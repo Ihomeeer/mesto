@@ -1,0 +1,4 @@
+.elements__like_state_disabled {
+  background-image: url(../../../../images/like-button-disabled.svg);
+  background-size: cover;
+}
