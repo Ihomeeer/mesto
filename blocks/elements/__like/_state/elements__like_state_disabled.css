@@ -2,3 +2,8 @@
   background-image: url(../../../../images/like-button-disabled.svg);
   background-size: cover;
 }
+
+.elements__like_state_disabled:hover {
+  opacity: .6;
+  transition: opacity .4s;
+}
