@@ -12,3 +12,12 @@
   color: white;
   border: none;
 }
+
+@media screen and (max-width: 560px) {
+  .popup__save-button {
+    width: calc(100% - 22px*2);
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

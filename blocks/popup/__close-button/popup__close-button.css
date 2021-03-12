@@ -9,9 +9,19 @@
   position: absolute;
   top: calc(50% - 330px/2 - 40px);
   left: calc(50% + 430px/2);
+  cursor: pointer;
 }
 
 .popup__close-button:hover {
   opacity: .6;
   transition: opacity .4s;
+}
+
+@media screen and (max-width: 560px) {
+  .popup__close-button {
+    width: 26px;
+    height: 26px;
+    top: calc(50% - 322px/2 - 40px);
+    left: calc(50% + 282px/2 - 25px);
+  }
 }
