@@ -6,6 +6,7 @@
   background: url(../../../images/edit-button.svg);
   background-size: cover;
   border: none;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {

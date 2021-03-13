@@ -1,4 +1,5 @@
 .profile__function {
+  max-width: 336px;
   margin-top: 16px;
   margin-bottom: 0;
   padding: 0;
@@ -7,10 +8,14 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; */
 }
 
 @media screen and (max-width: 767px) {
   .profile__function {
+    max-width: 282px;
     margin-top: 14px;
     font-size: 14px;
     line-height: 17px;

@@ -11,6 +11,12 @@
   text-align: center;
   color: white;
   border: none;
+  cursor: pointer;
+}
+
+.popup__save-button:hover {
+opacity: .8;
+transition: opacity .4s;
 }
 
 @media screen and (max-width: 560px) {

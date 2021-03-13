@@ -6,6 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {
