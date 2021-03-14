@@ -10,6 +10,7 @@ let jobInput = formElement.querySelector('.popup__function');
 let saveButton = document.querySelector('.popup__close-button');
 
 nameInput.value = defaultName.textContent;
+
 jobInput.value = defaultJob.textContent;
 
 function openPopup() {
@@ -22,13 +23,13 @@ function closePopup() {
   jobInput.value = defaultJob.textContent;
 }
 
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
   closePopup();
 }
+
 openPopupButton.addEventListener('click', openPopup);
 
 closePopupButton.addEventListener('click', closePopup);
@@ -38,4 +39,3 @@ popupOverlay.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
 saveButton.addEventListener('click', formSubmitHandler);
-
