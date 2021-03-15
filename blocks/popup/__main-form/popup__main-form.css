@@ -1,6 +1,6 @@
 .popup__main-form {
   width: 430px;
-  height: 330px;
+  height: min-content;
   margin: auto;
   padding: 0;
   position: fixed;
@@ -15,9 +15,7 @@
 }
 
 @media screen and (max-width: 560px) {
-.popup__main-form {
-  width: 282px;
-  height: 322px;
-}
-
+  .popup__main-form {
+    width: 282px;
+  }
 }

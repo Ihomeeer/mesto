@@ -7,6 +7,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
+  outline: none;
   cursor: pointer;
   align-self: center;
   display: block;
@@ -20,7 +21,7 @@
 @media screen and (max-width: 767px) {
   .profile__add-button {
     width: 282px;
-    margin: 36px 0 0 0;
+    margin-top: 36px;
     background: url(../../../images/add-button-320x.png);
   }
 }

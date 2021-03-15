@@ -1,6 +1,6 @@
 .elements__card {
   width: 282px;
-  height: 360px;
+  min-height: 360px;
   margin: 0 auto;
   border-radius: 10px;
   color: black;

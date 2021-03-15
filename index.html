@@ -7,76 +7,76 @@
   <link rel="stylesheet" href="pages/index.css">
   <title>Место</title>
 </head>
-<body>
+<body class="body">
   <main class="page">
     <section class="popup">
       <div class="popup__overlay"></div>
-      <button class="popup__close-button"></button>
-      <form class="popup__main-form">
-        <h2 class="popup__header">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__name">
-        <input type="text" class="popup__input popup__function">
-      <button class="popup__save-button">Сохранить</button>
-      </form>
+        <button type="reset" class="popup__close-button"></button>
+        <form class="popup__main-form">
+          <h2 class="popup__header">Редактировать профиль</h2>
+          <input type="text" name="nameInput" class="popup__input popup__name">
+          <input type="text" name="jobInput" class="popup__input popup__function">
+        <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
     </section>
     <header class="header">
       <img class="header__logo" src="./images/header__logo.svg" alt="логотип проекта 'Место'">
     </header>
     <section class="profile">
       <div class="profile__info">
-        <img class="profile__avatar" src="./images/default-avatar.jpg" alt="Аватар">
+        <img class="profile__avatar" src="./images/default-avatar.jpg" alt="Жак-Ив Кустh2">
         <div class="profile__text-section">
           <div class="profile__name-section">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button"></button>
           </div>
           <p class="profile__function">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add-button"></button>
+      <button type="button" class="profile__add-button"></button>
     </section>
     <section class="elements">
       <ul class="elements__grid">
         <li class="elements__card">
           <img src="./images/1-Moscow-min.jpg" alt="Москва" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Москва</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Москва</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__card">
           <img src="./images/2-Vladivostok-min.jpg" alt="Владивосток" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Владивосток</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Владивосток</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__card">
           <img src="./images/3-Rostov-min.jpg" alt="Ростов-на-Дону" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Ростов-на-Дону</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Ростов-на-Дону</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__card">
           <img src="./images/4-EKB-min.jpg" alt="Екатеринбург" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Екатеринбург</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Екатеринбург</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__card">
           <img src="./images/5-Sochi-min.jpg" alt="Сочи" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Сочи</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Сочи</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
         <li class="elements__card">
           <img src="./images/6-Peterburg-min.jpg" alt="Санкт-Петербург" class="elements__photo">
           <div class="elements__info-panel">
-            <p class="elements__name">Санкт-Петербург</p>
-            <button class="elements__like elements__like_state_disabled"></button>
+            <h2 class="elements__name">Санкт-Петербург</h2>
+            <button type="button" class="elements__like"></button>
           </div>
         </li>
       </ul>
@@ -85,6 +85,6 @@
       <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
   </main>
-  <script src="./scripts/idex.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

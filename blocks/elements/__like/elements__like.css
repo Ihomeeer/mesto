@@ -1,10 +1,17 @@
 .elements__like {
   margin: 0;
   padding: 0;
-  border: none;
   width: 22px;
   height: 19px;
+  background-image: url(../../../images/like-button-disabled.svg);
+  background-size: cover;
   align-self: center;
+  border: none;
   background-color: white;
   cursor: pointer;
+}
+
+.elements__like:hover {
+  opacity: .6;
+  transition: opacity .4s;
 }
