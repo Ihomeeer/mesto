@@ -19,9 +19,14 @@ function formSubmitHandlerPlace (evt) {
   card.querySelector('.elements__photo').alt = placeNameInput.value;
   card.querySelector('.elements__name').textContent = placeNameInput.value;
   cardGrid.prepend(card);
-  togglePlacePopup();
   placeNameInput.value = '';
   placeLinkInput.value = '';
+  card.querySelector('.elements__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('elements__like_active');
+  });
+  cardDelete();
+  zoomImage();
+  togglePlacePopup();
 }
 
 placeOpenPopupBtn.addEventListener('click', togglePlacePopup);
@@ -96,52 +101,68 @@ for (let i=0; i < initialCards.length; i++) {
 }
 
 // ---------Лайки---------
-const likeBtns = document.querySelectorAll('.elements__like');
-
-likeBtns.forEach(function (likeBtns) {
+function likes () {
+  const likeBtns = document.querySelectorAll('.elements__like');
+  likeBtns.forEach(function (likeBtns) {
   likeBtns.addEventListener('click', function (evt) {
     const targetLikeBtn = evt.target;
     targetLikeBtn.classList.toggle('elements__like_active');
+    });
   });
-});
+}
+
+likes();
 
 // ---------Удаление карточек---------
-const deleteBtns = document.querySelectorAll('.elements__delete');
-
-deleteBtns.forEach(function (deleteBtns) {
-  deleteBtns.addEventListener('click', function (evt) {
-    const targetDeleteBtn = evt.target;
-    targetDeleteBtn.closest('.elements__card').remove();
+function cardDelete () {
+  const deleteBtns = document.querySelectorAll('.elements__delete');
+  deleteBtns.forEach(function (deleteBtns) {
+    deleteBtns.addEventListener('click', function (evt) {
+      const targetDeleteBtn = evt.target;
+      targetDeleteBtn.closest('.elements__card').remove();
+    });
   });
-});
+}
+
+cardDelete();
 
 // ---------Попап (который вроде как модальное окно на самом деле?) с картинками---------
 const photoPopup = document.querySelector('.photo-popup');
 const photoPopupCloseBtn = photoPopup.querySelector('#photoPopupCloseBtn');
 const photoPopupOverlay = photoPopup.querySelector('.popup__overlay');
-const photoBtns = document.querySelectorAll('.elements__photo');
-const photoNames = document.querySelectorAll('.elements__name');
-const currentPhoto = photoPopup.querySelector('.photo-popup__photo');
-const currentName = photoPopup.querySelector('.photo-popup__name');
 
-// function togglePhotoPopup(e) {
-//   e.preventDefault();
-//   photoPopup.classList.toggle('photo-popup_opened');
-// }
+function togglePhotoPopup(evt) {
+  evt.preventDefault();
+  photoPopup.classList.toggle('photo-popup_opened');
+}
 
-// photoBtns.forEach(function (e) {
-//   e.addEventListener('click', togglePhotoPopup);
-// }
-
-photoBtns.forEach(function (e) {
-  e.addEventListener('click', function(e) {
-    e.preventDefault();
-    photoPopup.classList.toggle('photo-popup_opened');
-    currentPhoto.src = e.target.src;
-    console.log(e.target.closest('.photo-popup__name'))
+function photoBtnsDet () {
+  const photoBtns = document.querySelectorAll('.elements__photo');
+  photoBtns.forEach(function (evt) {
+  evt.addEventListener('click', togglePhotoPopup);
   });
-});
+}
+
+function zoomImage () {
+  const photoBtns = document.querySelectorAll('.elements__photo');
+  const currentPhoto = photoPopup.querySelector('.photo-popup__photo');
+  const currentName = photoPopup.querySelector('.photo-popup__name');
+
+  photoBtns.forEach(function (evt) {
+    evt.addEventListener('click', function(evt) {
+      evt.preventDefault(evt);
+      currentPhoto.src = evt.target.src;
+      currentName.textContent = `${evt.target.parentElement.textContent}`;
+      console.log(evt.target.parentElement.value);
+      console.log(currentName)
+    });
+  });
+  photoBtnsDet();
+}
+
+zoomImage ()
+
+photoPopupCloseBtn.addEventListener('click', togglePhotoPopup);
+photoPopupOverlay.addEventListener('click', togglePhotoPopup);
 
 
-// photoPopupCloseBtn.addEventListener('click', togglePhotoPopup);
-// photoPopupOverlay.addEventListener('click', togglePhotoPopup);
