@@ -1,3 +1,5 @@
 .photo-popup {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }

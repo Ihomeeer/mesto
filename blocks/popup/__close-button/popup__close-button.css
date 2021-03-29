@@ -7,9 +7,9 @@
   background-size: cover;
   border: none;
   outline: none;
-  position: fixed;
+  position: absolute;
   top: calc(50% - 350px/2 - 40px);
-  left: calc(50% + 440px/2);
+  left: calc(50% + 450px/2);
   cursor: pointer;
 }
 
