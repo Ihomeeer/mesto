@@ -41,12 +41,10 @@ function formSubmitHandlerPlace (evt) {
   card.querySelector('.elements__photo').src = placeLinkInput.value;
   card.querySelector('.elements__photo').alt = placeNameInput.value;
   card.querySelector('.elements__name').textContent = placeNameInput.value;
-  cardGrid.prepend(card);
   placeNameInput.value = '';
   placeLinkInput.value = '';
-  card.querySelector('.elements__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('elements__like_active');
-  });
+  cardGrid.prepend(card);
+  newCardLike(card);
   deleteCard();
   zoomImage();
   togglePlacePopup();
@@ -94,6 +92,7 @@ for (let i=0; i < initialCards.length; i++) {
   cardGrid.append(card);
 }
 
+
 // ---------Лайки---------
 function cardLikes () {
   const likeBtns = document.querySelectorAll('.elements__like');
@@ -106,6 +105,12 @@ function cardLikes () {
 }
 
 cardLikes();
+
+function newCardLike (elem) {
+  elem.querySelector('.elements__like').addEventListener('click', function (evt) {
+  evt.target.classList.toggle('elements__like_active');
+  });
+}
 
 // ---------Удаление карточек---------
 function deleteCard () {
