@@ -28,9 +28,14 @@ profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 const placePopup = document.querySelector('#placePopup');
 const placeFormElement = document.querySelector('#placeForm');
 const placeCard = document.querySelector('#placeCard').content;
+const cardGrid = document.querySelector('.elements__grid');
 
 function togglePlacePopup() {
   placePopup.classList.toggle('popup_opened');
+}
+
+function newCardprepend (elem) {
+  cardGrid.prepend(elem);
 }
 
 function formSubmitHandlerPlace (evt) {
@@ -43,7 +48,7 @@ function formSubmitHandlerPlace (evt) {
   card.querySelector('.elements__name').textContent = placeNameInput.value;
   placeNameInput.value = '';
   placeLinkInput.value = '';
-  cardGrid.prepend(card);
+  newCardprepend(card);
   newCardLike(card);
   deleteCard();
   zoomImage();
@@ -56,7 +61,6 @@ placePopup.querySelector('.popup__overlay').addEventListener('click', togglePlac
 placeFormElement.addEventListener('submit', formSubmitHandlerPlace);
 
 // ---------6 начальных карточек---------
-const cardGrid = document.querySelector('.elements__grid');
 const initialCards = [
   {
     name: 'Москва',
@@ -84,12 +88,16 @@ const initialCards = [
   }
 ];
 
+function cardsAppend (elem) {
+  cardGrid.append(elem);
+}
+
 for (let i=0; i < initialCards.length; i++) {
   const card = placeCard.querySelector('.elements__card').cloneNode(true);
   card.querySelector('.elements__photo').src = initialCards[i].link;
   card.querySelector('.elements__photo').alt = initialCards[i].name;
   card.querySelector('.elements__name').textContent = initialCards[i].name;
-  cardGrid.append(card);
+  cardsAppend(card);
 }
 
 
