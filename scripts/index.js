@@ -1,4 +1,4 @@
-// ---------Попап редактирования профиля---------
+//---------Переменные---------
 const profilePopup = document.querySelector('#profilePopup');
 let defaultName = document.querySelector('.profile__name');
 let defaultJob = document.querySelector('.profile__function');
@@ -6,6 +6,14 @@ const profileFormElement = document.querySelector('#profileForm');
 let nameInput = profileFormElement.querySelector('#profilePopupName');
 let jobInput = profileFormElement.querySelector('#profilePopupJob');
 
+const placePopup = document.querySelector('#placePopup');
+const placeFormElement = document.querySelector('#placeForm');
+const placeCard = document.querySelector('#placeCard').content;
+const cardGrid = document.querySelector('.elements__grid');
+
+const photoPopup = document.querySelector('.photo-popup');
+
+// ---------Попап редактирования профиля---------
 function toggleProfilePopup() {
   profilePopup.classList.toggle('popup_opened');
   nameInput.value = defaultName.textContent;
@@ -23,18 +31,14 @@ document.querySelector('.profile__edit-button').addEventListener('click', toggle
 profilePopup.querySelector('#profilePopupCloseBtn').addEventListener('click', toggleProfilePopup);
 profilePopup.querySelector('.popup__overlay').addEventListener('click', toggleProfilePopup);
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
+// ---------
 
 // ---------Попап добавления карточки и само добавление---------
-const placePopup = document.querySelector('#placePopup');
-const placeFormElement = document.querySelector('#placeForm');
-const placeCard = document.querySelector('#placeCard').content;
-const cardGrid = document.querySelector('.elements__grid');
-
 function togglePlacePopup() {
   placePopup.classList.toggle('popup_opened');
 }
 
-function newCardprepend (elem) {
+function newCardPrepend (elem) {
   cardGrid.prepend(elem);
 }
 
@@ -48,7 +52,7 @@ function formSubmitHandlerPlace (evt) {
   card.querySelector('.elements__name').textContent = placeNameInput.value;
   placeNameInput.value = '';
   placeLinkInput.value = '';
-  newCardprepend(card);
+  newCardPrepend(card);
   newCardLike(card);
   deleteCard();
   zoomImage();
@@ -59,6 +63,7 @@ document.querySelector('.profile__add-button').addEventListener('click', toggleP
 placePopup.querySelector('#placePopupCloseBtn').addEventListener('click', togglePlacePopup);
 placePopup.querySelector('.popup__overlay').addEventListener('click', togglePlacePopup);
 placeFormElement.addEventListener('submit', formSubmitHandlerPlace);
+// ---------
 
 // ---------6 начальных карточек---------
 const initialCards = [
@@ -99,7 +104,7 @@ for (let i=0; i < initialCards.length; i++) {
   card.querySelector('.elements__name').textContent = initialCards[i].name;
   cardsAppend(card);
 }
-
+// ---------
 
 // ---------Лайки---------
 function cardLikes () {
@@ -119,6 +124,7 @@ function newCardLike (elem) {
   evt.target.classList.toggle('elements__like_active');
   });
 }
+// ---------
 
 // ---------Удаление карточек---------
 function deleteCard () {
@@ -132,10 +138,9 @@ function deleteCard () {
 }
 
 deleteCard();
+// ---------
 
 // ---------Попап (который вроде как модальное окно на самом деле?) с картинками---------
-const photoPopup = document.querySelector('.photo-popup');
-
 function togglePhotoPopup (evt) {
   evt.preventDefault();
   photoPopup.classList.toggle('popup_opened');
@@ -167,4 +172,4 @@ zoomImage ();
 
 photoPopup.querySelector('#photoPopupCloseBtn').addEventListener('click', togglePhotoPopup);
 photoPopup.querySelector('.popup__overlay').addEventListener('click', togglePhotoPopup);
-
+// ---------
