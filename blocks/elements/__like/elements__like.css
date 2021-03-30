@@ -7,7 +7,8 @@
   background-size: cover;
   align-self: center;
   border: none;
-  background-color: white;
+  background-color: transparent;
+  background-size: 100%;
   cursor: pointer;
 }
 
