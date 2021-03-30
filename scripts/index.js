@@ -1,12 +1,12 @@
 //---------Переменные---------
-const profilePopup = document.querySelector('#profilePopup');
+const profilePopup = document.querySelector('#profilePopup'); //для профильной модалки
 let defaultName = document.querySelector('.profile__name');
 let defaultJob = document.querySelector('.profile__function');
 const profileFormElement = document.querySelector('#profileForm');
 let nameInput = profileFormElement.querySelector('#profilePopupName');
 let jobInput = profileFormElement.querySelector('#profilePopupJob');
 
-const placePopup = document.querySelector('#placePopup');
+const placePopup = document.querySelector('#placePopup');//для модалки с добавлением нового места
 const placeFormElement = document.querySelector('#placeForm');
 const placeCard = document.querySelector('#placeCard').content;
 const cardGrid = document.querySelector('.elements__grid');
@@ -33,7 +33,7 @@ profilePopup.querySelector('.popup__overlay').addEventListener('click', togglePr
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 // ---------
 
-// ---------Попап добавления карточки и само добавление---------
+// ---------Модалка добавления карточки и само добавление---------
 function togglePlacePopup() {
   placePopup.classList.toggle('popup_opened');
 }
@@ -42,18 +42,23 @@ function newCardPrepend (elem) {
   cardGrid.prepend(elem);
 }
 
-function formSubmitHandlerPlace (evt) {
-  evt.preventDefault();
+function addNewCard () {
   let placeNameInput = placeFormElement.querySelector('#placePopupName');
   let placeLinkInput = placeFormElement.querySelector('#placePopupLink');
   const card = placeCard.querySelector('.elements__card').cloneNode(true);
-  card.querySelector('.elements__photo').src = placeLinkInput.value;
-  card.querySelector('.elements__photo').alt = placeNameInput.value;
-  card.querySelector('.elements__name').textContent = placeNameInput.value;
+  const cardPhoto = card.querySelector('.elements__photo');
+  cardPhoto.src = placeLinkInput.value;
+  const cardName = card.querySelector('.elements__name');
+  cardName.textContent = placeNameInput.value;
   placeNameInput.value = '';
   placeLinkInput.value = '';
   newCardPrepend(card);
   newCardLike(card);
+}
+
+function formSubmitHandlerPlace (evt) {
+  evt.preventDefault();
+  addNewCard();
   deleteCard();
   zoomImage();
   togglePlacePopup();
@@ -140,7 +145,7 @@ function deleteCard () {
 deleteCard();
 // ---------
 
-// ---------Попап (который вроде как модальное окно на самом деле?) с картинками---------
+// ---------Модалка с увеличенными картинками---------
 function togglePhotoPopup (evt) {
   evt.preventDefault();
   photoPopup.classList.toggle('popup_opened');
