@@ -45,8 +45,8 @@ const initialCards = [
   function createCard (name, link) {
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
   let item = {
-    name: name.value,
-    link: link.value,
+    name: name,
+    link: link,
   };
   console.log(item)
   const newCardName = newCard.querySelector('.elements__name');
@@ -63,19 +63,25 @@ const initialCards = [
   return newCard;
 }
 
-// initialCards.forEach(function (initialCards) {
 
-// });
-for (let i=0; i < initialCards.length; i++) {
-  createCard(initialCards[i]);
-  }
-
-// function initCards (initialCards) {
-//   initialCards.forEach(function (initialCards) {
-//     item.link = initialCards[i].link;
-//     item.name = initialCards[i].name;
-//   })
+// // ---------Модалка с увеличенными картинками---------
+// function togglePhotoPopup (evt) {
+//   evt.preventDefault();
+//   photoPopup.classList.toggle('popup_opened');
 // }
+
+// function determinatePhotoBtns () {
+//   const photoBtns = document.querySelectorAll('.elements__photo');
+//   photoBtns.forEach(function (evt) {
+//   evt.addEventListener('click', togglePhotoPopup);
+//   });
+// }
+
+
+
+
+
+
 
 
 
@@ -108,8 +114,8 @@ function resetValues () {
 //функция отправки формы
 function formSubmitHandlerPlace (evt) {
   evt.preventDefault();
-  const name = placePopup.querySelector('#placePopupName');
-  const link = placePopup.querySelector('#placePopupLink');
+  const name = placePopup.querySelector('#placePopupName').value;
+  const link = placePopup.querySelector('#placePopupLink').value;
   createCard(name, link);
   closePopup(placePopup);
   resetValues();
@@ -131,36 +137,25 @@ function cardDelete (elem) {
 // ---------модальное окно с зумом---------
 // открытие модального окна
 function cardZoom (elem, item) {
-  elem.addEventListener('click', function () {
+  elem.addEventListener('click', function (evt) {
     openPopup(photoPopup);
   });
     zoomData (item);
   }
 // определение переменных и присваивание им значений
   function zoomData (item) {
-    const currentPhoto = photoPopup.querySelector('.popup__photo');
-    const currentName = photoPopup.querySelector('.popup__photo-name');
+    let currentPhoto = photoPopup.querySelector('.popup__photo');
+    let currentName = photoPopup.querySelector('.popup__photo-name');
     currentPhoto.src = item.link;
     currentPhoto.alt = item.name;
     currentName.textContent = item.name;
   }
-  // ---------первоначальные карточки---------
+// ---------первоначальные карточки---------
+initialCards.forEach(function (initialCards) {
+  createCard(initialCards.name, initialCards.link)
+});
 
 
-
-
-// function cardsAppend (elem) {
-//   cardGrid.append(elem);
-// }
-
-// for (let i=0; i < initialCards.length; i++) {
-//   const card = placeCard.querySelector('.elements__card').cloneNode(true);
-//   card.querySelector('.elements__photo').src = initialCards[i].link;
-//   card.querySelector('.elements__photo').alt = initialCards[i].name;
-//   card.querySelector('.elements__name').textContent = initialCards[i].name;
-//   cardsAppend(card);
-// }
-//
 
 
 
