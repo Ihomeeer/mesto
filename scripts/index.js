@@ -1,3 +1,4 @@
+//=========Переменные=========
 //---------Переменные для профильного модального окна---------
 const profilePopup = document.querySelector('#profilePopup');
 const defaultName = document.querySelector('.profile__name');
@@ -12,8 +13,7 @@ const cardTemplate = document.querySelector('#placeCard').content;
 const cardGrid = document.querySelector('.elements__grid');
 //---------Переменные для модального окна с зумом---------
 const photoPopup = document.querySelector('#photoPopup');
-
-
+//---------Переменные для первоначальных карточек---------
 const initialCards = [
   {
     name: 'Москва',
@@ -40,29 +40,45 @@ const initialCards = [
     link: './images/6-Peterburg-min.jpg'
   }
 ];
-
-
-
+//=========Функции=========
 //---------функция создания карточки---------
   function createCard (name, link) {
-    let item = {
-      name: name.value,
-      link: link.value
-    };
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
+  let item = {
+    name: name.value,
+    link: link.value,
+  };
+  console.log(item)
   const newCardName = newCard.querySelector('.elements__name');
   const newCardPhoto = newCard.querySelector('.elements__photo');
   const newCardLikeBtn = newCard.querySelector('.elements__like');
   const newCardDeleteBtn = newCard.querySelector('.elements__delete');
-  newCardName.textContent = name.value;
-  newCardPhoto.src = link.value;
-  console.log(newCardName, newCardPhoto.src)
+  newCardName.textContent = item.name;
+  newCardPhoto.src = item.link;
+  newCardPhoto.alt = item.name;
   cardGrid.prepend(newCard);
   cardLike(newCardLikeBtn);
   cardDelete(newCardDeleteBtn);
-  cardZoom(newCardPhoto);
-  // return newCard;
+  cardZoom(newCardPhoto, item);
+  return newCard;
 }
+
+// initialCards.forEach(function (initialCards) {
+
+// });
+for (let i=0; i < initialCards.length; i++) {
+  createCard(initialCards[i]);
+  }
+
+// function initCards (initialCards) {
+//   initialCards.forEach(function (initialCards) {
+//     item.link = initialCards[i].link;
+//     item.name = initialCards[i].name;
+//   })
+// }
+
+
+
 // ---------открытие и закрытие модальных окон---------
 function openPopup (elem) {
   elem.classList.add('popup_opened');
@@ -72,14 +88,14 @@ function closePopup (elem) {
   elem.classList.remove('popup_opened');
 }
 // ---------профильное модальное окно---------
+//первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
   nameInput.value = defaultName.textContent;
   jobInput.value = defaultJob.textContent;
 }
-
+//функция отправки формы
 function formSubmitHandlerProfile (evt) {
   evt.preventDefault();
-
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
   closePopup(profilePopup);
@@ -114,54 +130,44 @@ function cardDelete (elem) {
 }
 // ---------модальное окно с зумом---------
 // открытие модального окна
-function cardZoom (elem) {
+function cardZoom (elem, item) {
   elem.addEventListener('click', function () {
     openPopup(photoPopup);
-    const currentPhoto = photoPopup.querySelector('.photo-popup__photo');
-    const currentName = photoPopup.querySelector('.photo-popup__name');
-    currentPhoto.src = elem.src;
-    currentPhoto.alt = elem.alt;
-    currentName.textContent = newCardPhoto.textContent;
-  })
-}
+  });
+    zoomData (item);
+  }
+// определение переменных и присваивание им значений
+  function zoomData (item) {
+    const currentPhoto = photoPopup.querySelector('.popup__photo');
+    const currentName = photoPopup.querySelector('.popup__photo-name');
+    currentPhoto.src = item.link;
+    currentPhoto.alt = item.name;
+    currentName.textContent = item.name;
+  }
+  // ---------первоначальные карточки---------
 
-// // newCardPhoto
 
 
-// function togglePhotoPopup (evt) {
-//   evt.preventDefault();
-//   photoPopup.classList.toggle('popup_opened');
+
+// function cardsAppend (elem) {
+//   cardGrid.append(elem);
 // }
 
-// function determinatePhotoBtns () {
-//   const photoBtns = document.querySelectorAll('.elements__photo');
-//   photoBtns.forEach(function (evt) {
-//   evt.addEventListener('click', togglePhotoPopup);
-//   });
+// for (let i=0; i < initialCards.length; i++) {
+//   const card = placeCard.querySelector('.elements__card').cloneNode(true);
+//   card.querySelector('.elements__photo').src = initialCards[i].link;
+//   card.querySelector('.elements__photo').alt = initialCards[i].name;
+//   card.querySelector('.elements__name').textContent = initialCards[i].name;
+//   cardsAppend(card);
 // }
-
-// function zoomImage () {
-//   const photoBtns = document.querySelectorAll('.elements__photo');
-//   const currentPhoto = photoPopup.querySelector('.photo-popup__photo');
-//   const currentName = photoPopup.querySelector('.photo-popup__name');
-//   photoBtns.forEach(function (evt) {
-//     evt.addEventListener('click', function(evt) {
-//       evt.preventDefault(evt);
-//       currentPhoto.src = evt.target.src;
-//       currentPhoto.alt = evt.target.alt;
-//       currentName.textContent = `${evt.target.parentElement.textContent}`;
-//     });
-//   });
-//   determinatePhotoBtns();
-// }
-
-// zoomImage ();
+//
 
 
 
 
 
 
+//=========Обработчики=========
 // ---------профильное модальное окно---------
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
@@ -185,93 +191,7 @@ placePopup.querySelector('#placePopupCloseBtn').addEventListener('click', functi
 placePopup.querySelector('.popup__overlay').addEventListener('click', function () {
   closePopup(placePopup);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const photoPopup = document.querySelector('.photo-popup');
-
-// // ---------
-
-// // ---------6 начальных карточек---------
-
-
-// function cardsAppend (elem) {
-//   cardGrid.append(elem);
-// }
-
-// for (let i=0; i < initialCards.length; i++) {
-//   const card = placeCard.querySelector('.elements__card').cloneNode(true);
-//   card.querySelector('.elements__photo').src = initialCards[i].link;
-//   card.querySelector('.elements__photo').alt = initialCards[i].name;
-//   card.querySelector('.elements__name').textContent = initialCards[i].name;
-//   cardsAppend(card);
-// }
-//
-
-// ---------Модалка с увеличенными картинками---------
-// function togglePhotoPopup (evt) {
-//   evt.preventDefault();
-//   photoPopup.classList.toggle('popup_opened');
-// }
-
-// function determinatePhotoBtns () {
-//   const photoBtns = document.querySelectorAll('.elements__photo');
-//   photoBtns.forEach(function (evt) {
-//   evt.addEventListener('click', togglePhotoPopup);
-//   });
-// }
-
-// function zoomImage () {
-//   const photoBtns = document.querySelectorAll('.elements__photo');
-//   const currentPhoto = photoPopup.querySelector('.photo-popup__photo');
-//   const currentName = photoPopup.querySelector('.photo-popup__name');
-//   photoBtns.forEach(function (evt) {
-//     evt.addEventListener('click', function(evt) {
-//       evt.preventDefault(evt);
-//       currentPhoto.src = evt.target.src;
-//       currentPhoto.alt = evt.target.alt;
-//       currentName.textContent = `${evt.target.parentElement.textContent}`;
-//     });
-//   });
-//   determinatePhotoBtns();
-// }
-
-// zoomImage ();
-
-// photoPopup.querySelector('#photoPopupCloseBtn').addEventListener('click', togglePhotoPopup);
-// photoPopup.querySelector('.popup__overlay').addEventListener('click', togglePhotoPopup);
-// ---------
+// ---------модальное окно с зумом---------
+photoPopup.querySelector('#photoPopupCloseBtn').addEventListener('click', function () {
+  closePopup(photoPopup);
+});
