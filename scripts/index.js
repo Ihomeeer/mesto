@@ -1,4 +1,5 @@
 //=========Переменные=========
+
 //---------Переменные для профильного модального окна---------
 const profilePopup = document.querySelector('#profilePopup');
 const defaultName = document.querySelector('.profile__name');
@@ -6,13 +7,18 @@ const defaultJob = document.querySelector('.profile__function');
 const profileFormElement = document.querySelector('#profileForm');
 const nameInput = profileFormElement.querySelector('#profilePopupName');
 const jobInput = profileFormElement.querySelector('#profilePopupJob');
+
 //---------Переменные для модального окна создания карточек---------
 const placePopup = document.querySelector('#placePopup');
 const placeForm = document.querySelector('#placeForm');
 const cardTemplate = document.querySelector('#placeCard').content;
 const cardGrid = document.querySelector('.elements__grid');
+
 //---------Переменные для модального окна с зумом---------
 const photoPopup = document.querySelector('#photoPopup');
+const currentPhoto = photoPopup.querySelector('.popup__photo');
+const currentName = photoPopup.querySelector('.popup__photo-name');
+
 //---------Переменные для первоначальных карточек---------
 const initialCards = [
   {
@@ -40,7 +46,9 @@ const initialCards = [
     link: './images/6-Peterburg-min.jpg'
   }
 ];
+
 //=========Функции=========
+
 //---------функция создания карточки---------
   function createCard (name, link) {
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
@@ -48,7 +56,6 @@ const initialCards = [
     name: name,
     link: link,
   };
-  console.log(item)
   const newCardName = newCard.querySelector('.elements__name');
   const newCardPhoto = newCard.querySelector('.elements__photo');
   const newCardLikeBtn = newCard.querySelector('.elements__like');
@@ -56,34 +63,16 @@ const initialCards = [
   newCardName.textContent = item.name;
   newCardPhoto.src = item.link;
   newCardPhoto.alt = item.name;
-  cardGrid.prepend(newCard);
+  cardZoom(newCardPhoto, item);
   cardLike(newCardLikeBtn);
   cardDelete(newCardDeleteBtn);
-  cardZoom(newCardPhoto, item);
+  newCardPrepend (newCard);
   return newCard;
 }
-
-
-// // ---------Модалка с увеличенными картинками---------
-// function togglePhotoPopup (evt) {
-//   evt.preventDefault();
-//   photoPopup.classList.toggle('popup_opened');
-// }
-
-// function determinatePhotoBtns () {
-//   const photoBtns = document.querySelectorAll('.elements__photo');
-//   photoBtns.forEach(function (evt) {
-//   evt.addEventListener('click', togglePhotoPopup);
-//   });
-// }
-
-
-
-
-
-
-
-
+//добавление карточки в контейнер
+function newCardPrepend (elem) {
+  cardGrid.prepend(elem);
+}
 
 // ---------открытие и закрытие модальных окон---------
 function openPopup (elem) {
@@ -93,6 +82,7 @@ function openPopup (elem) {
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
 }
+
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
@@ -106,6 +96,7 @@ function formSubmitHandlerProfile (evt) {
   defaultJob.textContent = jobInput.value;
   closePopup(profilePopup);
 }
+
 // ---------модальное окно добавления карточек---------
 //сбрасывание значений инпутов после отправки
 function resetValues () {
@@ -120,6 +111,22 @@ function formSubmitHandlerPlace (evt) {
   closePopup(placePopup);
   resetValues();
 }
+
+// ---------модальное окно с зумом---------
+// открытие модального окна
+function cardZoom (elem, item) {
+  elem.addEventListener('click', function () {
+    openPopup(photoPopup);
+    zoomData (item);
+  });
+}
+// определение переменных и присваивание им значений
+  function zoomData (item) {
+    currentPhoto.src = item.link;
+    currentPhoto.alt = item.name;
+    currentName.textContent = item.name;
+  }
+
 //---------функция лайка---------
 function cardLike (elem) {
   elem.addEventListener('click', function (evt) {
@@ -127,6 +134,7 @@ function cardLike (elem) {
     targetLikeBtn.classList.toggle('elements__like_active');
   });
 }
+
 //---------функция удаления---------
 function cardDelete (elem) {
   elem.addEventListener('click', function (evt) {
@@ -134,59 +142,41 @@ function cardDelete (elem) {
   targetDeleteBtn.closest('.elements__card').remove();
   });
 }
-// ---------модальное окно с зумом---------
-// открытие модального окна
-function cardZoom (elem, item) {
-  elem.addEventListener('click', function (evt) {
-    openPopup(photoPopup);
-  });
-    zoomData (item);
-  }
-// определение переменных и присваивание им значений
-  function zoomData (item) {
-    let currentPhoto = photoPopup.querySelector('.popup__photo');
-    let currentName = photoPopup.querySelector('.popup__photo-name');
-    currentPhoto.src = item.link;
-    currentPhoto.alt = item.name;
-    currentName.textContent = item.name;
-  }
+
 // ---------первоначальные карточки---------
+initialCards.reverse();
 initialCards.forEach(function (initialCards) {
   createCard(initialCards.name, initialCards.link)
 });
 
-
-
-
-
-
-
-
 //=========Обработчики=========
+
 // ---------профильное модальное окно---------
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
   profileDefaultInfo ();
 });
-profilePopup.querySelector('#profilePopupCloseBtn').addEventListener('click', function () {
-  closePopup(profilePopup);
-});
-profilePopup.querySelector('.popup__overlay').addEventListener('click', function () {
-  closePopup(profilePopup);
+profilePopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+    closePopup(profilePopup);
+  }
 });
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
+
 // ---------модальное окно для нового места---------
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   openPopup(placePopup);
 });
 placePopup.addEventListener('submit', formSubmitHandlerPlace);
-placePopup.querySelector('#placePopupCloseBtn').addEventListener('click', function () {
-  closePopup(placePopup);
+placePopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
+    closePopup(placePopup);
+  }
 });
-placePopup.querySelector('.popup__overlay').addEventListener('click', function () {
-  closePopup(placePopup);
-});
+
 // ---------модальное окно с зумом---------
-photoPopup.querySelector('#photoPopupCloseBtn').addEventListener('click', function () {
-  closePopup(photoPopup);
+photoPopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
+    closePopup(photoPopup);
+  }
 });
