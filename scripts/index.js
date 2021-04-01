@@ -52,7 +52,7 @@ const initialCards = [
 //---------функция создания карточки---------
   function createCard (name, link) {
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
-  let item = {
+  const item = {
     name: name,
     link: link,
   };
