@@ -68,6 +68,7 @@ const initialCards = [
   cardDelete(newCardDeleteBtn);
   return newCard;
 }
+
 //---------добавление карточки в контейнер---------
 function newCardPrepend (container, cardElem) {
   container.prepend(cardElem);
@@ -146,11 +147,7 @@ function cardDelete (elem) {
 // ---------первоначальные карточки---------
 initialCards.reverse();
 initialCards.forEach(function (initialCards) {
-  const item = {
-    name: initialCards.name,
-    link: initialCards.link,
-  };
-  newCardPrepend(cardGrid, createCard(item.name, item.link));
+  newCardPrepend(cardGrid, createCard(initialCards.name, initialCards.link));
 });
 //=========Обработчики=========
 
