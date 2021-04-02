@@ -49,8 +49,6 @@ const initialCards = [
 
 //=========Функции=========
 
-
-
 //---------функция создания карточки---------
   function createCard (name, link) {
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
@@ -68,15 +66,14 @@ const initialCards = [
   cardZoom(newCardPhoto, item);
   cardLike(newCardLikeBtn);
   cardDelete(newCardDeleteBtn);
-  // console.log(newCard)
   return newCard;
 }
-// добавление карточки в контейнер
+//---------добавление карточки в контейнер---------
 function newCardPrepend (container, cardElem) {
   container.prepend(cardElem);
 }
 
-// ---------открытие и закрытие модальных окон---------
+//---------открытие и закрытие модальных окон---------
 function openPopup (elem) {
   elem.classList.add('popup_opened');
 }
@@ -109,7 +106,8 @@ function formSubmitHandlerPlace (evt) {
   evt.preventDefault();
   const name = placePopup.querySelector('#placePopupName').value;
   const link = placePopup.querySelector('#placePopupLink').value;
-  createCard(name, link);
+  const card = createCard(name, link);
+  newCardPrepend(cardGrid, card);
   closePopup(placePopup);
   resetValues();
 }
@@ -152,10 +150,8 @@ initialCards.forEach(function (initialCards) {
     name: initialCards.name,
     link: initialCards.link,
   };
-  createCard(item.name, item.link)
-return item;
+  newCardPrepend(cardGrid, createCard(item.name, item.link));
 });
-
 //=========Обработчики=========
 
 // ---------профильное модальное окно---------
@@ -187,4 +183,3 @@ photoPopup.addEventListener('click', (evt) => {
     closePopup(photoPopup);
   }
 });
-newCardPrepend(cardGrid, createCard(newCard.name, newCard.link));
