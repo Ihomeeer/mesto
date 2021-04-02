@@ -49,6 +49,8 @@ const initialCards = [
 
 //=========Функции=========
 
+
+
 //---------функция создания карточки---------
   function createCard (name, link) {
   const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
@@ -66,12 +68,12 @@ const initialCards = [
   cardZoom(newCardPhoto, item);
   cardLike(newCardLikeBtn);
   cardDelete(newCardDeleteBtn);
-  newCardPrepend (newCard);
+  // console.log(newCard)
   return newCard;
 }
-//добавление карточки в контейнер
-function newCardPrepend (elem) {
-  cardGrid.prepend(elem);
+// добавление карточки в контейнер
+function newCardPrepend (container, cardElem) {
+  container.prepend(cardElem);
 }
 
 // ---------открытие и закрытие модальных окон---------
@@ -146,7 +148,12 @@ function cardDelete (elem) {
 // ---------первоначальные карточки---------
 initialCards.reverse();
 initialCards.forEach(function (initialCards) {
-  createCard(initialCards.name, initialCards.link)
+  const item = {
+    name: initialCards.name,
+    link: initialCards.link,
+  };
+  createCard(item.name, item.link)
+return item;
 });
 
 //=========Обработчики=========
@@ -180,3 +187,4 @@ photoPopup.addEventListener('click', (evt) => {
     closePopup(photoPopup);
   }
 });
+newCardPrepend(cardGrid, createCard(newCard.name, newCard.link));
