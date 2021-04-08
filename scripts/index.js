@@ -82,6 +82,15 @@ function openPopup (elem) {
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
 }
+//функция закрытия модалок по esc ------------------------------------------------------ДОРАБОТАТЬ
+function popupCloseEscButton (popup) {
+  popup.addEventListener('keydown', function (evt) {
+    console.log(popup.classList)
+    if (popup.classList.contains('popup_opened') && evt.keyCode === 27) {
+      closePopup(popup);
+    };
+  });
+}
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -96,6 +105,8 @@ function formSubmitHandlerProfile (evt) {
   defaultJob.textContent = jobInput.value;
   closePopup(profilePopup);
 }
+
+popupCloseEscButton(profilePopup);
 
 // ---------модальное окно добавления карточек---------
 //сбрасывание значений инпутов после отправки
@@ -112,6 +123,8 @@ function formSubmitHandlerPlace (evt) {
   closePopup(placePopup);
   resetValues();
 }
+
+popupCloseEscButton(placePopup);
 
 // ---------модальное окно с зумом---------
 // открытие модального окна
@@ -149,6 +162,7 @@ initialCards.reverse();
 initialCards.forEach(function (initialCards) {
   newCardPrepend(cardGrid, createCard(initialCards.name, initialCards.link));
 });
+
 //=========Обработчики=========
 
 // ---------профильное модальное окно---------
@@ -156,11 +170,15 @@ document.querySelector('.profile__edit-button').addEventListener('click', functi
   openPopup(profilePopup);
   profileDefaultInfo ();
 });
+
 profilePopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
     closePopup(profilePopup);
   }
 });
+
+
+
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 
 // ---------модальное окно для нового места---------
