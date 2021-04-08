@@ -9,9 +9,11 @@
 @import url(../blocks/popup/__header/popup__header.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__error-span/popup__error-span.css);
+@import url(../blocks/popup/__error-span/_show/popup__error-span_show.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__function/popup__function.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
+@import url(../blocks/popup/__save-button/_disabled/popup__save-button_disabled.css);
 @import url(../blocks/popup/__form-container/popup__form-container.css);
 @import url(../blocks/popup/__photo-close-button/popup__photo-close-button.css);
 @import url(../blocks/popup/__image-container/popup__image-container.css);

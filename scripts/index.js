@@ -198,3 +198,10 @@ photoPopup.addEventListener('click', (evt) => {
     closePopup(photoPopup);
   }
 });
+
+
+
+//-----------------------------------------Валидация-----------------------------------------
+const showError = (input) => {
+  
+}
