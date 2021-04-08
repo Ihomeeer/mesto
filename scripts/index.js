@@ -167,6 +167,7 @@ profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   openPopup(placePopup);
 });
+
 placePopup.addEventListener('submit', formSubmitHandlerPlace);
 placePopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
