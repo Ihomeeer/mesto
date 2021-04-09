@@ -1,45 +1,40 @@
-//-----------------------------------------Валидация-----------------------------------------
-
-const form = {
-
-}
-
+//Скрипт отвечает за валидацию форм на странице
 
 //=========Функции=========
 
 //функции показа и скрытия ошибок
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_error');
+  inputElement.classList.add(params.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__error-span_show');
+  errorElement.classList.add(params.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_error');
-  errorElement.classList.remove('popup__error-span_show');
+  inputElement.classList.remove(params.inputErrorClass);
+  errorElement.classList.remove(params.errorClass);
   errorElement.textContent = '';
 };
 
 //функция проверки валидности форм
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, params) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, params);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, params);
   }
 };
 
 //функция установки обработчиков
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, params) => {
+  const inputList = Array.from(formElement.querySelectorAll(params.inputSelector));
+  const buttonElement = formElement.querySelector(params.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, params);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, params);
+      toggleButtonState(inputList, buttonElement, params);
     });
   });
 };
@@ -52,30 +47,32 @@ const hasInvalidInput = (inputList) => {
 };
 
 //функция изменения состояния кнопки отправки
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, params) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__save-button_disabled');
+    buttonElement.classList.add(params.inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove('popup__save-button_disabled');
+    buttonElement.classList.remove(params.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 };
 
 //функция инициации валидации
 const enableValidation = (params) => {
-  const formList = Array.from(document.querySelectorAll('formSelector'));
-  console.log(formList)
+  console.log(params)
+  const formList = Array.from(document.querySelectorAll(params.formSelector));
   formList.forEach(function(formElement) {
-    setEventListeners(formElement);
+    setEventListeners(formElement, params);
   });
 };
+
+
 
 enableValidation({
   formSelector: '.popup__main-form',
   inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
+  submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error-message_visible'
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error-span_show',
 });
