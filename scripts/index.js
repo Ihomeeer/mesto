@@ -82,15 +82,22 @@ function openPopup (elem) {
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
 }
-//функция закрытия модалок по esc ------------------------------------------------------ДОРАБОТАТЬ
+//функция закрытия модальных окон по нажатию esc
 function popupCloseEscButton (popup) {
-  popup.addEventListener('keydown', function (evt) {
-    console.log(popup.classList)
-    if (popup.classList.contains('popup_opened') && evt.keyCode === 27) {
-      closePopup(popup);
-    };
-  });
-}
+  if (popup.classList.contains('popup_opened')) {
+    popup.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === 27) {
+        closePopup(popup);
+      };
+    });
+  } else {
+    popup.removeEventListener('keydown', function (evt) {
+      if (evt.keyCode === 27) {
+        closePopup(popup);
+      };
+    });
+  }
+};
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -104,9 +111,8 @@ function formSubmitHandlerProfile (evt) {
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
   closePopup(profilePopup);
+  popupCloseEscButton(profilePopup);
 }
-
-popupCloseEscButton(profilePopup);
 
 // ---------модальное окно добавления карточек---------
 //сбрасывание значений инпутов после отправки
@@ -121,10 +127,9 @@ function formSubmitHandlerPlace (evt) {
   const card = createCard(name, link);
   newCardPrepend(cardGrid, card);
   closePopup(placePopup);
+  popupCloseEscButton(placePopup);
   resetValues();
 }
-
-popupCloseEscButton(placePopup);
 
 // ---------модальное окно с зумом---------
 // открытие модального окна
@@ -169,6 +174,7 @@ initialCards.forEach(function (initialCards) {
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
   profileDefaultInfo ();
+  popupCloseEscButton(profilePopup);
 });
 
 profilePopup.addEventListener('click', (evt) => {
@@ -177,13 +183,12 @@ profilePopup.addEventListener('click', (evt) => {
   }
 });
 
-
-
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 
 // ---------модальное окно для нового места---------
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   openPopup(placePopup);
+  popupCloseEscButton(placePopup);
 });
 placePopup.addEventListener('submit', formSubmitHandlerPlace);
 placePopup.addEventListener('click', (evt) => {
@@ -198,10 +203,3 @@ photoPopup.addEventListener('click', (evt) => {
     closePopup(photoPopup);
   }
 });
-
-
-
-//-----------------------------------------Валидация-----------------------------------------
-const showError = (input) => {
-  
-}
