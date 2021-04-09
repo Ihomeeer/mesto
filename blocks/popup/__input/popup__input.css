@@ -1,5 +1,5 @@
 .popup__input {
-  width: calc(100% - 36px*2);
+  width: 100%;
   border: none;
   font-style: normal;
   font-weight: normal;

@@ -26,19 +26,6 @@ const checkInputValidity = (formElement, inputElement, params) => {
   }
 };
 
-//функция установки обработчиков
-const setEventListeners = (formElement, params) => {
-  const inputList = Array.from(formElement.querySelectorAll(params.inputSelector));
-  const buttonElement = formElement.querySelector(params.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, params);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement, params);
-      toggleButtonState(inputList, buttonElement, params);
-    });
-  });
-};
-
 //функция для детектирования невалидных полей
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -57,17 +44,28 @@ const toggleButtonState = (inputList, buttonElement, params) => {
   }
 };
 
+//функция установки обработчиков
+const setEventListeners = (formElement, params) => {
+  const inputList = Array.from(formElement.querySelectorAll(params.inputSelector));
+  const buttonElement = formElement.querySelector(params.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, params);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement, params);
+      toggleButtonState(inputList, buttonElement, params);
+    });
+  });
+};
+
 //функция инициации валидации
 const enableValidation = (params) => {
-  console.log(params)
   const formList = Array.from(document.querySelectorAll(params.formSelector));
   formList.forEach(function(formElement) {
     setEventListeners(formElement, params);
   });
 };
 
-
-
+//запуск валидации на странице с заданными параметрами
 enableValidation({
   formSelector: '.popup__main-form',
   inputSelector: '.popup__input',

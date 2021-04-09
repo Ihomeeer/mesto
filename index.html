@@ -16,10 +16,14 @@
         <button type="reset" class="popup__close-button" id="profilePopupCloseBtn"></button>
         <form class="popup__main-form" id="profileForm" novalidate>
           <h2 class="popup__header">Редактировать профиль</h2>
-          <input type="text" name="profileName" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="popup__error-span" id="profilePopupName-error"></span>
-          <input type="text" name="profileJob" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
-          <span class="popup__error-span" id="profilePopupJob-error"></span>
+          <div class="popup__input-container">
+            <input type="text" name="profileName" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <span class="popup__error-span" id="profilePopupName-error"></span>
+          </div>
+          <div class="popup__input-container">
+            <input type="text" name="profileJob" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
+            <span class="popup__error-span" id="profilePopupJob-error"></span>
+          </div>
           <button type="submit" class="popup__save-button" id="profilePopupSaveBtn">Сохранить</button>
         </form>
     </section>
@@ -31,10 +35,14 @@
       <button type="reset" class="popup__close-button" id="placePopupCloseBtn"></button>
       <form class="popup__main-form" id="placeForm" novalidate>
         <h2 class="popup__header">Новое место</h2>
-        <input type="text" name="placeName" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
-        <span class="popup__error-span" id="placePopupName-error"></span>
-        <input type="url" name="placeLink" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
-        <span class="popup__error-span" id="placePopupLink-error"></span>
+        <div class="popup__input-container">
+          <input type="text" name="placeName" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
+          <span class="popup__error-span" id="placePopupName-error"></span>
+        </div>
+        <div class="popup__input-container">
+          <input type="url" name="placeLink" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
+          <span class="popup__error-span" id="placePopupLink-error"></span>
+        </div>
         <button type="submit" class="popup__save-button" id="placePopupSaveBtn">Создать</button>
       </form>
     </section>
