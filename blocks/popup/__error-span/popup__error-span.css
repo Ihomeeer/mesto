@@ -1,6 +1,5 @@
 .popup__error-span {
   width: 100%;
-  /* min-height: 12px; */
   position: absolute;
   top: calc(100% + 5px);
   left: 0;

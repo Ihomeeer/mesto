@@ -1,3 +1,12 @@
+// Основной скрипт, обеспечивающий интерактивность страницы. Его функции:
+// 1. Создает карточку по заданным данным (имя и ссылка на картинку) - навешивает обработчики для лайков, удаления и зума изображения;
+// 2. Обеспечивает работу 3х модальных окон - с изменением данных профиля, добавления карточки и ее зума;
+// 3. Реализует закрытие модальных окон по клику на необходимую кнопку, оверлей, по нажатию esc;
+// 4. Создает 6 "начальных" карточек (данные для них берутся из отдельного файла, куда вынесены для удобства, чтобы не растягивать код);
+
+// символами "===" отделяются друг от друга переменные/функции/обработчики
+// символами "---" отделяются друг от друга отдельные "модули", например открытие и закрытие модальных окон от непосредственно создания карточки;
+
 //=========Переменные=========
 
 //---------Переменные для профильного модального окна---------
@@ -18,6 +27,9 @@ const cardGrid = document.querySelector('.elements__grid');
 const photoPopup = document.querySelector('#photoPopup');
 const currentPhoto = photoPopup.querySelector('.popup__photo');
 const currentName = photoPopup.querySelector('.popup__photo-name');
+
+//---------Переменные для закрытия модальных окон---------
+const page = document.querySelector('.page');
 
 //=========Функции=========
 
@@ -47,28 +59,31 @@ function newCardPrepend (container, cardElem) {
 }
 
 //---------открытие и закрытие модальных окон---------
+//функция открытия модальных
 function openPopup (elem) {
   elem.classList.add('popup_opened');
+  popupCloseEscButton(elem);
 }
-
+//функция закрытия модальных
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
+  popupCloseEscButton(elem);
 }
 //функция закрытия модальных окон по нажатию esc
 function popupCloseEscButton (popup) {
   if (popup.classList.contains('popup_opened')) {
-    popup.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+    document.addEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
         closePopup(popup);
-      };
+      }
     });
   } else {
-    popup.removeEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+    document.removeEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
         closePopup(popup);
-      };
+      }
     });
-  }
+  };
 };
 
 // ---------профильное модальное окно---------
@@ -83,7 +98,6 @@ function formSubmitHandlerProfile (evt) {
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
   closePopup(profilePopup);
-  popupCloseEscButton(profilePopup);
 }
 
 // ---------модальное окно добавления карточек---------
@@ -99,7 +113,6 @@ function formSubmitHandlerPlace (evt) {
   const card = createCard(name, link);
   newCardPrepend(cardGrid, card);
   closePopup(placePopup);
-  popupCloseEscButton(placePopup);
   resetValues();
 }
 
@@ -107,8 +120,8 @@ function formSubmitHandlerPlace (evt) {
 // открытие модального окна
 function cardZoom (elem, item) {
   elem.addEventListener('click', function () {
-    openPopup(photoPopup);
     zoomData (item);
+    openPopup(photoPopup);
   });
 }
 // определение переменных и присваивание им значений
@@ -143,34 +156,37 @@ initialCards.forEach(function (initialCards) {
 //=========Обработчики=========
 
 // ---------профильное модальное окно---------
+//открытие по кнопке и добавление существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
   profileDefaultInfo ();
-  popupCloseEscButton(profilePopup);
 });
-
+//закрытие модального окна по клику на кнопку и на оверлей
 profilePopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
     closePopup(profilePopup);
   }
 });
-
+//отправка данных формы
 profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
 
 // ---------модальное окно для нового места---------
+//открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   openPopup(placePopup);
-  popupCloseEscButton(placePopup);
 });
-placePopup.addEventListener('submit', formSubmitHandlerPlace);
+//закрытие модального окна по клику на кнопку и на оверлей и сброс формы
 placePopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
     closePopup(placePopup);
     resetValues();
   }
 });
+//отправка данных формы
+placePopup.addEventListener('submit', formSubmitHandlerPlace);
 
 // ---------модальное окно с зумом---------
+//закрытие модального окна по клику на кнопку и на оверлей
 photoPopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
     closePopup(photoPopup);

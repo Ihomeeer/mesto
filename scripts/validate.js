@@ -1,15 +1,19 @@
 //Скрипт отвечает за валидацию форм на странице
 
+// символами "===" отделяются друг от друга переменные/функции/обработчики
+// символами "---" отделяются друг от друга отдельные "модули", например открытие и закрытие модальных окон от непосредственно создания карточки;
+
 //=========Функции=========
 
-//функции показа и скрытия ошибок
+//---------функции показа и скрытия ошибок---------
+// функция показа ошибок
 const showInputError = (formElement, inputElement, errorMessage, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(params.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(params.errorClass);
 };
-
+// функция скрытия ошибок
 const hideInputError = (formElement, inputElement, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(params.inputErrorClass);
@@ -17,7 +21,7 @@ const hideInputError = (formElement, inputElement, params) => {
   errorElement.textContent = '';
 };
 
-//функция проверки валидности форм
+//---------функция проверки валидности форм---------
 const checkInputValidity = (formElement, inputElement, params) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, params);
@@ -26,14 +30,14 @@ const checkInputValidity = (formElement, inputElement, params) => {
   }
 };
 
-//функция для детектирования невалидных полей
+//---------функция для детектирования невалидных полей---------
 const hasInvalidInput = (inputsList) => {
   return inputsList.some((inputElement) => {
     return !inputElement.validity.valid;
   })
 };
 
-//функция изменения состояния кнопки отправки
+//---------функция изменения состояния кнопки отправки---------
 const toggleButtonState = (inputsList, buttonElement, params) => {
   if (hasInvalidInput(inputsList)) {
     buttonElement.classList.add(params.inactiveButtonClass);
@@ -44,7 +48,7 @@ const toggleButtonState = (inputsList, buttonElement, params) => {
   }
 };
 
-//функция установки обработчиков
+//---------функция установки обработчиков---------
 const setEventListeners = (formElement, params) => {
   const inputsList = Array.from(formElement.querySelectorAll(params.inputSelector));
   const buttonElement = formElement.querySelector(params.submitButtonSelector);
@@ -57,7 +61,7 @@ const setEventListeners = (formElement, params) => {
   });
 };
 
-//функция инициации валидации
+//---------функция инициации валидации---------
 const enableValidation = (params) => {
   const formsList = Array.from(document.querySelectorAll(params.formSelector));
   formsList.forEach(function(formElement) {
@@ -65,7 +69,7 @@ const enableValidation = (params) => {
   });
 };
 
-//запуск валидации на странице с заданными параметрами
+//---------запуск валидации на странице с заданными параметрами---------
 enableValidation({
   formSelector: '.popup__main-form',
   inputSelector: '.popup__input',
