@@ -9,7 +9,7 @@
   outline: none;
   position: absolute;
   top: calc(50% - 350px/2 - 40px);
-  left: calc(50% + 450px/2);
+  left: calc(50% + 435px/2);
   cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
   .popup__close-button {
     width: 26px;
     height: 26px;
-    top: calc(50% - 322px/2 - 40px);
+    top: calc(50% - 322px/2 - 39px);
     left: calc(50% + 282px/2 - 25px);
   }
 }
