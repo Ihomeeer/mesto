@@ -9,45 +9,6 @@
 </head>
 <body class="body">
   <main class="page">
-    <section class="popup" id="profilePopup">
-        <button type="reset" class="popup__close-button" id="profilePopupCloseBtn"></button>
-        <form class="popup__main-form" id="profileForm" novalidate>
-          <h2 class="popup__header">Редактировать профиль</h2>
-          <div class="popup__input-container">
-            <input type="text" name="profileName" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
-            <span class="popup__error-span" id="profilePopupName-error"></span>
-          </div>
-          <div class="popup__input-container">
-            <input type="text" name="profileJob" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
-            <span class="popup__error-span" id="profilePopupJob-error"></span>
-          </div>
-          <button type="submit" class="popup__save-button" id="profilePopupSaveBtn">Сохранить</button>
-        </form>
-    </section>
-    <section class="popup" id="placePopup">
-      <button type="reset" class="popup__close-button" id="placePopupCloseBtn"></button>
-      <form class="popup__main-form" id="placeForm" novalidate>
-        <h2 class="popup__header">Новое место</h2>
-        <div class="popup__input-container">
-          <input type="text" name="placeName" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
-          <span class="popup__error-span" id="placePopupName-error"></span>
-        </div>
-        <div class="popup__input-container">
-          <input type="url" name="placeLink" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
-          <span class="popup__error-span" id="placePopupLink-error"></span>
-        </div>
-        <button type="submit" class="popup__save-button" id="placePopupSaveBtn">Создать</button>
-      </form>
-    </section>
-    <section class="popup" id="photoPopup">
-      <div class="popup__form-container">
-        <button class="popup__photo-close-button" id="photoPopupCloseBtn"></button>
-        <figure class="popup__image-container">
-          <img src="#" alt="#" class="popup__photo">
-          <figcaption class="popup__photo-name"></figcaption>
-        </figure>
-      </div>
-    </section>
     <header class="header">
       <div class="header__logo"></div>
     </header>
@@ -80,6 +41,45 @@
         </div>
       </li>
     </template>
+    <div class="popup" name="profile-modal" id="profilePopup">
+      <button type="button" class="popup__close-button" id="profilePopupCloseBtn"></button>
+      <form class="popup__main-form" id="profileForm" novalidate>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <div class="popup__input-container">
+          <input type="text" name="profile-name" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
+          <span class="popup__error-span" id="profilePopupName-error"></span>
+        </div>
+        <div class="popup__input-container">
+          <input type="text" name="profile-job" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
+          <span class="popup__error-span" id="profilePopupJob-error"></span>
+        </div>
+        <button type="submit" class="popup__save-button" id="profilePopupSaveBtn">Сохранить</button>
+      </form>
+  </div>
+  <div class="popup" name="place-modal" id="placePopup">
+    <button type="button" class="popup__close-button" id="placePopupCloseBtn"></button>
+    <form class="popup__main-form" id="placeForm" novalidate>
+      <h2 class="popup__header">Новое место</h2>
+      <div class="popup__input-container">
+        <input type="text" name="place-name" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
+        <span class="popup__error-span" id="placePopupName-error"></span>
+      </div>
+      <div class="popup__input-container">
+        <input type="url" name="place-link" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
+        <span class="popup__error-span" id="placePopupLink-error"></span>
+      </div>
+      <button type="submit" class="popup__save-button" id="placePopupSaveBtn">Создать</button>
+    </form>
+  </div>
+  <div class="popup" name="photo-modal" id="photoPopup">
+    <div class="popup__form-container">
+      <button type="button" class="popup__photo-close-button" id="photoPopupCloseBtn"></button>
+      <figure class="popup__image-container">
+        <img src="#" alt="#" class="popup__photo">
+        <figcaption class="popup__photo-name"></figcaption>
+      </figure>
+    </div>
+  </div>
   </main>
   <script src="./scripts/initialCards.js"></script>
   <script src="./scripts/index.js"></script>

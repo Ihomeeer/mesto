@@ -28,9 +28,6 @@ const photoPopup = document.querySelector('#photoPopup');
 const currentPhoto = photoPopup.querySelector('.popup__photo');
 const currentName = photoPopup.querySelector('.popup__photo-name');
 
-//---------Переменные для закрытия модальных окон---------
-const page = document.querySelector('.page');
-
 //=========Функции=========
 
 //---------функция создания карточки---------
@@ -47,9 +44,9 @@ const page = document.querySelector('.page');
   newCardName.textContent = item.name;
   newCardPhoto.src = item.link;
   newCardPhoto.alt = item.name;
-  cardZoom(newCardPhoto, item);
-  cardLike(newCardLikeBtn);
-  cardDelete(newCardDeleteBtn);
+  newCardPhoto.addEventListener('click', () => cardZoom(item));
+  newCardLikeBtn.addEventListener('click', (evt) => cardLike(evt));
+  newCardDeleteBtn.addEventListener('click', (evt) => cardDelete(evt));
   return newCard;
 }
 
@@ -59,12 +56,13 @@ function newCardPrepend (container, cardElem) {
 }
 
 //---------открытие и закрытие модальных окон---------
-//функция открытия модальных
+//функция открытия модальных окон
 function openPopup (elem) {
+  removeErrors(elem);
   elem.classList.add('popup_opened');
   popupCloseEscButton(elem);
 }
-//функция закрытия модальных
+//функция закрытия модальных окон
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
   popupCloseEscButton(elem);
@@ -101,10 +99,6 @@ function formSubmitHandlerProfile (evt) {
 }
 
 // ---------модальное окно добавления карточек---------
-//сбрасывание значений инпутов после отправки
-function resetValues () {
-  placePopup.querySelector('#placeForm').reset();
-}
 //функция отправки формы
 function formSubmitHandlerPlace (evt) {
   evt.preventDefault();
@@ -113,16 +107,15 @@ function formSubmitHandlerPlace (evt) {
   const card = createCard(name, link);
   newCardPrepend(cardGrid, card);
   closePopup(placePopup);
-  resetValues();
+  placeForm.reset();
+  setEventListeners(placeForm, params);   //делает кнопку отправки неактивной при повторном открытии модального окна
 }
 
 // ---------модальное окно с зумом---------
 // открытие модального окна
-function cardZoom (elem, item) {
-  elem.addEventListener('click', function () {
+function cardZoom (item) {
     zoomData (item);
     openPopup(photoPopup);
-  });
 }
 // определение переменных и присваивание им значений
   function zoomData (item) {
@@ -132,20 +125,25 @@ function cardZoom (elem, item) {
   }
 
 //---------функция лайка---------
-function cardLike (elem) {
-  elem.addEventListener('click', function (evt) {
+function cardLike (evt) {
     const targetLikeBtn = evt.target;
     targetLikeBtn.classList.toggle('elements__like_active');
-  });
 }
 
 //---------функция удаления---------
-function cardDelete (elem) {
-  elem.addEventListener('click', function (evt) {
+function cardDelete (evt) {
   const targetDeleteBtn = evt.target;
   targetDeleteBtn.closest('.elements__card').remove();
-  });
 }
+
+//функция скрытия ошибок при повторном открытии форм
+const removeErrors = (elem) => {
+  const errorSpans = elem.querySelectorAll('.popup__input');
+  errorSpans.forEach(function(errorSpan) {
+  errorSpan.classList.remove('popup__error-span_show');
+  });
+};
+
 
 // ---------первоначальные карточки---------
 initialCards.reverse();
@@ -162,7 +160,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', functi
   profileDefaultInfo ();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
-profilePopup.addEventListener('click', (evt) => {
+profilePopup.addEventListener('mousedown', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
     closePopup(profilePopup);
   }
@@ -176,10 +174,10 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс формы
-placePopup.addEventListener('click', (evt) => {
+placePopup.addEventListener('mousedown', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
     closePopup(placePopup);
-    resetValues();
+    placeForm.reset()
   }
 });
 //отправка данных формы

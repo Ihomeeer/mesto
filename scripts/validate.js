@@ -3,6 +3,17 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики
 // символами "---" отделяются друг от друга отдельные "модули", например открытие и закрытие модальных окон от непосредственно создания карточки;
 
+//=========Переменные=========
+//переменная для записи параметров валидации
+const params = {
+  formSelector: '.popup__main-form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error-span_show',
+};
+
 //=========Функции=========
 
 //---------функции показа и скрытия ошибок---------
@@ -70,11 +81,4 @@ const enableValidation = (params) => {
 };
 
 //---------запуск валидации на странице с заданными параметрами---------
-enableValidation({
-  formSelector: '.popup__main-form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__error-span_show',
-});
+enableValidation(params);
