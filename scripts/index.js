@@ -44,14 +44,14 @@ function createCard (name, link) {
   newCardName.textContent = item.name;
   newCardPhoto.src = item.link;
   newCardPhoto.alt = item.name;
-  newCardPhoto.addEventListener('click', () => cardZoom(item));
-  newCardLikeBtn.addEventListener('click', (evt) => cardLike(evt));
-  newCardDeleteBtn.addEventListener('click', (evt) => cardDelete(evt));
+  newCardPhoto.addEventListener('click', () => zoomCard(item));
+  newCardLikeBtn.addEventListener('click', (evt) => likeCard(evt));
+  newCardDeleteBtn.addEventListener('click', (evt) => deleteCard(evt));
   return newCard;
 }
 
 //---------добавление карточки в контейнер---------
-function newCardPrepend (container, cardElem) {
+function prependNewCard (container, cardElem) {
   container.prepend(cardElem);
 }
 
@@ -59,15 +59,15 @@ function newCardPrepend (container, cardElem) {
 //функция открытия модальных окон
 function openPopup (elem) {
   elem.classList.add('popup_opened');
-  document.addEventListener('keydown', popupCloseEscButton);
+  document.addEventListener('keydown', closePopupEscButton);
 }
 //функция закрытия модальных окон
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
-  document.removeEventListener('keydown', popupCloseEscButton);
+  document.removeEventListener('keydown', closePopupEscButton);
 }
 //функция закрытия модальных окон по нажатию esc
-function popupCloseEscButton (evt) {
+function closePopupEscButton (evt) {
   const currentPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     closePopup(currentPopup);
@@ -81,7 +81,7 @@ function profileDefaultInfo () {
   jobInput.value = defaultJob.textContent;
 }
 //функция отправки формы
-function formSubmitHandlerProfile (evt) {
+function submitFormHandlerProfile (evt) {
   evt.preventDefault();
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
@@ -90,12 +90,12 @@ function formSubmitHandlerProfile (evt) {
 
 // ---------модальное окно добавления карточек---------
 //функция отправки формы
-function formSubmitHandlerPlace (evt) {
+function submitFormHandlerPlace (evt) {
   evt.preventDefault();
   const name = placePopup.querySelector('#placePopupName').value;
   const link = placePopup.querySelector('#placePopupLink').value;
   const card = createCard(name, link);
-  newCardPrepend(cardGrid, card);
+  prependNewCard(cardGrid, card);
   closePopup(placePopup);
   placeForm.reset();
   setEventListeners(placeForm, params);   //делает кнопку отправки неактивной при повторном открытии модального окна
@@ -103,7 +103,7 @@ function formSubmitHandlerPlace (evt) {
 
 // ---------модальное окно с зумом---------
 // открытие модального окна
-function cardZoom (item) {
+function zoomCard (item) {
   zoomData (item);
   openPopup(photoPopup);
 }
@@ -115,18 +115,18 @@ function zoomData (item) {
 }
 
 //---------функция лайка---------
-function cardLike (evt) {
+function likeCard (evt) {
   const targetLikeBtn = evt.target;
   targetLikeBtn.classList.toggle('elements__like_active');
 }
 
 //---------функция удаления---------
-function cardDelete (evt) {
+function deleteCard (evt) {
   const targetDeleteBtn = evt.target;
   targetDeleteBtn.closest('.elements__card').remove();
 }
 
-//---------функция скрытия ошибок при повторном открытии форм с пустыми полями (актуально для модального окна с добавлением новой карточки)---------
+//---------функция скрытия ошибок при повторном открытии форм с пустыми полями---------
 const removeErrors = (elem) => {
   const errorSpans = elem.querySelectorAll('.popup__error-span');
   const currentInputs = elem.querySelectorAll('.popup__input');
@@ -138,10 +138,18 @@ const removeErrors = (elem) => {
   });
 };
 
+// const removeErrors = (elem) => {
+//   const currentForm = elem.querySelector('.popup__main-form');
+//   const currentInputs = elem.querySelectorAll('.popup__input');
+//   currentInputs.forEach(function (currentForm, input, зфкфьы) {
+//     hideInputError(currentForm, input, params);
+//   });
+// }
+
 // ---------первоначальные карточки---------
 initialCards.reverse();
 initialCards.forEach(function (initialCards) {
-  newCardPrepend(cardGrid, createCard(initialCards.name, initialCards.link));
+  prependNewCard(cardGrid, createCard(initialCards.name, initialCards.link));
 });
 
 //=========Обработчики=========
@@ -150,6 +158,7 @@ initialCards.forEach(function (initialCards) {
 //открытие по кнопке и добавление существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
+  removeErrors(profilePopup);
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
@@ -159,7 +168,7 @@ profilePopup.addEventListener('mousedown', (evt) => {
   }
 });
 //отправка данных формы
-profileFormElement.addEventListener('submit', formSubmitHandlerProfile);
+profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
@@ -175,7 +184,7 @@ placePopup.addEventListener('mousedown', (evt) => {
   }
 });
 //отправка данных формы
-placePopup.addEventListener('submit', formSubmitHandlerPlace);
+placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 // ---------модальное окно с зумом---------
 //закрытие модального окна по клику на кнопку и на оверлей
