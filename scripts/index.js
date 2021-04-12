@@ -98,7 +98,7 @@ function submitFormHandlerPlace (evt) {
   prependNewCard(cardGrid, card);
   closePopup(placePopup);
   placeForm.reset();
-  setEventListeners(placeForm, params);   //делает кнопку отправки неактивной при повторном открытии модального окна
+
 }
 
 // ---------модальное окно с зумом---------
@@ -126,12 +126,19 @@ function deleteCard (evt) {
   targetDeleteBtn.closest('.elements__card').remove();
 }
 
-//---------функция скрытия ошибок при повторном открытии форм с пустыми полями---------
+//---------манипуляции при повторном открытии форм с пустыми полями---------
+//функция скрытия ошибок
 const removeErrors = (elem) => {
   const currentInputs = elem.querySelectorAll('.popup__input')
   currentInputs.forEach((input) => {
-    hideInputError(input, params)
+    hideInputError(input, params);
   });
+}
+//функция отключения кнопки отправки
+const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
+  const currentButton = elem.querySelector('.popup__save-button');
+  const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
+  toggleButtonState(currentInputsList, currentButton, params);
 }
 
 // ---------первоначальные карточки---------
@@ -161,8 +168,9 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
-  openPopup(placePopup);
   removeErrors(placePopup);
+  disableSubmitBtn(placePopup);
+  openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс формы
 placePopup.addEventListener('mousedown', (evt) => {
