@@ -128,23 +128,11 @@ function deleteCard (evt) {
 
 //---------функция скрытия ошибок при повторном открытии форм с пустыми полями---------
 const removeErrors = (elem) => {
-  const errorSpans = elem.querySelectorAll('.popup__error-span');
-  const currentInputs = elem.querySelectorAll('.popup__input');
-  currentInputs.forEach(function (input) {
-    input.classList.remove('popup__input_type_error');
+  const currentInputs = elem.querySelectorAll('.popup__input')
+  currentInputs.forEach((input) => {
+    hideInputError(input, params)
   });
-  errorSpans.forEach(function (errorSpan) {
-    errorSpan.classList.remove('popup__error-span_show');
-  });
-};
-
-// const removeErrors = (elem) => {
-//   const currentForm = elem.querySelector('.popup__main-form');
-//   const currentInputs = elem.querySelectorAll('.popup__input');
-//   currentInputs.forEach(function (currentForm, input, зфкфьы) {
-//     hideInputError(currentForm, input, params);
-//   });
-// }
+}
 
 // ---------первоначальные карточки---------
 initialCards.reverse();
@@ -180,7 +168,7 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 placePopup.addEventListener('mousedown', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
     closePopup(placePopup);
-    placeForm.reset()
+    placeForm.reset();
   }
 });
 //отправка данных формы

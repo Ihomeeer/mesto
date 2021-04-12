@@ -25,8 +25,9 @@ const showInputError = (formElement, inputElement, errorMessage, params) => {
   errorElement.classList.add(params.errorClass);
 };
 // функция скрытия ошибок
-const hideInputError = (formElement, inputElement, params) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+const hideInputError = (inputElement, params) => {
+  const currentForm = inputElement.closest(params.formSelector);
+  const errorElement = currentForm.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(params.inputErrorClass);
   errorElement.classList.remove(params.errorClass);
   errorElement.textContent = '';
@@ -37,7 +38,7 @@ const checkInputValidity = (formElement, inputElement, params) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, params);
   } else {
-    hideInputError(formElement, inputElement, params);
+    hideInputError(inputElement, params);
   }
 };
 
