@@ -30,26 +30,6 @@ const currentName = photoPopup.querySelector('.popup__photo-name');
 
 //=========Функции=========
 
-//---------функция создания карточки---------
-function createCard (name, link) {
-  const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
-  const item = {
-    name: name,
-    link: link,
-  };
-  const newCardName = newCard.querySelector('.elements__name');
-  const newCardPhoto = newCard.querySelector('.elements__photo');
-  const newCardLikeBtn = newCard.querySelector('.elements__like');
-  const newCardDeleteBtn = newCard.querySelector('.elements__delete');
-  newCardName.textContent = item.name;
-  newCardPhoto.src = item.link;
-  newCardPhoto.alt = item.name;
-  newCardPhoto.addEventListener('click', () => zoomCard(item));
-  newCardLikeBtn.addEventListener('click', (evt) => likeCard(evt));
-  newCardDeleteBtn.addEventListener('click', (evt) => deleteCard(evt));
-  return newCard;
-}
-
 //---------добавление карточки в контейнер---------
 function prependNewCard (container, cardElem) {
   container.prepend(cardElem);
@@ -98,7 +78,6 @@ function submitFormHandlerPlace (evt) {
   prependNewCard(cardGrid, card);
   closePopup(placePopup);
   placeForm.reset();
-
 }
 
 // ---------модальное окно с зумом---------
@@ -112,18 +91,6 @@ function zoomData (item) {
   currentPhoto.src = item.link;
   currentPhoto.alt = item.name;
   currentName.textContent = item.name;
-}
-
-//---------функция лайка---------
-function likeCard (evt) {
-  const targetLikeBtn = evt.target;
-  targetLikeBtn.classList.toggle('elements__like_active');
-}
-
-//---------функция удаления---------
-function deleteCard (evt) {
-  const targetDeleteBtn = evt.target;
-  targetDeleteBtn.closest('.elements__card').remove();
 }
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
@@ -189,3 +156,47 @@ photoPopup.addEventListener('click', (evt) => {
     closePopup(photoPopup);
   }
 });
+
+
+//=========Классы=========
+class Card {
+  constructor(name, link, cardSelector) {
+    this._name = name;
+    this._link = link;
+    this._cardSelector = cardSelector;
+  }
+
+  //---------создание карточки---------
+  createCard (name, link) {
+    const newCard = cardTemplate.querySelector('.elements__card').cloneNode(true);
+    const item = {
+      name: name,
+      link: link,
+    };
+    const newCardName = newCard.querySelector('.elements__name');
+    const newCardPhoto = newCard.querySelector('.elements__photo');
+    const newCardLikeBtn = newCard.querySelector('.elements__like');
+    const newCardDeleteBtn = newCard.querySelector('.elements__delete');
+    newCardName.textContent = item.name;
+    newCardPhoto.src = item.link;
+    newCardPhoto.alt = item.name;
+    newCardPhoto.addEventListener('click', () => zoomCard(item));
+    newCardLikeBtn.addEventListener('click', (evt) => _likeCard(evt));
+    newCardDeleteBtn.addEventListener('click', (evt) => _deleteCard(evt));
+    return newCard;
+  }
+
+  //---------функция лайка---------
+  function likeCard (evt) {
+    const targetLikeBtn = evt.target;
+    targetLikeBtn.classList.toggle('elements__like_active');
+  }
+
+  //---------функция удаления---------
+  function deleteCard (evt) {
+    const targetDeleteBtn = evt.target;
+    targetDeleteBtn.closest('.elements__card').remove();
+  }
+
+
+}
