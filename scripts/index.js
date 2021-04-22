@@ -92,11 +92,7 @@ class Card {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
-    photoPopup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
-        closePopup(photoPopup);
-      }
-    });
+
   }
 }
 
@@ -209,8 +205,15 @@ placePopup.addEventListener('mousedown', (evt) => {
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
 
-const currentInputsList = Array.from(document.querySelectorAll('.popup__input'));
-currentInputsList.forEach((input, params) => {
-  const val = new FormValidator(params, input);
-  val.enableValidation ();
-})
+// ---------модальное окно с зумом---------
+photoPopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
+    closePopup(photoPopup);
+  }
+});
+
+
+
+//ПРОВЕРИТЬ ПОЛИМОРФИЗМ
+// this - контекст
+// в конструктор пихается все, что вызывается один раз, при первом вызове класса.

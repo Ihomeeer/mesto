@@ -5,6 +5,7 @@
 
 //=========Переменные=========
 //переменная для записи параметров валидации
+
 const params = {
   formSelector: '.popup__main-form',
   inputSelector: '.popup__input',
@@ -16,7 +17,7 @@ const params = {
 
 class FormValidator {
   constructor (params, formElement) {
-    this._params = params;
+
     this._formElement = formElement;
   }
 
