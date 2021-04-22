@@ -161,17 +161,17 @@ function submitFormHandlerPlace (evt) {
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
 //функция скрытия ошибок
-const removeErrors = (elem) => {
-  const currentInputs = elem.querySelectorAll('.popup__input')
-  currentInputs.forEach((input) => {
-    hideInputError(input, params);
-  });
-}
+// const removeErrors = (elem) => {
+//   const currentInputs = elem.querySelectorAll('.popup__input')
+//   currentInputs.forEach((input) => {
+//     FormValidator._hideInputError(input, params);
+//   });
+// }
 //функция отключения кнопки отправки
 const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
   const currentButton = elem.querySelector('.popup__save-button');
   const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
-  toggleButtonState(currentInputsList, currentButton, params);
+  // FormValidator._toggleButtonState(currentInputsList, currentButton, params);
 }
 
 //=========Обработчики=========
@@ -180,7 +180,7 @@ const disableSubmitBtn = (elem) => {                                        //д
 //открытие по кнопке и добавление существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
-  removeErrors(profilePopup);
+  // removeErrors(profilePopup);
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
@@ -195,7 +195,7 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
-  removeErrors(placePopup);
+  // removeErrors(placePopup);
   disableSubmitBtn(placePopup);
   openPopup(placePopup);
 });
@@ -208,3 +208,9 @@ placePopup.addEventListener('mousedown', (evt) => {
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
+
+const currentInputsList = Array.from(document.querySelectorAll('.popup__input'));
+currentInputsList.forEach((input, params) => {
+  const val = new FormValidator(params, input);
+  val.enableValidation ();
+})
