@@ -20,20 +20,14 @@ const jobInput = profileFormElement.querySelector('#profilePopupJob');
 //---------Переменные для модального окна добавления карточек---------
 const placePopup = document.querySelector('#placePopup');
 const placeForm = document.querySelector('#placeForm');
-// const cardTemplate = document.querySelector('#placeCard').content;
 const cardGrid = document.querySelector('.elements__grid');
 
 //---------Переменные для модального окна с зумом---------
 const photoPopup = document.querySelector('#photoPopup');
-const currentPhoto = photoPopup.querySelector('.popup__photo');
-const currentName = photoPopup.querySelector('.popup__photo-name');
-
-
-
-
-
 
 //=========Классы=========
+
+//---------Создание карточки, добавление обработчиков---------
 class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
@@ -42,47 +36,84 @@ class Card {
   }
 
   //---------создание карточки---------
-  createCard () {
-    const newCard = document.querySelector(this._cardSelector)
-    .content
-    .querySelector('.elements__card')
-    .cloneNode(true);
-    const newCardName = newCard.querySelector('.elements__name');
-    const newCardPhoto = newCard.querySelector('.elements__photo');
-    const newCardLikeBtn = newCard.querySelector('.elements__like');
-    const newCardDeleteBtn = newCard.querySelector('.elements__delete');
-    newCardName.textContent = this._name;
-    newCardPhoto.src = this._link;
-    newCardPhoto.alt = this._name;
-    newCardPhoto.addEventListener('click', () => zoomCard(this._name, this._link));
-    newCardLikeBtn.addEventListener('click', (evt) => this._likeCard(evt));
-    newCardDeleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    return newCard;
+  createCard() {
+    this.element = this._getTemplate();
+    const _newCardName = this.element.querySelector('.elements__name');
+    const _newCardPhoto = this.element.querySelector('.elements__photo');
+    const _newCardLikeBtn = this.element.querySelector('.elements__like');
+    const _newCardDeleteBtn = this.element.querySelector('.elements__delete');
+    _newCardName.textContent = this._name;
+    _newCardPhoto.src = this._link;
+    _newCardPhoto.alt = this._name;
+    this._setListeners( _newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
+
+    return this.element;
+  }
+
+  //---------разметка---------
+  _getTemplate() {
+    const _cardElement = document.querySelector(this._cardSelector)
+      .content
+      .querySelector('.elements__card')
+      .cloneNode(true);
+
+    return _cardElement;
   }
 
   //---------лайки---------
   _likeCard (evt) {
-    const targetLikeBtn = evt.target;
-    targetLikeBtn.classList.toggle('elements__like_active');
+    const _targetLikeBtn = evt.target;
+    _targetLikeBtn.classList.toggle('elements__like_active');
   }
 
   //---------удаление---------
   _deleteCard (evt) {
-    const targetDeleteBtn = evt.target;
-    targetDeleteBtn.closest('.elements__card').remove();
+    const _targetDeleteBtn = evt.target;
+    _targetDeleteBtn.closest('.elements__card').remove();
+  }
+
+  // ---------модальное окно с зумом---------
+  // открытие модального окна
+  _zoomCard (name, link) {
+    const _currentPhoto = photoPopup.querySelector('.popup__photo');
+    const _currentName = photoPopup.querySelector('.popup__photo-name');
+    this._zoomData (name, link, _currentPhoto, _currentName);
+    openPopup(photoPopup);
+  }
+  // определение переменных и присваивание им значений
+  _zoomData (name, link, currentPhoto, currentName) {
+    currentPhoto.src = link;
+    currentPhoto.alt = name;
+    currentName.textContent = name;
+  }
+
+  //---------слушатели---------
+  _setListeners(likeBtn, deleteBtn, photo) {
+    likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
+    deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
+    photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
+    photoPopup.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
+        closePopup(photoPopup);
+      }
+    });
   }
 }
-
-
-
-
 
 //=========Функции=========
 
 //---------добавление карточки в контейнер---------
-function prependNewCard (container, cardElem) {
+function prependNewCard (name, link, container, cardSelector) {
+  const card = new Card(name, link, cardSelector);
+  const cardElem = card.createCard();
   container.prepend(cardElem);
 }
+
+// ---------первоначальные карточки---------
+initialCards.reverse();
+initialCards.forEach(function (initialCards) {
+  prependNewCard(initialCards.name, initialCards.link, cardGrid, '.place-card');
+});
 
 //---------открытие и закрытие модальных окон---------
 //функция открытия модальных окон
@@ -123,23 +154,9 @@ function submitFormHandlerPlace (evt) {
   evt.preventDefault();
   const name = placePopup.querySelector('#placePopupName').value;
   const link = placePopup.querySelector('#placePopupLink').value;
-  const card = new Card(name, link, '.place-card');
-  prependNewCard(cardGrid, card);
+  prependNewCard(name, link, cardGrid, '.place-card');
   closePopup(placePopup);
   placeForm.reset();
-}
-
-// ---------модальное окно с зумом---------
-// открытие модального окна
-function zoomCard (name, link) {
-  zoomData (name, link);
-  openPopup(photoPopup);
-}
-// определение переменных и присваивание им значений
-function zoomData (name, link) {
-  currentPhoto.src = link;
-  currentPhoto.alt = name;
-  currentName.textContent = name;
 }
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
@@ -156,12 +173,6 @@ const disableSubmitBtn = (elem) => {                                        //д
   const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
   toggleButtonState(currentInputsList, currentButton, params);
 }
-
-// ---------первоначальные карточки---------
-initialCards.reverse();
-initialCards.forEach(function (initialCards) {
-  prependNewCard(cardGrid, new Card(initialCards.name, initialCards.link, '.place-card'));
-});
 
 //=========Обработчики=========
 
@@ -197,13 +208,3 @@ placePopup.addEventListener('mousedown', (evt) => {
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
-
-// ---------модальное окно с зумом---------
-//закрытие модального окна по клику на кнопку и на оверлей
-photoPopup.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
-    closePopup(photoPopup);
-  }
-});
-
-
