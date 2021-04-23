@@ -78,17 +78,15 @@ class FormValidator {
   };
 
   //---------функция инициации валидации---------
-  enableValidation(params) {
-    const _formsList = Array.from(document.querySelectorAll(params.formSelector));
-    _formsList.forEach(function(formElement) {
-      this._setEventListeners(formElement, params);
-    });
-  };
+  enableValidation() {
+      this._setEventListeners(this._formElement, this._params);
+  }
 }
 
-const inputList = document.querySelectorAll('.popup__input');
-inputList.forEach(function(input) {
-  const validation = new FormValidator(params, input);
+
+const formList = document.querySelectorAll('.popup__main-form');
+formList.forEach(function(form) {
+  const validation = new FormValidator(params, form);
   const enabledValidation = validation.enableValidation();
-  console.log(validation)
+  console.log(form)
 });
