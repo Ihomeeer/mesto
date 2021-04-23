@@ -156,12 +156,12 @@ function submitFormHandlerPlace (evt) {
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
 //функция скрытия ошибок
-const removeErrors = (elem) => {
-  const currentInputs = elem.querySelectorAll('.popup__input')
-  currentInputs.forEach((input) => {
-    // hideInputError(input, params);
-  });
-}
+// const removeErrors = (elem) => {
+//   const currentInputs = elem.querySelectorAll('.popup__input')
+//   currentInputs.forEach((input) => {
+//   FormValidator._hideInputError(input, params);
+//   });
+// }
 //функция отключения кнопки отправки
 const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
   const currentButton = elem.querySelector('.popup__save-button');

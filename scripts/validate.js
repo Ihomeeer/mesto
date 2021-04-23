@@ -17,7 +17,7 @@ const params = {
 
 class FormValidator {
   constructor (params, formElement) {
-
+    this._params = params;
     this._formElement = formElement;
   }
 
@@ -66,12 +66,13 @@ class FormValidator {
   };
 
   //---------функция установки обработчиков---------
-  _setEventListeners(formElement, params) {
+  _setEventListeners(params, formElement) {
     const _inputsList = Array.from(formElement.querySelectorAll(params.inputSelector));
     const _buttonElement = formElement.querySelector(params.submitButtonSelector);
     this._toggleButtonState(_inputsList, _buttonElement, params);
     _inputsList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
+      console.log(inputElement)
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(formElement, inputElement, params);
         this._toggleButtonState(_inputsList, _buttonElement, params);
       });
@@ -80,14 +81,16 @@ class FormValidator {
 
   //---------функция инициации валидации---------
   enableValidation() {
-      this._setEventListeners(this._formElement, this._params);
+      this._setEventListeners(this._params, this._formElement, );
   }
 }
 
-
 const formList = document.querySelectorAll('.popup__main-form');
 formList.forEach(function(form) {
+  launchValidation(params, form);
+});
+
+function launchValidation (params, form) {
   const validation = new FormValidator(params, form);
   const enabledValidation = validation.enableValidation();
-  console.log(form)
-});
+}
