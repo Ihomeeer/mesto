@@ -92,11 +92,6 @@ class Card {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
-    photoPopup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
-        closePopup(photoPopup);
-      }
-    });
   }
 }
 
@@ -164,14 +159,14 @@ function submitFormHandlerPlace (evt) {
 const removeErrors = (elem) => {
   const currentInputs = elem.querySelectorAll('.popup__input')
   currentInputs.forEach((input) => {
-    hideInputError(input, params);
+    // hideInputError(input, params);
   });
 }
 //функция отключения кнопки отправки
 const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
   const currentButton = elem.querySelector('.popup__save-button');
   const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
-  toggleButtonState(currentInputsList, currentButton, params);
+  // toggleButtonState(currentInputsList, currentButton, params);
 }
 
 //=========Обработчики=========
@@ -208,3 +203,10 @@ placePopup.addEventListener('mousedown', (evt) => {
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
+
+// ---------модальное окно с зумом фото---------
+photoPopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
+    closePopup(photoPopup);
+  }
+});
