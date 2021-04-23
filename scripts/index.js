@@ -92,7 +92,6 @@ class Card {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
-
   }
 }
 
@@ -157,17 +156,17 @@ function submitFormHandlerPlace (evt) {
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
 //функция скрытия ошибок
-// const removeErrors = (elem) => {
-//   const currentInputs = elem.querySelectorAll('.popup__input')
-//   currentInputs.forEach((input) => {
-//     FormValidator._hideInputError(input, params);
-//   });
-// }
+const removeErrors = (elem) => {
+  const currentInputs = elem.querySelectorAll('.popup__input')
+  currentInputs.forEach((input) => {
+    // hideInputError(input, params);
+  });
+}
 //функция отключения кнопки отправки
 const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
   const currentButton = elem.querySelector('.popup__save-button');
   const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
-  // FormValidator._toggleButtonState(currentInputsList, currentButton, params);
+  // toggleButtonState(currentInputsList, currentButton, params);
 }
 
 //=========Обработчики=========
@@ -205,15 +204,9 @@ placePopup.addEventListener('mousedown', (evt) => {
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
 
-// ---------модальное окно с зумом---------
+// ---------модальное окно с зумом фото---------
 photoPopup.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
     closePopup(photoPopup);
   }
 });
-
-
-
-//ПРОВЕРИТЬ ПОЛИМОРФИЗМ
-// this - контекст
-// в конструктор пихается все, что вызывается один раз, при первом вызове класса.
