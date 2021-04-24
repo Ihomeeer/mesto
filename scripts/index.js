@@ -26,6 +26,8 @@ const jobInput = profileFormElement.querySelector('#profilePopupJob');
 const placePopup = document.querySelector('#placePopup');
 const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
+const name = placePopup.querySelector('#placePopupName');
+const link = placePopup.querySelector('#placePopupLink');
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
@@ -105,9 +107,7 @@ function submitFormHandlerProfile (evt) {
 //функция отправки формы
 function submitFormHandlerPlace (evt) {
   evt.preventDefault();
-  const name = placePopup.querySelector('#placePopupName').value;
-  const link = placePopup.querySelector('#placePopupLink').value;
-  prependNewCard(name, link, cardGrid, '.place-card');
+  prependNewCard(name.value, link.value, cardGrid, '.place-card');
   closePopup(placePopup);
   placeForm.reset();
 }
@@ -136,6 +136,16 @@ function launchValidation (params, form) {
   const validation = new FormValidator(params, form).enableValidation();
 }
 
+const closePopuphandler = (evt, popup) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+    closePopup(evt.target.closest('.popup'));
+    if (popup.id === 'placePopup') {
+      placeForm.reset();
+    }
+  }
+}
+
+closePopuphandler(placePopup)
 
 //=========Обработчики=========
 
@@ -148,11 +158,17 @@ document.querySelector('.profile__edit-button').addEventListener('click', functi
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
-profilePopup.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-    closePopup(profilePopup);
-  }
-});
+// profilePopup.addEventListener('mousedown', (evt) => {
+//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+//     closePopup(profilePopup);
+//   }
+// });
+placePopup.addEventListener('mousedown', (evt) => {
+  closePopuphandler(placePopup)
+  });
+
+
+
 //отправка данных формы
 profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 
@@ -164,12 +180,12 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс формы
-placePopup.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
-    closePopup(placePopup);
-    placeForm.reset();
-  }
-});
+// placePopup.addEventListener('mousedown', (evt) => {
+//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
+//     closePopup(placePopup);
+//     placeForm.reset();
+//   }
+// });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
 
