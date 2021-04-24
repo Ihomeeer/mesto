@@ -49,16 +49,22 @@ export const params = {
 //=========Функции=========
 
 
-//---------добавление карточки в контейнер---------
-function prependNewCard (name, link, container, cardSelector) {
+//---------создание и добавление карточки в контейнер---------
+//функция создания элемента карточки
+const newCard = (name, link, cardSelector) => {
   const card = new Card(name, link, cardSelector);
   const cardElem = card.createCard();
-  container.prepend(cardElem);
+
+  return cardElem;
+};
+//функция добавления готовой карточки на страницу
+const prependNewCard = (name, link, container, cardSelector) => {
+  container.prepend(newCard(name, link, cardSelector));
 }
 
 // ---------первоначальные карточки---------
 initialCards.reverse();
-initialCards.forEach(function (initialCards) {
+initialCards.forEach((initialCards) => {
   prependNewCard(initialCards.name, initialCards.link, cardGrid, '.place-card');
 });
 
