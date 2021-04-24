@@ -1,4 +1,9 @@
-import {openPopup} from './index.js';
+//Класс отвечает за создание карточек на странице
+
+// символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
+// символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
+
+import {openPopup, currentPhoto, currentName, photoPopup} from './index.js';
 
 //---------Класс - создание карточки, добавление обработчиков---------
 class Card {
@@ -48,9 +53,7 @@ class Card {
   // ---------модальное окно с зумом---------
   // открытие модального окна
   _zoomCard (name, link) {
-    const _currentPhoto = photoPopup.querySelector('.popup__photo');
-    const _currentName = photoPopup.querySelector('.popup__photo-name');
-    this._zoomData (name, link, _currentPhoto, _currentName);
+    this._zoomData (name, link, currentPhoto, currentName);
     openPopup(photoPopup);
   }
   // определение переменных и присваивание им значений

@@ -8,7 +8,7 @@
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 import {Card} from './Card.js';
 import {initialCards} from './InitialCards.js';
-import {params, FormValidator} from './FormValidator.js';
+import {FormValidator} from './FormValidator.js';
 
 
 //=========Переменные=========
@@ -28,10 +28,22 @@ const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
 
 //---------Переменные для модального окна с зумом---------
-const photoPopup = document.querySelector('#photoPopup');
+export const photoPopup = document.querySelector('#photoPopup');
 
 //---------Переменные для валидации---------
 const formList = document.querySelectorAll('.popup__main-form');
+export const currentPhoto = photoPopup.querySelector('.popup__photo');
+export const currentName = photoPopup.querySelector('.popup__photo-name');
+
+//---------Переменная для записи параметров валидации---------
+export const params = {
+  formSelector: '.popup__main-form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error-span_show',
+}
 
 
 //=========Функции=========
@@ -63,8 +75,8 @@ function closePopup (elem) {
 }
 //функция закрытия модальных окон по нажатию esc
 function closePopupEscButton (evt) {
-  const currentPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const currentPopup = document.querySelector('.popup_opened');
     closePopup(currentPopup);
   };
 }

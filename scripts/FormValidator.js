@@ -1,21 +1,16 @@
-//Скрипт отвечает за валидацию форм на странице
+//Класс отвечает за валидацию форм на странице
 
-// символами "===" отделяются друг от друга переменные/функции/обработчики
-// символами "---" отделяются друг от друга отдельные "модули", например открытие и закрытие модальных окон от непосредственно создания карточки;
+// символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
+// символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
 //=========Переменные=========
-//переменная для записи параметров валидации
 
-const params = {
-  formSelector: '.popup__main-form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error-span_show',
-}
+
+import {params} from './index.js';
+
 
 //=========Классы=========
+
 
 //---------Класс для валидации форм---------
 class FormValidator {
@@ -26,25 +21,24 @@ class FormValidator {
 
   //---------показ и скрытие ошибок---------
   // показ ошибок
-  _showInputError(formElement, inputElement, errorMessage, params) {
-    const _errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  _showInputError(inputElement, errorMessage, params) {
+    const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(params.inputErrorClass);
     _errorElement.textContent = errorMessage;
     _errorElement.classList.add(params.errorClass);
   };
   // скрытие ошибок
   _hideInputError(inputElement, params) {
-    const _currentForm = inputElement.closest(params.formSelector);
-    const _errorElement = _currentForm.querySelector(`#${inputElement.id}-error`);
+    const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(params.inputErrorClass);
     _errorElement.classList.remove(params.errorClass);
     _errorElement.textContent = '';
   };
 
   //---------проверка валидности форм---------
-  _checkInputValidity(formElement, inputElement, params) {
+  _checkInputValidity(inputElement, params) {
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement, inputElement.validationMessage, params);
+      this._showInputError(inputElement, inputElement.validationMessage, params);
     } else {
       this._hideInputError(inputElement, params);
     }
@@ -75,7 +69,7 @@ class FormValidator {
     this._toggleButtonState(_inputsList, _buttonElement, params);
     _inputsList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(formElement, inputElement, params);
+        this._checkInputValidity(inputElement, params);
         this._toggleButtonState(_inputsList, _buttonElement, params);
       });
     });
