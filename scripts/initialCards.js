@@ -27,3 +27,5 @@ const initialCards = [
     link: './images/6-Peterburg-min.jpg'
   }
 ];
+
+export {initialCards};

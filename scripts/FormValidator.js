@@ -15,21 +15,24 @@ const params = {
   errorClass: 'popup__error-span_show',
 }
 
+//=========Классы=========
+
+//---------Класс для валидации форм---------
 class FormValidator {
   constructor (params, formElement) {
     this._params = params;
     this._formElement = formElement;
   }
 
-  //---------функции показа и скрытия ошибок---------
-  // функция показа ошибок
+  //---------показ и скрытие ошибок---------
+  // показ ошибок
   _showInputError(formElement, inputElement, errorMessage, params) {
     const _errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(params.inputErrorClass);
     _errorElement.textContent = errorMessage;
     _errorElement.classList.add(params.errorClass);
   };
-  // функция скрытия ошибок
+  // скрытие ошибок
   _hideInputError(inputElement, params) {
     const _currentForm = inputElement.closest(params.formSelector);
     const _errorElement = _currentForm.querySelector(`#${inputElement.id}-error`);
@@ -38,7 +41,7 @@ class FormValidator {
     _errorElement.textContent = '';
   };
 
-  //---------функция проверки валидности форм---------
+  //---------проверка валидности форм---------
   _checkInputValidity(formElement, inputElement, params) {
     if (!inputElement.validity.valid) {
       this._showInputError(formElement, inputElement, inputElement.validationMessage, params);
@@ -47,14 +50,14 @@ class FormValidator {
     }
   };
 
-  //---------функция для детектирования невалидных полей---------
+  //---------детектирование невалидных полей---------
   _hasInvalidInput(inputsList) {
     return inputsList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   };
 
-  //---------функция изменения состояния кнопки отправки---------
+  //---------изменение состояния кнопки отправки---------
   _toggleButtonState(inputsList, buttonElement, params) {
     if (this._hasInvalidInput(inputsList)) {
       buttonElement.classList.add(params.inactiveButtonClass);
@@ -65,13 +68,12 @@ class FormValidator {
     }
   };
 
-  //---------функция установки обработчиков---------
+  //---------установка обработчиков---------
   _setEventListeners(params, formElement) {
     const _inputsList = Array.from(formElement.querySelectorAll(params.inputSelector));
     const _buttonElement = formElement.querySelector(params.submitButtonSelector);
     this._toggleButtonState(_inputsList, _buttonElement, params);
     _inputsList.forEach((inputElement) => {
-      console.log(inputElement)
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(formElement, inputElement, params);
         this._toggleButtonState(_inputsList, _buttonElement, params);
@@ -79,18 +81,10 @@ class FormValidator {
     });
   };
 
-  //---------функция инициации валидации---------
+  //---------инициация валидации---------
   enableValidation() {
       this._setEventListeners(this._params, this._formElement, );
   }
 }
 
-const formList = document.querySelectorAll('.popup__main-form');
-formList.forEach(function(form) {
-  launchValidation(params, form);
-});
-
-function launchValidation (params, form) {
-  const validation = new FormValidator(params, form);
-  const enabledValidation = validation.enableValidation();
-}
+export {params, FormValidator};
