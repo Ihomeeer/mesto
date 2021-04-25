@@ -11,7 +11,7 @@ import {initialCards} from './InitialCards.js';
 import {FormValidator} from './FormValidator.js';
 
 
-//=========Переменные=========
+//=========Переменные=================================================================================
 
 
 //---------Переменные для профильного модального окна---------
@@ -47,9 +47,7 @@ export const params = {
   errorClass: 'popup__error-span_show',
 }
 
-
-//=========Функции=========
-
+//=========Функции=================================================================================
 
 //---------создание и добавление карточки в контейнер---------
 //функция создания элемента карточки
@@ -80,6 +78,15 @@ export function openPopup (elem) {
 function closePopup (elem) {
   elem.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEscButton);
+}
+//функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей + сброс введеных данных в инпутах модалки добавления карточек
+const closePopuphandler = (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+    closePopup(evt.target.closest('.popup'));
+    if (evt.target.id === 'placePopup' || evt.target.id === 'placePopupCloseBtn') {
+      placeForm.reset();
+    }
+  }
 }
 //функция закрытия модальных окон по нажатию esc
 function closePopupEscButton (evt) {
@@ -136,19 +143,7 @@ function launchValidation (params, form) {
   const validation = new FormValidator(params, form).enableValidation();
 }
 
-const closePopuphandler = (evt, popup) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-    closePopup(evt.target.closest('.popup'));
-    if (popup.id === 'placePopup') {
-      placeForm.reset();
-    }
-  }
-}
-
-closePopuphandler(placePopup)
-
-//=========Обработчики=========
-
+//=========Обработчики=================================================================================
 
 // ---------профильное модальное окно---------
 //открытие по кнопке и добавление существующей инфо в поля
@@ -158,17 +153,9 @@ document.querySelector('.profile__edit-button').addEventListener('click', functi
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
-// profilePopup.addEventListener('mousedown', (evt) => {
-//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-//     closePopup(profilePopup);
-//   }
-// });
-placePopup.addEventListener('mousedown', (evt) => {
-  closePopuphandler(placePopup)
-  });
-
-
-
+profilePopup.addEventListener('mousedown', (evt) => {
+  closePopuphandler(evt);
+});
 //отправка данных формы
 profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 
@@ -179,13 +166,10 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   disableSubmitBtn(placePopup);
   openPopup(placePopup);
 });
-//закрытие модального окна по клику на кнопку и на оверлей и сброс формы
-// placePopup.addEventListener('mousedown', (evt) => {
-//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') ) {
-//     closePopup(placePopup);
-//     placeForm.reset();
-//   }
-// });
+//закрытие модального окна по клику на кнопку и на оверлей и сброс данных в инпутах
+placePopup.addEventListener('mousedown', (evt) => {
+  closePopuphandler(evt);
+  });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
 
