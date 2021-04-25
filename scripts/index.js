@@ -10,9 +10,7 @@ import {Card} from './Card.js';
 import {initialCards} from './InitialCards.js';
 import {FormValidator} from './FormValidator.js';
 
-
 //=========Переменные=================================================================================
-
 
 //---------Переменные для профильного модального окна---------
 const profilePopup = document.querySelector('#profilePopup');
@@ -28,6 +26,7 @@ const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
 const name = placePopup.querySelector('#placePopupName');
 const link = placePopup.querySelector('#placePopupLink');
+const placePopupSaveButton = placePopup.querySelector('#placePopupSaveBtn');
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
@@ -121,21 +120,12 @@ function submitFormHandlerPlace (evt) {
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
 //функция скрытия ошибок
-const removeErrors = ((params, elem) => {
-  const currentErrors = elem.querySelectorAll('.popup__error-span');
-  const currentInputs = elem.querySelectorAll('.popup__input');
-  currentErrors.forEach((error) => {
-    error.classList.remove(params.errorClass);
-  });
-  currentInputs.forEach((input) => {
-    input.classList.remove(params.inputErrorClass);
-  });
+const removeErrors = ((params, form) => {
+const removeCurrentErrors = new FormValidator(params, form).removeErrors(params, form);
 });
-//функция отключения кнопки отправки
-const disableSubmitBtn = (elem) => {                                        //делает кнопку отправки неактивной при повторном открытии модального окна
-  const currentButton = elem.querySelector('.popup__save-button');
-  currentButton.disabled = true;
-  currentButton.classList.add(params.inactiveButtonClass);
+//функция отключения кнопки отправки - делает кнопку отправки неактивной при повторном открытии модального окна
+const disableSubmitBtn = (params, form, button) => {
+  const disableSubmitButton = new FormValidator(params, form).disableSubmitButton(button);
 }
 
 // ---------запуск валидации---------
@@ -163,7 +153,7 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   removeErrors(params, placePopup);
-  disableSubmitBtn(placePopup);
+  disableSubmitBtn(params, placeForm, placePopupSaveButton);
   openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс данных в инпутах

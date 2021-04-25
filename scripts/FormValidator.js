@@ -54,8 +54,9 @@ class FormValidator {
   //---------изменение состояния кнопки отправки---------
   _toggleButtonState(inputsList, buttonElement, params) {
     if (this._hasInvalidInput(inputsList)) {
-      buttonElement.classList.add(params.inactiveButtonClass);
-      buttonElement.disabled = true;
+      this.disableSubmitButton(buttonElement);
+      // buttonElement.classList.add(params.inactiveButtonClass);
+      // buttonElement.disabled = true;
     } else {
       buttonElement.classList.remove(params.inactiveButtonClass);
       buttonElement.disabled = false;
@@ -75,10 +76,23 @@ class FormValidator {
     });
   };
 
+  //---------публичный метод для отключения кнопки валидации. Используется в index.js для отключения кнопки в модалке с карточками---------
+  disableSubmitButton(buttonElement) {
+    buttonElement.classList.add(this._params.inactiveButtonClass);
+    buttonElement.disbaled = true;
+  }
+  //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
+  removeErrors = (params, form) => {
+    const currentInputs = form.querySelectorAll('.popup__input')
+    currentInputs.forEach((input) => {
+      this._hideInputError(input, params);
+    });
+  }
+
   //---------инициация валидации---------
   enableValidation() {
-      this._setEventListeners(this._params, this._formElement, );
+    this._setEventListeners(this._params, this._formElement, );
   }
 }
 
-export {params, FormValidator};
+export {FormValidator};
