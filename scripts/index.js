@@ -176,4 +176,3 @@ document.addEventListener('DOMContentLoaded', () => {
     launchValidation(params, form);
   })
 });
-

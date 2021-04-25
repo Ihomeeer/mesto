@@ -3,20 +3,16 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
-//=========Переменные=========
-
-
 import {params} from './index.js';
-
-
-//=========Классы=========
-
 
 //---------Класс для валидации форм---------
 class FormValidator {
   constructor (params, formElement) {
     this._params = params;
     this._formElement = formElement;
+
+    this._inputsList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
   }
 
   //---------показ и скрытие ошибок---------
@@ -55,8 +51,6 @@ class FormValidator {
   _toggleButtonState(inputsList, buttonElement, params) {
     if (this._hasInvalidInput(inputsList)) {
       this.disableSubmitButton(buttonElement);
-      // buttonElement.classList.add(params.inactiveButtonClass);
-      // buttonElement.disabled = true;
     } else {
       buttonElement.classList.remove(params.inactiveButtonClass);
       buttonElement.disabled = false;
@@ -64,14 +58,12 @@ class FormValidator {
   };
 
   //---------установка обработчиков---------
-  _setEventListeners(params, formElement) {
-    const _inputsList = Array.from(formElement.querySelectorAll(params.inputSelector));
-    const _buttonElement = formElement.querySelector(params.submitButtonSelector);
-    this._toggleButtonState(_inputsList, _buttonElement, params);
-    _inputsList.forEach((inputElement) => {
+  _setEventListeners(params) {
+    this._toggleButtonState(this._inputsList, this._buttonElement, params);
+    this._inputsList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement, params);
-        this._toggleButtonState(_inputsList, _buttonElement, params);
+        this._toggleButtonState(this._inputsList, this._buttonElement, params);
       });
     });
   };
@@ -81,6 +73,7 @@ class FormValidator {
     buttonElement.classList.add(this._params.inactiveButtonClass);
     buttonElement.disbaled = true;
   }
+
   //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
   removeErrors = (params, form) => {
     const currentInputs = form.querySelectorAll('.popup__input')
@@ -91,7 +84,7 @@ class FormValidator {
 
   //---------инициация валидации---------
   enableValidation() {
-    this._setEventListeners(this._params, this._formElement, );
+    this._setEventListeners(this._params);
   }
 }
 
