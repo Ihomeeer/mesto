@@ -3,14 +3,11 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
-import {params} from './index.js';
-
 //---------Класс для валидации форм---------
 class FormValidator {
   constructor (params, formElement) {
     this._params = params;
     this._formElement = formElement;
-
     this._inputsList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
   }
