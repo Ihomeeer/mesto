@@ -72,9 +72,8 @@ class FormValidator {
   }
 
   //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
-  removeErrors = (form) => {
-    const currentInputs = form.querySelectorAll('.popup__input')
-    currentInputs.forEach((input) => {
+  removeErrors = () => {
+    this._inputsList.forEach((input) => {
       this._hideInputError(input);
     });
   }
