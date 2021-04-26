@@ -121,7 +121,7 @@ function submitFormHandlerPlace (evt) {
 //---------манипуляции при повторном открытии форм с пустыми полями---------
 //функция скрытия ошибок
 const removeErrors = ((params, form) => {
-const removeCurrentErrors = new FormValidator(params, form).removeErrors(params, form);
+const removeCurrentErrors = new FormValidator(params, form).removeErrors(form);
 });
 //функция отключения кнопки отправки - делает кнопку отправки неактивной при повторном открытии модального окна
 const disableSubmitBtn = (params, form) => {
