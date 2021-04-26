@@ -79,12 +79,9 @@ function closePopup (elem) {
   document.removeEventListener('keydown', closePopupEscButton);
 }
 //функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей + сброс введеных данных в инпутах модалки добавления карточек
-const closePopuphandler = (evt) => {
+const closePopupHandler = (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
     closePopup(evt.target.closest('.popup'));
-    if (evt.target.id === 'placePopup' || evt.target.id === 'placePopupCloseBtn') {
-      placeForm.reset();
-    }
   }
 }
 //функция закрытия модальных окон по нажатию esc
@@ -115,7 +112,6 @@ function submitFormHandlerPlace (evt) {
   evt.preventDefault();
   prependNewCard(name.value, link.value, cardGrid, '.place-card');
   closePopup(placePopup);
-  placeForm.reset();
 }
 
 //---------манипуляции при повторном открытии форм с пустыми полями---------
@@ -144,7 +140,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', functi
 });
 //закрытие модального окна по клику на кнопку и на оверлей
 profilePopup.addEventListener('mousedown', (evt) => {
-  closePopuphandler(evt);
+  closePopupHandler(evt);
 });
 //отправка данных формы
 profileFormElement.addEventListener('submit', submitFormHandlerProfile);
@@ -152,13 +148,14 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
+  placeForm.reset();
   removeErrors(params, placePopup);
   disableSubmitBtn(params, placeForm);
   openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс данных в инпутах
 placePopup.addEventListener('mousedown', (evt) => {
-  closePopuphandler(evt);
+  closePopupHandler(evt);
   });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
