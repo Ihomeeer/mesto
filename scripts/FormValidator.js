@@ -14,17 +14,17 @@ class FormValidator {
 
   //---------показ и скрытие ошибок---------
   // показ ошибок
-  _showInputError(inputElement, errorMessage, params) {
+  _showInputError(inputElement, errorMessage) {
     const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(params.inputErrorClass);
+    inputElement.classList.add(this._params.inputErrorClass);
     _errorElement.textContent = errorMessage;
-    _errorElement.classList.add(params.errorClass);
+    _errorElement.classList.add(this._params.errorClass);
   };
   // скрытие ошибок
-  _hideInputError(inputElement, params) {
+  _hideInputError(inputElement) {
     const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(params.inputErrorClass);
-    _errorElement.classList.remove(params.errorClass);
+    inputElement.classList.remove(this._params.inputErrorClass);
+    _errorElement.classList.remove(this._params.errorClass);
     _errorElement.textContent = '';
   };
 
@@ -38,8 +38,8 @@ class FormValidator {
   };
 
   //---------детектирование невалидных полей---------
-  _hasInvalidInput(inputsList) {
-    return inputsList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputsList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   };
@@ -47,7 +47,7 @@ class FormValidator {
   //---------изменение состояния кнопки отправки---------
   _toggleButtonState(inputsList, buttonElement, params) {
     if (this._hasInvalidInput(inputsList)) {
-      this.disableSubmitButton(buttonElement);
+      this.disableSubmitButton();
     } else {
       buttonElement.classList.remove(params.inactiveButtonClass);
       buttonElement.disabled = false;
@@ -66,9 +66,9 @@ class FormValidator {
   };
 
   //---------публичный метод для отключения кнопки валидации. Используется в index.js для отключения кнопки в модалке с карточками---------
-  disableSubmitButton(buttonElement) {
-    buttonElement.classList.add(this._params.inactiveButtonClass);
-    buttonElement.disbaled = true;
+  disableSubmitButton() {
+    this._buttonElement.classList.add(this._params.inactiveButtonClass);
+    this._buttonElement.disbaled = true;
   }
 
   //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
