@@ -45,8 +45,8 @@ class FormValidator {
   };
 
   //---------изменение состояния кнопки отправки---------
-  _toggleButtonState(inputsList) {
-    if (this._hasInvalidInput(inputsList)) {
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this._inputsList)) {
       this.disableSubmitButton();
     } else {
       this._buttonElement.classList.remove(this._params.inactiveButtonClass);
@@ -56,11 +56,11 @@ class FormValidator {
 
   //---------установка обработчиков---------
   _setEventListeners() {
-    this._toggleButtonState(this._inputsList);
+    this._toggleButtonState();
     this._inputsList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(this._inputsList);
+        this._toggleButtonState();
       });
     });
   };
