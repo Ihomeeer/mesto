@@ -124,8 +124,8 @@ const removeErrors = ((params, form) => {
 const removeCurrentErrors = new FormValidator(params, form).removeErrors(params, form);
 });
 //функция отключения кнопки отправки - делает кнопку отправки неактивной при повторном открытии модального окна
-const disableSubmitBtn = (params, form, button) => {
-  const disableSubmitButton = new FormValidator(params, form).disableSubmitButton(button);
+const disableSubmitBtn = (params, form) => {
+  const disableSubmitButton = new FormValidator(params, form).disableSubmitButton();
 }
 
 // ---------запуск валидации---------
@@ -153,7 +153,7 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   removeErrors(params, placePopup);
-  disableSubmitBtn(params, placeForm, placePopupSaveButton);
+  disableSubmitBtn(params, placeForm);
   openPopup(placePopup);
 });
 //закрытие модального окна по клику на кнопку и на оверлей и сброс данных в инпутах

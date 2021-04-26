@@ -45,12 +45,12 @@ class FormValidator {
   };
 
   //---------изменение состояния кнопки отправки---------
-  _toggleButtonState(inputsList, buttonElement, params) {
+  _toggleButtonState(inputsList) {
     if (this._hasInvalidInput(inputsList)) {
       this.disableSubmitButton();
     } else {
-      buttonElement.classList.remove(params.inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._params.inactiveButtonClass);
+      this._buttonElement.disabled = false;
     }
   };
 
