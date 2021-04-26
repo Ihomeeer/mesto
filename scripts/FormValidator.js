@@ -68,7 +68,7 @@ class FormValidator {
   //---------публичный метод для отключения кнопки валидации. Используется в index.js для отключения кнопки в модалке с карточками---------
   disableSubmitButton() {
     this._buttonElement.classList.add(this._params.inactiveButtonClass);
-    this._buttonElement.disbaled = true;
+    this._buttonElement.setAttribute('disabled', true);
   }
 
   //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------

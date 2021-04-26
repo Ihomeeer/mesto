@@ -26,15 +26,9 @@ const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
 const name = placePopup.querySelector('#placePopupName');
 const link = placePopup.querySelector('#placePopupLink');
-const placePopupSaveButton = placePopup.querySelector('#placePopupSaveBtn');
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
-
-//---------Переменные для валидации---------
-const formList = document.querySelectorAll('.popup__main-form');
-export const currentPhoto = photoPopup.querySelector('.popup__photo');
-export const currentName = photoPopup.querySelector('.popup__photo-name');
 
 //---------Переменная для записи параметров валидации---------
 export const params = {
@@ -46,7 +40,18 @@ export const params = {
   errorClass: 'popup__error-span_show',
 }
 
+//---------Переменные для валидации---------
+const formList = document.querySelectorAll('.popup__main-form');
+export const currentPhoto = photoPopup.querySelector('.popup__photo');
+export const currentName = photoPopup.querySelector('.popup__photo-name');
+const editProfileValidator = new FormValidator(params, profileFormElement);
+const addCardValidator = new FormValidator(params, placeForm);
+
 //=========Функции=================================================================================
+
+//---------валидация---------
+editProfileValidator.enableValidation();
+addCardValidator.enableValidation();
 
 //---------создание и добавление карточки в контейнер---------
 //функция создания элемента карточки
@@ -78,9 +83,9 @@ function closePopup (elem) {
   elem.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEscButton);
 }
-//функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей + сброс введеных данных в инпутах модалки добавления карточек
+//функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей
 const closePopupHandler = (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
     closePopup(evt.target.closest('.popup'));
   }
 }
@@ -114,28 +119,13 @@ function submitFormHandlerPlace (evt) {
   closePopup(placePopup);
 }
 
-//---------манипуляции при повторном открытии форм с пустыми полями---------
-//функция скрытия ошибок
-const removeErrors = ((params, form) => {
-const removeCurrentErrors = new FormValidator(params, form).removeErrors();
-});
-//функция отключения кнопки отправки - делает кнопку отправки неактивной при повторном открытии модального окна
-const disableSubmitBtn = (params, form) => {
-  const disableSubmitButton = new FormValidator(params, form).disableSubmitButton();
-}
-
-// ---------запуск валидации---------
-function launchValidation (params, form) {
-  const validation = new FormValidator(params, form).enableValidation();
-}
-
 //=========Обработчики=================================================================================
 
 // ---------профильное модальное окно---------
 //открытие по кнопке и добавление существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', function () {
   openPopup(profilePopup);
-  removeErrors(params, profilePopup);
+  editProfileValidator.removeErrors();
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
@@ -149,27 +139,18 @@ profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
   placeForm.reset();
-  removeErrors(params, placePopup);
-  disableSubmitBtn(params, placeForm);
+  addCardValidator.removeErrors();
+  addCardValidator.disableSubmitButton();
   openPopup(placePopup);
 });
-//закрытие модального окна по клику на кнопку и на оверлей и сброс данных в инпутах
+//закрытие модального окна по клику на кнопку и на оверлей
 placePopup.addEventListener('mousedown', (evt) => {
   closePopupHandler(evt);
-  });
+});
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 // ---------модальное окно с зумом фото---------
 photoPopup.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__photo-close-button') ) {
-    closePopup(photoPopup);
-  }
-});
-
-// ---------валидация---------
-document.addEventListener('DOMContentLoaded', () => {
-  formList.forEach((form) => {
-    launchValidation(params, form);
-  })
+  closePopupHandler(evt);
 });
