@@ -29,11 +29,11 @@ class FormValidator {
   };
 
   //---------проверка валидности форм---------
-  _checkInputValidity(inputElement, params) {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement, inputElement.validationMessage, params);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(inputElement, params);
+      this._hideInputError(inputElement);
     }
   };
 
@@ -55,12 +55,12 @@ class FormValidator {
   };
 
   //---------установка обработчиков---------
-  _setEventListeners(params) {
-    this._toggleButtonState(this._inputsList, this._buttonElement, params);
+  _setEventListeners() {
+    this._toggleButtonState(this._inputsList);
     this._inputsList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(inputElement, params);
-        this._toggleButtonState(this._inputsList, this._buttonElement, params);
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState(this._inputsList);
       });
     });
   };
@@ -81,7 +81,7 @@ class FormValidator {
 
   //---------инициация валидации---------
   enableValidation() {
-    this._setEventListeners(this._params);
+    this._setEventListeners();
   }
 }
 
