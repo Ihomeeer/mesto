@@ -3,7 +3,8 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
-import {openPopup, currentPhoto, currentName, photoPopup} from './index.js';
+import {openPopup} from './utilityFuncs.js'
+import {currentPhoto, currentName, photoPopup} from './index.js';
 
 //---------Класс - создание карточки, добавление обработчиков---------
 class Card {
@@ -22,6 +23,7 @@ class Card {
     const _newCardDeleteBtn = this.element.querySelector('.elements__delete');
     _newCardName.textContent = this._name;
     _newCardPhoto.src = this._link;
+    _newCardPhoto.alt = `К сожалению, изображение ${this._name} недоступно`
     _newCardPhoto.alt = this._name;
     this._setListeners( _newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
 

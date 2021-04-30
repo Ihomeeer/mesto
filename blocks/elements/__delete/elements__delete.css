@@ -10,9 +10,10 @@
   cursor: pointer;
   background-color: transparent;
   outline: none;
+  transition: 0.2s ease-in;
 }
 
 .elements__delete:hover {
   opacity: .6;
-  transition: opacity .4s;
+  transform: scale(1.4);
 }

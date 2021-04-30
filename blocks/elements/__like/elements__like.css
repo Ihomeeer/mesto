@@ -9,9 +9,10 @@
   background-color: transparent;
   background-size: 100%;
   cursor: pointer;
-  transition: opacity .4s;
+  transition: 0.2s ease-in;
 }
 
 .elements__like:hover {
   opacity: .6;
+  transform: scale(1.4);
 }

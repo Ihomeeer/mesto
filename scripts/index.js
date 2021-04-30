@@ -9,6 +9,7 @@
 import {Card} from './Card.js';
 import {initialCards} from './InitialCards.js';
 import {FormValidator} from './FormValidator.js';
+import {openPopup, closePopup, closePopupEscButton} from './utilityFuncs.js'
 
 //=========Переменные=================================================================================
 
@@ -73,28 +74,11 @@ initialCards.forEach((initialCards) => {
 });
 
 //---------открытие и закрытие модальных окон---------
-//функция открытия модальных окон
-export function openPopup (elem) {
-  elem.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEscButton);
-}
-//функция закрытия модальных окон
-function closePopup (elem) {
-  elem.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEscButton);
-}
 //функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей
 const closePopupHandler = (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
     closePopup(evt.target.closest('.popup'));
   }
-}
-//функция закрытия модальных окон по нажатию esc
-function closePopupEscButton (evt) {
-  if (evt.key === 'Escape') {
-    const currentPopup = document.querySelector('.popup_opened');
-    closePopup(currentPopup);
-  };
 }
 
 // ---------профильное модальное окно---------
