@@ -3,8 +3,6 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
-import {currentPhoto, currentName, photoPopup} from '../scripts/index.js';
-
 //---------Класс - создание карточки, добавление обработчиков---------
 class Card {
   constructor(name, link, cardSelector) {
@@ -24,7 +22,7 @@ class Card {
     _newCardPhoto.src = this._link;
     _newCardPhoto.alt = `К сожалению, изображение ${this._name} недоступно`
     _newCardPhoto.alt = this._name;
-    this._setListeners( _newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
+    this._setListeners( _newCardLikeBtn, _newCardDeleteBtn);
 
     return this.element;
   }
@@ -51,24 +49,10 @@ class Card {
     _targetDeleteBtn.closest('.elements__card').remove();
   }
 
-  // ---------модальное окно с зумом---------
-  // открытие модального окна
-  _zoomCard (name, link) {
-    this._zoomData (name, link, currentPhoto, currentName);
-    // openPopup(photoPopup);
-  }
-  // определение переменных и присваивание им значений
-  _zoomData (name, link, currentPhoto, currentName) {
-    currentPhoto.src = link;
-    currentPhoto.alt = name;
-    currentName.textContent = name;
-  }
-
   //---------слушатели---------
-  _setListeners(likeBtn, deleteBtn, photo) {
+  _setListeners(likeBtn, deleteBtn) {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
   }
 }
 

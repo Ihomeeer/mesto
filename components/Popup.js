@@ -6,23 +6,27 @@ export default class Popup {
   }
 
   //открытие модальных окон
-  openPopup () {
+  openPopup() {
     this._popup.classList.add('popup_opened');
-    document.addEventListener('keydown', this._handleEscClose);
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt)});
   }
   //закрытие модальных окон
-  closePopup () {
+  closePopup() {
     this._popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', this._handleEscClose);
+    document.removeEventListener('keydown', (evt) => {
+      this._handleEscClose(evt)});
   }
   //закрытие модальных окон по нажатию esc
-  _handleEscClose (evt) {
+  _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.closePopup();
     };
   }
   //слушатель кнопки закрытия попапа
-  setEventListeners () {
-    
+  setEventListeners() {
+    this._popup.querySelector('button').addEventListener('click', () => {
+      this.closePopup();
+    })
   }
 }

@@ -34,6 +34,8 @@ const placePopupHandler = new Popup(placePopup);
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
+// export const currentPhoto = photoPopup.querySelector('.popup__photo');
+// export const currentName = photoPopup.querySelector('.popup__photo-name');
 
 //---------Переменная для записи параметров валидации---------
 export const params = {
@@ -46,11 +48,9 @@ export const params = {
 }
 
 //---------Переменные для валидации---------
-// const formList = document.querySelectorAll('.popup__main-form');
-export const currentPhoto = photoPopup.querySelector('.popup__photo');
-export const currentName = photoPopup.querySelector('.popup__photo-name');
 const editProfileValidator = new FormValidator(params, profileFormElement);
 const addCardValidator = new FormValidator(params, placeForm);
+
 
 //=========Функции=================================================================================
 
@@ -96,7 +96,7 @@ function submitFormHandlerProfile (evt) {
   evt.preventDefault();
   defaultName.textContent = nameInput.value;
   defaultJob.textContent = jobInput.value;
-  closePopup(profilePopup);
+  profilePopupHandler.closePopup();
 }
 
 // ---------модальное окно добавления карточек---------
@@ -104,7 +104,7 @@ function submitFormHandlerProfile (evt) {
 function submitFormHandlerPlace (evt) {
   evt.preventDefault();
   prependNewCard(name.value, link.value, cardGrid, '.place-card');
-  closePopup(placePopup);
+  placePopupHandler.closePopup();
 }
 
 //=========Обработчики=================================================================================
@@ -112,7 +112,6 @@ function submitFormHandlerPlace (evt) {
 // ---------профильное модальное окно---------
 //открытие по кнопке и добавление существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
-  // openPopup(profilePopup);
   profilePopupHandler.openPopup();
   editProfileValidator.removeErrors();
   profileDefaultInfo();
@@ -130,7 +129,7 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   placeForm.reset();
   addCardValidator.removeErrors();
   addCardValidator.disableSubmitButton();
-  // openPopup(placePopup);
+  placePopupHandler.openPopup();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
 placePopup.addEventListener('mousedown', (evt) => {
