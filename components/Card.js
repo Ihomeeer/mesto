@@ -3,7 +3,6 @@
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
-import {openPopup} from '../utils/utilityFuncs.js'
 import {currentPhoto, currentName, photoPopup} from '../scripts/index.js';
 
 //---------Класс - создание карточки, добавление обработчиков---------
@@ -56,7 +55,7 @@ class Card {
   // открытие модального окна
   _zoomCard (name, link) {
     this._zoomData (name, link, currentPhoto, currentName);
-    openPopup(photoPopup);
+    // openPopup(photoPopup);
   }
   // определение переменных и присваивание им значений
   _zoomData (name, link, currentPhoto, currentName) {
