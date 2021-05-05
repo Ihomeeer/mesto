@@ -4,19 +4,25 @@
 
 //---------открытие и закрытие модальных окон---------
 //функция открытия модальных окон
-export function openPopup (elem) {
+function openPopup (elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscButton);
 }
 //функция закрытия модальных окон
-export function closePopup (elem) {
+function closePopup (elem) {
   elem.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEscButton);
 }
 //функция закрытия модальных окон по нажатию esc
-export function closePopupEscButton (evt) {
+function closePopupEscButton (evt) {
   if (evt.key === 'Escape') {
     const currentPopup = document.querySelector('.popup_opened');
     closePopup(currentPopup);
   };
+}
+
+export {
+  openPopup,
+  closePopup,
+  closePopupEscButton
 }

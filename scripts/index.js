@@ -6,10 +6,10 @@
 
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-import {Card} from './Card.js';
-import {initialCards} from './InitialCards.js';
-import {FormValidator} from './FormValidator.js';
-import {openPopup, closePopup, closePopupEscButton} from './utilityFuncs.js'
+import {Card} from '../components/Card.js';
+import {initialCards} from '../utils/initialCards.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {openPopup, closePopup, closePopupEscButton} from '../utils/utilityFuncs.js'
 
 //=========Переменные=================================================================================
 
