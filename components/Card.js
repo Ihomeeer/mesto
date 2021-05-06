@@ -4,7 +4,7 @@
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
 //---------Класс - создание карточки, добавление обработчиков---------
-import {photoPopup} from '../scripts/index.js';
+import {photoPopup, handleCardClick} from '../scripts/index.js';
 export default class Card {
   constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
@@ -52,7 +52,7 @@ export default class Card {
   }
 
   //---------слушатели---------
-  _setListeners(likeBtn, deleteBtn, photo) {
+  _setListeners = (likeBtn, deleteBtn, photo) => {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     photo.addEventListener('click', (evt) => {

@@ -12,13 +12,13 @@ export default class Popup {
       this._handleEscClose(evt)});
   }
   //закрытие модальных окон
-  closePopup() {
+  closePopup = () => {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', (evt) => {
       this._handleEscClose(evt)});
   }
   //закрытие модальных окон по нажатию esc
-  _handleEscClose(evt) {
+  _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.closePopup();
     };

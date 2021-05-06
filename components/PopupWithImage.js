@@ -3,7 +3,7 @@ import Popup from '../components/Popup.js';
 import Card from '../components/Card.js'
 
 export default class PopupWithImage extends Popup {
-  constructor({popupSelector, name, link}) {
+  constructor(popupSelector, name, link) {
     super(popupSelector);
     this._name = name;
     this._link = link;
@@ -11,7 +11,7 @@ export default class PopupWithImage extends Popup {
     this._currentName = currentName;
   }
   //открытие модальных окон
-  openPopup() {
+  openPopup = () => {
     this._currentPhoto.src = this._link;
     this._currentPhoto.alt = this._name;
     this._currentName.textContent = this._name;
