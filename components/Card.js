@@ -5,7 +5,7 @@
 
 //---------Класс - создание карточки, добавление обработчиков---------
 import {photoPopup} from '../scripts/index.js';
-class Card {
+export default class Card {
   constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
@@ -26,8 +26,6 @@ class Card {
     _newCardPhoto.alt = `К сожалению, изображение ${this._name} недоступно`
     _newCardPhoto.alt = this._name;
     this._setListeners(_newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
-    console.log(this.element)
-
     return this.element;
   }
 
@@ -57,9 +55,9 @@ class Card {
   _setListeners(likeBtn, deleteBtn, photo) {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', () => this._handleCardClick(this._photoPopupSelector, this._name, this._link));
-    this._handleCardClick(this.element, this._photoPopupSelector, this._name, this._link)
+    photo.addEventListener('click', (evt) => {
+      console.log(photo)
+      this._handleCardClick(this._photoPopupSelector, this._name, this._link);
+    });
   }
 }
-
-export {Card};

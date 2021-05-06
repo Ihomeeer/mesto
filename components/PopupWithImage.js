@@ -1,5 +1,7 @@
-import {currentPhoto, currentName, photoPopup} from '../scripts/index.js';
+import {currentPhoto, currentName} from '../scripts/index.js';
 import Popup from '../components/Popup.js';
+import Card from '../components/Card.js'
+
 export default class PopupWithImage extends Popup {
   constructor({popupSelector, name, link}) {
     super(popupSelector);

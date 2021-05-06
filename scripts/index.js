@@ -6,7 +6,7 @@
 
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-import {Card} from '../components/Card.js';
+import Card from '../components/Card.js';
 import {initialCards} from '../utils/initialCards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
@@ -23,7 +23,7 @@ const nameInput = profileFormElement.querySelector('#profilePopupName');
 const jobInput = profileFormElement.querySelector('#profilePopupJob');
 const profilePopupHandler = new Popup(profilePopup);
 
-// const profilePopupHandler = new Popup(profilePopup);
+
 
 //---------Переменные для модального окна добавления карточек---------
 const placePopup = document.querySelector('#placePopup');
@@ -59,22 +59,20 @@ const addCardValidator = new FormValidator(params, placeForm);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
-//---------создание и добавление карточки в контейнер---------
 
+export const handleCardClick = (popupSelector, name, link) => {
+  const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
+}
 //функция создания элемента карточки
-const newCard = (name, link, cardSelector, handleCardClick) => {
-  const card = new Card(name, link, cardSelector, handleCardClick)
+const newCard = (name, link, cardSelector) => {
+  const card = new Card(name, link, cardSelector, handleCardClick);
   const cardElem = card.createCard();
+
+  return cardElem;
 };
 //функция добавления готовой карточки на страницу
 const prependNewCard = (name, link, container, cardSelector) => {
-  container.prepend(newCard(name, link, cardSelector, handleCardClick));
-}
-
-const handleCardClick = (card, popupSelector, name, link) => {
-  card.querySelector('.elements__photo').addEventListener('click', () => {
-    const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
-  });
+  container.prepend(newCard(name, link, cardSelector));
 }
 
 // ---------первоначальные карточки---------
@@ -82,6 +80,15 @@ initialCards.reverse();
 initialCards.forEach((initialCards) => {
   prependNewCard(initialCards.name, initialCards.link, cardGrid, '.place-card');
 });
+
+
+
+
+
+
+
+
+
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -143,6 +150,3 @@ placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 // photoPopup.querySelector('.popup__photo-close-button').addEventListener('mousedown', () => {
 //    closePopupHandler(evt);
-
-
-
