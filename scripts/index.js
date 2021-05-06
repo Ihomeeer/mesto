@@ -35,8 +35,8 @@ const placePopupHandler = new Popup(placePopup);
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
-// export const currentPhoto = photoPopup.querySelector('.popup__photo');
-// export const currentName = photoPopup.querySelector('.popup__photo-name');
+export const currentPhoto = photoPopup.querySelector('.popup__photo');
+export const currentName = photoPopup.querySelector('.popup__photo-name');
 
 //---------Переменная для записи параметров валидации---------
 export const params = {
@@ -60,18 +60,21 @@ editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
 //---------создание и добавление карточки в контейнер---------
-//функция создания элемента карточки
-const newCard = (name, link, cardSelector) => {
-  const card = new Card(name, link, cardSelector, (popupSelector, name, link) => {
-    const zoomCard = new PopupWithImage(popupSelector, name, link).openPopup();
-  });
-  const cardElem = card.createCard();
 
-  return cardElem;
+//функция создания элемента карточки
+const newCard = (name, link, cardSelector, handleCardClick) => {
+  const card = new Card(name, link, cardSelector, handleCardClick)
+  const cardElem = card.createCard();
 };
 //функция добавления готовой карточки на страницу
 const prependNewCard = (name, link, container, cardSelector) => {
-  container.prepend(newCard(name, link, cardSelector));
+  container.prepend(newCard(name, link, cardSelector, handleCardClick));
+}
+
+const handleCardClick = (card, popupSelector, name, link) => {
+  card.querySelector('.elements__photo').addEventListener('click', () => {
+    const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
+  });
 }
 
 // ---------первоначальные карточки---------
@@ -79,14 +82,6 @@ initialCards.reverse();
 initialCards.forEach((initialCards) => {
   prependNewCard(initialCards.name, initialCards.link, cardGrid, '.place-card');
 });
-
-//---------открытие и закрытие модальных окон---------
-//функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей
-// const closePopupHandler = (evt, popupSelector) => {
-//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
-//     popupSelector.closePopup();
-//   }
-// }
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -120,8 +115,8 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
   profileDefaultInfo();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
-profilePopup.addEventListener('mousedown', (evt) => {
-  profilePopupHandler.closePopup();
+profilePopup.addEventListener('mousedown', () => {
+  profilePopupHandler.setEventListeners();
 });
 //отправка данных формы
 profileFormElement.addEventListener('submit', submitFormHandlerProfile);
@@ -135,9 +130,8 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   placePopupHandler.openPopup();
 });
 //закрытие модального окна по клику на кнопку и на оверлей
-placePopup.addEventListener('mousedown', (evt) => {
-  evt.preventDefault();
-  placePopupHandler.closePopup();
+placePopup.addEventListener('mousedown', () => {
+  placePopupHandler.setEventListeners();
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
@@ -149,3 +143,6 @@ placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 // photoPopup.querySelector('.popup__photo-close-button').addEventListener('mousedown', () => {
 //    closePopupHandler(evt);
+
+
+

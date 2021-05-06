@@ -32,3 +32,13 @@ export default class Popup {
     })
   }
 }
+
+// //функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей + сброс введеных данных в инпутах модалки добавления карточек
+// const closePopuphandler = (evt) => {
+//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+//     closePopup(evt.target.closest('.popup'));
+//     if (evt.target.id === 'placePopup' || evt.target.id === 'placePopupCloseBtn') {
+//       placeForm.reset();
+//     }
+//   }
+// }

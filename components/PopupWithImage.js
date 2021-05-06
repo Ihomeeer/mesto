@@ -1,13 +1,12 @@
-import {photoPopup} from '../scripts/index.js';
+import {currentPhoto, currentName, photoPopup} from '../scripts/index.js';
 import Popup from '../components/Popup.js';
-
 export default class PopupWithImage extends Popup {
   constructor({popupSelector, name, link}) {
     super(popupSelector);
     this._name = name;
     this._link = link;
-    this._currentPhoto = photoPopup.querySelector('.popup__photo');
-    this._currentName = photoPopup.querySelector('.popup__photo-name');
+    this._currentPhoto = currentPhoto;
+    this._currentName = currentName;
   }
   //открытие модальных окон
   openPopup() {
