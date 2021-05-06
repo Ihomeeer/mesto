@@ -10,6 +10,7 @@ import {Card} from '../components/Card.js';
 import {initialCards} from '../utils/initialCards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 //=========Переменные=================================================================================
 
@@ -61,7 +62,9 @@ addCardValidator.enableValidation();
 //---------создание и добавление карточки в контейнер---------
 //функция создания элемента карточки
 const newCard = (name, link, cardSelector) => {
-  const card = new Card(name, link, cardSelector);
+  const card = new Card(name, link, cardSelector, (popupSelector, name, link) => {
+    const zoomCard = new PopupWithImage(popupSelector, name, link).openPopup();
+  });
   const cardElem = card.createCard();
 
   return cardElem;
@@ -79,11 +82,11 @@ initialCards.forEach((initialCards) => {
 
 //---------открытие и закрытие модальных окон---------
 //функция закрытия модальных окон по нажатию на кнопку закрытия или оверлей
-const closePopupHandler = (evt, popupSelector) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
-    popupSelector.closePopup();
-  }
-}
+// const closePopupHandler = (evt, popupSelector) => {
+//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
+//     popupSelector.closePopup();
+//   }
+// }
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -118,7 +121,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 });
 //закрытие модального окна по клику на кнопку и на оверлей
 profilePopup.addEventListener('mousedown', (evt) => {
-  closePopupHandler(evt, profilePopupHandler);
+  profilePopupHandler.closePopup();
 });
 //отправка данных формы
 profileFormElement.addEventListener('submit', submitFormHandlerProfile);
@@ -133,7 +136,8 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 });
 //закрытие модального окна по клику на кнопку и на оверлей
 placePopup.addEventListener('mousedown', (evt) => {
-  closePopupHandler(evt, placePopupHandler);
+  evt.preventDefault();
+  placePopupHandler.closePopup();
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);

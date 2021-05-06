@@ -23,10 +23,12 @@ export default class Popup {
       this.closePopup();
     };
   }
-  //слушатель кнопки закрытия попапа
+  //слушатель закрытия попапа
   setEventListeners() {
-    this._popup.querySelector('button').addEventListener('click', () => {
-      this.closePopup();
+    this._popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
+        this.closePopup();
+      }
     })
   }
 }

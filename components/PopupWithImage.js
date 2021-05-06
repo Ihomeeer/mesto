@@ -1,7 +1,9 @@
 import {photoPopup} from '../scripts/index.js';
+import Popup from '../components/Popup.js';
 
-class PopupWithImage extends Popup {
-  constructor({name, link}) {
+export default class PopupWithImage extends Popup {
+  constructor({popupSelector, name, link}) {
+    super(popupSelector);
     this._name = name;
     this._link = link;
     this._currentPhoto = photoPopup.querySelector('.popup__photo');
@@ -14,9 +16,8 @@ class PopupWithImage extends Popup {
     this._currentName.textContent = this._name;
     this._popup.classList.add('popup_opened');
     document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt)
+      super._handleEscClose(evt)
     });
   }
 }
 
-photo.addEventListener('click', () => this._zoomCard(this._name, this._link));
