@@ -13,7 +13,7 @@ export default class PopupWithImage extends Popup {
 
   //открытие модальных окон
   openPopup = () => {
-    super.openPopup();git 
+    super.openPopup();
     this._currentPhoto.src = this._link;
     this._currentPhoto.alt = this._name;
     this._currentName.textContent = this._name;

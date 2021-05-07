@@ -8,28 +8,28 @@ export default class Popup {
   //открытие модальных окон
   openPopup() {
     this._popup.classList.add('popup_opened');
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt)});
+    this. setEventListeners();
+    document.addEventListener('keydown', this._handleEscClose);
   }
   //закрытие модальных окон
   closePopup = () => {
     this._popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (evt) => {
-      this._handleEscClose(evt)});
+    document.removeEventListener('keydown', this._handleEscClose);
   }
   //закрытие модальных окон по нажатию esc
   _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.closePopup();
-    };
+    }
+  }
+  closePopupElements = (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
+      this.closePopup();
+    }
   }
   //слушатель закрытия попапа
   setEventListeners() {
-    this._popup.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
-        this.closePopup();
-      }
-    })
+    this._popup.addEventListener('mousedown', this.closePopupElements)
   }
 }
 

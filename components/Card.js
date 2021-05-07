@@ -56,7 +56,6 @@ export default class Card {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     photo.addEventListener('click', (evt) => {
-      console.log(photo)
       this._handleCardClick(this._photoPopupSelector, this._name, this._link);
     });
   }
