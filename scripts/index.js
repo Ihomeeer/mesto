@@ -35,8 +35,6 @@ const placePopupHandler = new Popup(placePopup);
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
-export const currentPhoto = photoPopup.querySelector('.popup__photo');
-export const currentName = photoPopup.querySelector('.popup__photo-name');
 
 //---------Переменная для записи параметров валидации---------
 export const params = {
