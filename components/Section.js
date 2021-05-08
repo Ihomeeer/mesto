@@ -9,7 +9,9 @@ export default class Section {
 
   renderItems () {
     this._items.forEach((item) => {
-      this._renderer(item, this._container);
+      console.log(item);
+      console.log(this._renderer)
+      this._renderer(item, this._container, '.place-card');
     });
   }
 

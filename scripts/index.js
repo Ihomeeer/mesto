@@ -64,13 +64,12 @@ const addCardValidator = new FormValidator(params, placeForm);
 
 
 
-
 //---------валидация---------
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
 //---------создание карточки и добавление ее в разметку---------
-//функция создания элемента карточки
+// функция создания элемента карточки
 const newCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
@@ -86,11 +85,7 @@ export const handleCardClick = (popupSelector, name, link) => {
   const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
 }
 
-// ---------первоначальные карточки---------
-initialCards.reverse();
-initialCards.forEach((initialCards) => {
-  prependNewCard(initialCards, cardGrid, '.place-card');
-});
+
 
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
@@ -136,3 +131,21 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 });
 //отправка данных формы
 placePopup.addEventListener('submit', submitFormHandlerPlace);
+
+
+
+
+const initialCardsList = new Section ({
+  initialCards: initialCards,
+  renderer: prependNewCard}, cardGrid);
+  initialCardsList.renderItems()
+
+
+
+
+
+// ---------первоначальные карточки---------
+// initialCards.reverse();
+// initialCards.forEach((initialCards) => {
+//   prependNewCard(initialCards, cardGrid, '.place-card');
+// });
