@@ -11,6 +11,7 @@ import {initialCards} from '../utils/initialCards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js'
 import Section from "../components/Section.js";
 
 //=========Переменные=================================================================================
@@ -30,7 +31,7 @@ const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
 const name = placePopup.querySelector('#placePopupName');
 const link = placePopup.querySelector('#placePopupLink');
-const placePopupHandler = new Popup(placePopup);
+const placePopupHandler = new PopupWithForm(placePopup, submitFormHandlerPlace);
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
@@ -168,8 +169,11 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   addCardValidator.disableSubmitButton();
   placePopupHandler.openPopup();
 });
+
+
+
 //отправка данных формы
-placePopup.addEventListener('submit', submitFormHandlerPlace);
+// placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 
 
