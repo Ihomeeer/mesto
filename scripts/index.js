@@ -77,13 +77,17 @@ const newCard = (item, cardSelector) => {
   return cardElem;
 };
 //функция добавления готовой карточки на страницу
-const prependNewCard = (item, container, cardSelector) => {
-  container.prepend(newCard(item, cardSelector));
+const prependNewCard = (item, container) => {
+  container.prepend(newCard(item, '.place-card'));
 }
 //функция для открытия модалки с увеличеснным изображением
 export const handleCardClick = (popupSelector, name, link) => {
   const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
 }
+
+
+
+
 
 
 
@@ -101,13 +105,48 @@ function submitFormHandlerProfile (evt) {
   profilePopupHandler.closePopup();
 }
 
+
+
+
 // ---------модальное окно добавления карточек---------
 //функция отправки формы
 function submitFormHandlerPlace (evt) {
   evt.preventDefault();
-  prependNewCard({name: name.value, link: link.value}, cardGrid, '.place-card');
+  addNewCard();
   placePopupHandler.closePopup();
 }
+
+
+
+// ---------функции для создания карточек---------
+// ---------первоначальные карточки---------
+initialCards.reverse();
+const initialCardsList = new Section ({
+  item: initialCards,
+  renderer: prependNewCard
+}, cardGrid);
+  initialCardsList.renderItems();
+
+// ---------новая карточка, добавленная через модалку---------
+const addNewCard = () => {
+  const addNewPlaceCard = new Section ({
+    item: {name: name.value, link: link.value},
+    renderer: prependNewCard
+  }, cardGrid);
+  addNewPlaceCard.addItem({name: name.value, link: link.value});
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 //=========Обработчики=================================================================================
 
@@ -135,17 +174,7 @@ placePopup.addEventListener('submit', submitFormHandlerPlace);
 
 
 
-const initialCardsList = new Section ({
-  initialCards: initialCards,
-  renderer: prependNewCard}, cardGrid);
-  initialCardsList.renderItems()
 
 
 
 
-
-// ---------первоначальные карточки---------
-// initialCards.reverse();
-// initialCards.forEach((initialCards) => {
-//   prependNewCard(initialCards, cardGrid, '.place-card');
-// });
