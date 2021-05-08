@@ -11,6 +11,7 @@ import {initialCards} from '../utils/initialCards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import Section from "../components/Section.js";
 
 //=========Переменные=================================================================================
 
@@ -48,6 +49,21 @@ const addCardValidator = new FormValidator(params, placeForm);
 
 
 //=========Функции=================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //---------валидация---------
 editProfileValidator.enableValidation();
