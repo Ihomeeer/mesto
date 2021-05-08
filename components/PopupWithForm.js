@@ -7,7 +7,6 @@ export default class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__main-form');
   }
 
-
   _getInputValues = () => {
     const values = {};
     const inputs = Array.from(this._form.querySelectorAll('.popup__input'));
@@ -17,9 +16,13 @@ export default class PopupWithForm extends Popup {
     return values;
   }
 
+  _callBackHandler = (evt) => {
+    evt.preventDefault();
+    this._submitHandler(evt, this._getInputValues())
+  }
+
   setEventListeners() {
-    this._getInputValues();
     super.setEventListeners();
-    this._form.addEventListener('submit', this._submitHandler);
+    this._form.addEventListener('submit', this._callBackHandler);
   }
 }

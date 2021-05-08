@@ -81,6 +81,7 @@ class FormValidator {
   //---------инициация валидации---------
   enableValidation() {
     this._setEventListeners();
+
   }
 }
 

@@ -31,7 +31,7 @@ const placeForm = document.querySelector('#placeForm');
 const cardGrid = document.querySelector('.elements__grid');
 const name = placePopup.querySelector('#placePopupName');
 const link = placePopup.querySelector('#placePopupLink');
-const placePopupHandler = new PopupWithForm(placePopup, submitFormHandlerPlace);
+
 
 //---------Переменные для модального окна с зумом---------
 export const photoPopup = document.querySelector('#photoPopup');
@@ -69,6 +69,18 @@ const addCardValidator = new FormValidator(params, placeForm);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
+
+
+
+
+const placePopupHandler = new PopupWithForm(placePopup, submitFormHandlerPlace);
+// ---------модальное окно добавления карточек---------
+//функция отправки формы
+function submitFormHandlerPlace (item) {
+
+  addNewCard(item);
+  placePopupHandler.closePopup();
+}
 //---------создание карточки и добавление ее в разметку---------
 // функция создания элемента карточки
 const newCard = (item, cardSelector) => {
@@ -85,8 +97,23 @@ const prependNewCard = (item, container) => {
 export const handleCardClick = (popupSelector, name, link) => {
   const photoPopupOpened = new PopupWithImage(popupSelector, name, link).openPopup();
 }
+// ---------функции для создания карточек---------
+// ---------первоначальные карточки---------
+initialCards.reverse();
+const initialCardsList = new Section ({
+  item: initialCards,
+  renderer: prependNewCard
+}, cardGrid);
+  initialCardsList.renderItems();
 
-
+// ---------новая карточка, добавленная через модалку---------
+const addNewCard = (item) => {
+  const addNewPlaceCard = new Section ({
+    item: item,
+    renderer: prependNewCard
+  }, cardGrid);
+  addNewPlaceCard.addItem({name: name.value, link: link.value});
+}
 
 
 
@@ -105,39 +132,6 @@ function submitFormHandlerProfile (evt) {
   defaultJob.textContent = jobInput.value;
   profilePopupHandler.closePopup();
 }
-
-
-
-
-// ---------модальное окно добавления карточек---------
-//функция отправки формы
-function submitFormHandlerPlace (evt) {
-  evt.preventDefault();
-  addNewCard();
-  placePopupHandler.closePopup();
-}
-
-
-
-// ---------функции для создания карточек---------
-// ---------первоначальные карточки---------
-initialCards.reverse();
-const initialCardsList = new Section ({
-  item: initialCards,
-  renderer: prependNewCard
-}, cardGrid);
-  initialCardsList.renderItems();
-
-// ---------новая карточка, добавленная через модалку---------
-const addNewCard = () => {
-  const addNewPlaceCard = new Section ({
-    item: {name: name.value, link: link.value},
-    renderer: prependNewCard
-  }, cardGrid);
-  addNewPlaceCard.addItem({name: name.value, link: link.value});
-}
-
-
 
 
 
