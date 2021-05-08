@@ -23,7 +23,7 @@ const defaultJob = document.querySelector('.profile__function');
 const profileFormElement = document.querySelector('#profileForm');
 const nameInput = profileFormElement.querySelector('#profilePopupName');
 const jobInput = profileFormElement.querySelector('#profilePopupJob');
-const profilePopupHandler = new Popup(profilePopup);
+
 
 //---------Переменные для модального окна добавления карточек---------
 const placePopup = document.querySelector('#placePopup');
@@ -77,10 +77,32 @@ const placePopupHandler = new PopupWithForm(placePopup, submitFormHandlerPlace);
 // ---------модальное окно добавления карточек---------
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-
   addNewCard(item);
   placePopupHandler.closePopup();
 }
+
+
+const profilePopupHandler = new PopupWithForm(profilePopup, submitFormHandlerProfile);
+// ---------профильное модальное окно---------
+//первоначальные значения инпутов в профиле
+function profileDefaultInfo () {
+  nameInput.value = defaultName.textContent;
+  jobInput.value = defaultJob.textContent;
+}
+//функция отправки формы
+function submitFormHandlerProfile () {
+  defaultName.textContent = nameInput.value;
+  defaultJob.textContent = jobInput.value;
+  profilePopupHandler.closePopup();
+}
+
+
+
+
+
+
+
+
 //---------создание карточки и добавление ее в разметку---------
 // функция создания элемента карточки
 const newCard = (item, cardSelector) => {
@@ -117,32 +139,6 @@ const addNewCard = (item) => {
 
 
 
-
-
-// ---------профильное модальное окно---------
-//первоначальные значения инпутов в профиле
-function profileDefaultInfo () {
-  nameInput.value = defaultName.textContent;
-  jobInput.value = defaultJob.textContent;
-}
-//функция отправки формы
-function submitFormHandlerProfile (evt) {
-  evt.preventDefault();
-  defaultName.textContent = nameInput.value;
-  defaultJob.textContent = jobInput.value;
-  profilePopupHandler.closePopup();
-}
-
-
-
-
-
-
-
-
-
-
-
 //=========Обработчики=================================================================================
 
 // ---------профильное модальное окно---------
@@ -153,12 +149,11 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
   profileDefaultInfo();
 });
 //отправка данных формы
-profileFormElement.addEventListener('submit', submitFormHandlerProfile);
+// profileFormElement.addEventListener('submit', submitFormHandlerProfile);
 
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
-  placeForm.reset();
   addCardValidator.removeErrors();
   addCardValidator.disableSubmitButton();
   placePopupHandler.openPopup();
