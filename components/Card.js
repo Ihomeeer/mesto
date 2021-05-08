@@ -6,9 +6,9 @@
 //---------Класс - создание карточки, добавление обработчиков---------
 import {photoPopup, handleCardClick} from '../scripts/index.js';
 export default class Card {
-  constructor(name, link, cardSelector, handleCardClick) {
-    this._name = name;
-    this._link = link;
+  constructor(item, cardSelector, handleCardClick) {
+    this._name = item.name;
+    this._link = item.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._photoPopupSelector = photoPopup;

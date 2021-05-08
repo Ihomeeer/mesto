@@ -55,15 +55,15 @@ addCardValidator.enableValidation();
 
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки
-const newCard = (name, link, cardSelector) => {
-  const card = new Card(name, link, cardSelector, handleCardClick);
+const newCard = (item, cardSelector) => {
+  const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
 
   return cardElem;
 };
 //функция добавления готовой карточки на страницу
-const prependNewCard = (name, link, container, cardSelector) => {
-  container.prepend(newCard(name, link, cardSelector));
+const prependNewCard = (item, container, cardSelector) => {
+  container.prepend(newCard(item, cardSelector));
 }
 //функция для открытия модалки с увеличеснным изображением
 export const handleCardClick = (popupSelector, name, link) => {
@@ -73,7 +73,7 @@ export const handleCardClick = (popupSelector, name, link) => {
 // ---------первоначальные карточки---------
 initialCards.reverse();
 initialCards.forEach((initialCards) => {
-  prependNewCard(initialCards.name, initialCards.link, cardGrid, '.place-card');
+  prependNewCard(initialCards, cardGrid, '.place-card');
 });
 
 // ---------профильное модальное окно---------
@@ -94,7 +94,7 @@ function submitFormHandlerProfile (evt) {
 //функция отправки формы
 function submitFormHandlerPlace (evt) {
   evt.preventDefault();
-  prependNewCard(name.value, link.value, cardGrid, '.place-card');
+  prependNewCard({name: name.value, link: link.value}, cardGrid, '.place-card');
   placePopupHandler.closePopup();
 }
 
