@@ -9,17 +9,15 @@
 import Card from '../components/Card.js';
 import {initialCards} from '../utils/initialCards.js';
 import {FormValidator} from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js'
-import Section from "../components/Section.js";
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js'
 
 //=========Переменные=================================================================================
 
 //---------Переменные для профильного модального окна---------
 const profilePopup = document.querySelector('#profilePopup');
-const defaultName = document.querySelector('.profile__name');
-const defaultJob = document.querySelector('.profile__function');
 const profileFormElement = document.querySelector('#profileForm');
 const nameInput = profileFormElement.querySelector('#profilePopupName');
 const jobInput = profileFormElement.querySelector('#profilePopupJob');
@@ -53,24 +51,9 @@ const addCardValidator = new FormValidator(params, placeForm);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //---------валидация---------
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
-
-
-
 
 
 const placePopupHandler = new PopupWithForm(placePopup, submitFormHandlerPlace);
@@ -82,20 +65,35 @@ function submitFormHandlerPlace (item) {
 }
 
 
+
+
+
+
+
+
+const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
+
+
 const profilePopupHandler = new PopupWithForm(profilePopup, submitFormHandlerProfile);
 // ---------профильное модальное окно---------
 //первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
-  nameInput.value = defaultName.textContent;
-  jobInput.value = defaultJob.textContent;
+  const getUserData = userInfoHandler.getUserInfo();
+  nameInput.value = getUserData.UserName;
+  jobInput.value = getUserData.UserJob;
 }
 //функция отправки формы
 function submitFormHandlerProfile () {
-  defaultName.textContent = nameInput.value;
-  defaultJob.textContent = jobInput.value;
+  const newProfileInfo = userInfoHandler.setUserInfo(nameInput.value, jobInput.value);
   profilePopupHandler.closePopup();
 }
-
+// ---------профильное модальное окно---------слушатели
+//открытие по кнопке и добавление существующей инфо в поля
+document.querySelector('.profile__edit-button').addEventListener('click', () => {
+  profilePopupHandler.openPopup();
+  editProfileValidator.removeErrors();
+  profileDefaultInfo();
+});
 
 
 
@@ -141,15 +139,8 @@ const addNewCard = (item) => {
 
 //=========Обработчики=================================================================================
 
-// ---------профильное модальное окно---------
-//открытие по кнопке и добавление существующей инфо в поля
-document.querySelector('.profile__edit-button').addEventListener('click', () => {
-  profilePopupHandler.openPopup();
-  editProfileValidator.removeErrors();
-  profileDefaultInfo();
-});
-//отправка данных формы
-// profileFormElement.addEventListener('submit', submitFormHandlerProfile);
+
+
 
 // ---------модальное окно добавления карточек---------
 //открытие по кнопке
@@ -158,14 +149,6 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
   addCardValidator.disableSubmitButton();
   placePopupHandler.openPopup();
 });
-
-
-
-//отправка данных формы
-// placePopup.addEventListener('submit', submitFormHandlerPlace);
-
-
-
 
 
 
