@@ -4,7 +4,7 @@
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
 
 //---------Класс - создание карточки, добавление обработчиков---------
-import {photoPopup} from '../scripts/index.js';
+import {photoPopup} from '../index.js';
 export default class Card {
   constructor({name, link}, cardSelector, handleCardClick) {
     this._name = name;

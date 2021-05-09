@@ -6,13 +6,13 @@
 
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-import Card from '../components/Card.js';
-import {initialCards} from '../utils/initialCards.js';
-import FormValidator from '../components/FormValidator.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js'
-import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js'
+import Card from './components/Card.js';
+import {initialCards} from './utils/initialCards.js';
+import FormValidator from './utils/FormValidator.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js'
+import Section from './components/Section.js';
+import UserInfo from './components/UserInfo.js'
 
 //=========Переменные=================================================================================
 
