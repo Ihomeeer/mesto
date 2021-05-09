@@ -1,10 +1,7 @@
 //Класс отвечает за валидацию форм на странице
 
-// символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
-// символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-
 //---------Класс для валидации форм---------
-class FormValidator {
+export default class FormValidator {
   constructor (params, formElement) {
     this._params = params;
     this._formElement = formElement;
@@ -84,5 +81,3 @@ class FormValidator {
 
   }
 }
-
-export {FormValidator};
