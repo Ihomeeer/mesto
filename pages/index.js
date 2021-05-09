@@ -16,14 +16,14 @@ import {
   name,
   link,
   params
-} from './utils/Constants.js';
-import {initialCards} from './utils/initialCards.js';
-import Card from './components/Card.js';
-import FormValidator from './utils/FormValidator.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js'
-import Section from './components/Section.js';
-import UserInfo from './components/UserInfo.js';
+} from '../scripts/utils/Constants.js';
+import {initialCards} from '../scripts/utils/initialCards.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/utils/FormValidator.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js'
+import Section from '../scripts/components/Section.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
 
 //---------валидация---------
