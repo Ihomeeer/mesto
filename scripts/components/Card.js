@@ -1,20 +1,14 @@
 //Класс отвечает за создание карточек на странице
-
-// символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
-// символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-
-//---------Класс - создание карточки, добавление обработчиков---------
-import {photoPopup} from '../index.js';
 export default class Card {
   constructor({name, link}, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._photoPopupSelector = photoPopup;
+    this._photoPopupSelector = document.querySelector('#photoPopup');
   }
 
-  //---------создание карточки---------
+  //создание карточки
   createCard() {
     this.element = this._getTemplate();
     const _newCardName = this.element.querySelector('.elements__name');
@@ -29,7 +23,7 @@ export default class Card {
     return this.element;
   }
 
-  //---------разметка---------
+  //разметка
   _getTemplate() {
     const _cardElement = document.querySelector(this._cardSelector)
       .content
@@ -39,19 +33,19 @@ export default class Card {
     return _cardElement;
   }
 
-  //---------лайки---------
+  //лайки
   _likeCard (evt) {
     const _targetLikeBtn = evt.target;
     _targetLikeBtn.classList.toggle('elements__like_active');
   }
 
-  //---------удаление---------
+  //удаление
   _deleteCard (evt) {
     const _targetDeleteBtn = evt.target;
     _targetDeleteBtn.closest('.elements__card').remove();
   }
-
-  //---------слушатели---------
+  
+  //слушатели
   _setListeners = (likeBtn, deleteBtn, photo) => {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));

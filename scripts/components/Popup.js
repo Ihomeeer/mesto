@@ -11,22 +11,27 @@ export default class Popup {
     this. setEventListeners();
     document.addEventListener('keydown', this._handleEscClose);
   }
+
   //закрытие модальных окон
   closePopup() {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose);
   }
+
   //закрытие модальных окон по нажатию esc
   _handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.closePopup();
     }
   }
+  
+  //колбэк для закрытия по нажатию кнопок и оверлея
   closePopupElements = (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
       this.closePopup();
     }
   }
+
   //слушатель закрытия попапа
   setEventListeners() {
     this._popup.addEventListener('mousedown', this.closePopupElements)

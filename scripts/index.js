@@ -6,43 +6,24 @@
 
 // символами "===" отделяются друг от друга переменные/функции/обработчики - основные разделы файла
 // символами "---" отделяются друг от друга отдельные части разделов, например, различные функции в разделе "функции"
-import Card from './components/Card.js';
+
+import {
+  profileFormElement,
+  nameInput,
+  jobInput,
+  placeForm,
+  cardGrid,
+  name,
+  link,
+  params
+} from './utils/Constants.js';
 import {initialCards} from './utils/initialCards.js';
+import Card from './components/Card.js';
 import FormValidator from './utils/FormValidator.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js'
 import Section from './components/Section.js';
-import UserInfo from './components/UserInfo.js'
-
-//=========Переменные=================================================================================
-
-//---------Переменные для профильного модального окна---------
-const profilePopup = document.querySelector('#profilePopup');
-const profileFormElement = document.querySelector('#profileForm');
-const nameInput = profileFormElement.querySelector('#profilePopupName');
-const jobInput = profileFormElement.querySelector('#profilePopupJob');
-
-
-//---------Переменные для модального окна добавления карточек---------
-const placePopup = document.querySelector('#placePopup');
-const placeForm = document.querySelector('#placeForm');
-const cardGrid = document.querySelector('.elements__grid');
-const name = placePopup.querySelector('#placePopupName');
-const link = placePopup.querySelector('#placePopupLink');
-
-
-//---------Переменные для модального окна с зумом---------
-export const photoPopup = document.querySelector('#photoPopup');
-
-//---------Переменные для валидации---------
-export const params = {
-  formSelector: '.popup__main-form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error-span_show',
-}
+import UserInfo from './components/UserInfo.js';
 
 
 //---------валидация---------
