@@ -8,13 +8,14 @@ export default class Popup {
   //открытие модальных окон
   openPopup() {
     this._popup.classList.add('popup_opened');
-    this. setEventListeners();
+    this.setEventListeners();
     document.addEventListener('keydown', this._handleEscClose);
   }
 
   //закрытие модальных окон
   closePopup() {
     this._popup.classList.remove('popup_opened');
+    this.removeEventListeners();
     document.removeEventListener('keydown', this._handleEscClose);
   }
 
@@ -24,7 +25,7 @@ export default class Popup {
       this.closePopup();
     }
   }
-  
+
   //колбэк для закрытия по нажатию кнопок и оверлея
   closePopupElements = (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup__photo-close-button')) {
@@ -35,5 +36,9 @@ export default class Popup {
   //слушатель закрытия попапа
   setEventListeners() {
     this._popup.addEventListener('mousedown', this.closePopupElements)
+  }
+
+  removeEventListeners() {
+    this._popup.removeEventListener('mousedown', this.closePopupElements)
   }
 }
