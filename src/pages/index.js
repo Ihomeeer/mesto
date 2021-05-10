@@ -17,14 +17,20 @@ import {
   link,
   params
 } from '../scripts/utils/Constants.js';
-import {initialCards} from '../scripts/utils/initialCards.js';
+import {
+  moscow,
+  vladivostok,
+  rostov,
+  ekb,
+  sochi,
+  peterburg,
+  initialCards} from '../scripts/utils/initialCards.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/utils/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js'
 import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-
 
 //---------валидация---------
 //включение валидации в форме с профилем (переменная с параметрами и форма)
