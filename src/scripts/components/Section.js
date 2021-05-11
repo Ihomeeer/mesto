@@ -3,7 +3,7 @@ export default class Section {
   constructor ({item, renderer}, containerSelector) {
     this._items = item;
     this._renderer = renderer;
-    this._container = containerSelector;
+    this._container = document.querySelector(containerSelector);
   }
 
 //отрисовка начальных карточек

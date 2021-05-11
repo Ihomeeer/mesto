@@ -16,7 +16,7 @@ import {
   name,
   link,
   params
-} from '../scripts/utils/Constants.js';
+} from '../scripts/utils/constants.js';
 import {
   moscow,
   vladivostok,
@@ -26,7 +26,7 @@ import {
   peterburg,
   initialCards} from '../scripts/utils/initialCards.js';
 import Card from '../scripts/components/Card.js';
-import FormValidator from '../scripts/utils/FormValidator.js';
+import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js'
 import Section from '../scripts/components/Section.js';
@@ -43,8 +43,11 @@ addCardValidator.enableValidation();
 
 // ---------модальное окно зума карточек---------
 //функция для открытия модалки с увеличеснным изображением
+
 export const handleCardClick = (popupSelector, name, link) => {
-  const photoPopupOpened = new PopupWithImage('#photoPopup', name, link).openPopup();
+  const photoPopupHandler = new PopupWithImage('#photoPopup', name, link);
+  photoPopupHandler.openPopup();
+  photoPopupHandler.setEventListeners();
 }
 
 
@@ -53,11 +56,12 @@ export const handleCardClick = (popupSelector, name, link) => {
 const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
 //создание класса (селектор попапа, колбэк отпраки формы)
 const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandlerProfile);
+profilePopupHandler.setEventListeners();
 //первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
   const getUserData = userInfoHandler.getUserInfo();
-  nameInput.value = getUserData.UserName;
-  jobInput.value = getUserData.UserJob;
+  nameInput.value = getUserData.userName;
+  jobInput.value = getUserData.userJob;
 }
 //функция отправки формы
 function submitFormHandlerProfile () {
@@ -75,6 +79,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 // ---------модальное окно для добавления карточек---------
 //создание классса (селектор попапа, колбэк отправки формы)
 const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlace);
+placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
   addNewCard(item);
@@ -105,7 +110,7 @@ const addNewCard = (item) => {
   const addNewPlaceCard = new Section ({
     item: item,
     renderer: prependNewCard
-  }, cardGrid);
+  }, '.elements__grid');
   addNewPlaceCard.addItem({name: name.value, link: link.value});
 }
 //карточки при старте страницы
@@ -113,5 +118,5 @@ initialCards.reverse();
 const initialCardsList = new Section ({
   item: initialCards,
   renderer: prependNewCard
-}, cardGrid);
+}, '.elements__grid');
   initialCardsList.renderItems();
