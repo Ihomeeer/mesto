@@ -56,8 +56,8 @@ const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandler
 //первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
   const getUserData = userInfoHandler.getUserInfo();
-  nameInput.value = getUserData.UserName;
-  jobInput.value = getUserData.UserJob;
+  nameInput.value = getUserData.userName;
+  jobInput.value = getUserData.userJob;
 }
 //функция отправки формы
 function submitFormHandlerProfile () {

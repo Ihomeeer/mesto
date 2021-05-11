@@ -7,7 +7,7 @@ export default class UserInfo {
 
 //подставляет в поля модалки существующее инфо
   getUserInfo = () => {
-    return {UserName: this._name.textContent, UserJob: this._job.textContent}
+    return {userName: this._name.textContent, userJob: this._job.textContent}
   }
 
   //обновляет существующее инфо данными из модалки
