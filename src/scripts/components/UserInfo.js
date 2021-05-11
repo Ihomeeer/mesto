@@ -12,7 +12,7 @@ export default class UserInfo {
 
   //обновляет существующее инфо данными из модалки
   setUserInfo = (nameInput, jobInput) => {
-    this._name.textContent =nameInput;
+    this._name.textContent = nameInput;
     this._job.textContent = jobInput;
   }
 }
