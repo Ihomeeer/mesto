@@ -42,15 +42,13 @@ addCardValidator.enableValidation();
 
 
 // ---------модальное окно зума карточек---------
+//создание нового класса PopupWithImage
+const photoPopupHandler = new PopupWithImage(photoPopupSelector);
 //функция для открытия модалки с увеличеснным изображением
-
 export const handleCardClick = (name, link) => {
-  const photoPopupHandler = new PopupWithImage(photoPopupSelector);
   photoPopupHandler.openPopup(name, link);
   photoPopupHandler.setEventListeners();
 }
-
-
 
 
 // ---------профильное модальное окно---------
@@ -97,7 +95,7 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем, селектор карты и колбэк открытия окна с зумом)
-const newCard = (item, cardSelector) => {
+const createNewCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
 
@@ -105,7 +103,7 @@ const newCard = (item, cardSelector) => {
 };
 //функция добавления новой карточки в контейнер
 const prependNewCard = (item, container) => {
-  container.prepend(newCard(item, '.place-card'));
+  container.prepend(createNewCard(item, '.place-card'));
 }
 //новая карточка, добавленная через модалку
 const addNewCard = (item) => {
