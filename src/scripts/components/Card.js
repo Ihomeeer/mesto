@@ -5,20 +5,19 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-
+    this.element = this._getTemplate();
+    this._newCardName = this.element.querySelector('.elements__name');
+    this._newCardPhoto = this.element.querySelector('.elements__photo');
+    this._newCardLikeBtn = this.element.querySelector('.elements__like');
+    this._newCardDeleteBtn = this.element.querySelector('.elements__delete');
   }
 
   //создание карточки
   createCard() {
-    this.element = this._getTemplate();
-    const _newCardName = this.element.querySelector('.elements__name');
-    const _newCardPhoto = this.element.querySelector('.elements__photo');
-    const _newCardLikeBtn = this.element.querySelector('.elements__like');
-    const _newCardDeleteBtn = this.element.querySelector('.elements__delete');
-    _newCardName.textContent = this._name;
-    _newCardPhoto.src = this._link;
-    _newCardPhoto.alt = this._name;
-    this._setListeners(_newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
+    this._newCardName.textContent = this._name;
+    this._newCardPhoto.src = this._link;
+    this._newCardPhoto.alt = this._name;
+    this._setListeners(this._newCardLikeBtn, this._newCardDeleteBtn, this._newCardPhoto);
     return this.element;
   }
 
