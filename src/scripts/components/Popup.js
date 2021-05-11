@@ -32,7 +32,7 @@ export default class Popup {
   }
 
   //слушатель закрытия попапа
-  setEventListeners = () => {
+  setEventListeners() {
     this._popup.addEventListener('mousedown', this._closePopupElements)
   }
 }
