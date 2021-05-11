@@ -12,8 +12,6 @@ import {
   nameInput,
   jobInput,
   placeForm,
-  name,
-  link,
   photoPopupSelector,
   params
 } from '../scripts/utils/constants.js';
@@ -64,8 +62,8 @@ function profileDefaultInfo () {
   jobInput.value = getUserData.userJob;
 }
 //функция отправки формы
-function submitFormHandlerProfile () {
-  const newProfileInfo = userInfoHandler.setUserInfo(nameInput.value, jobInput.value);
+function submitFormHandlerProfile (newUser) {
+  userInfoHandler.setUserInfo(newUser);
   profilePopupHandler.closePopup();
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
