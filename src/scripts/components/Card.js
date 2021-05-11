@@ -5,7 +5,7 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._photoPopupSelector = document.querySelector('#photoPopup');
+
   }
 
   //создание карточки
@@ -17,7 +17,6 @@ export default class Card {
     const _newCardDeleteBtn = this.element.querySelector('.elements__delete');
     _newCardName.textContent = this._name;
     _newCardPhoto.src = this._link;
-    _newCardPhoto.alt = `К сожалению, изображение ${this._name} недоступно`
     _newCardPhoto.alt = this._name;
     this._setListeners(_newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
     return this.element;
@@ -44,13 +43,13 @@ export default class Card {
     const _targetDeleteBtn = evt.target;
     _targetDeleteBtn.closest('.elements__card').remove();
   }
-  
+
   //слушатели
   _setListeners = (likeBtn, deleteBtn, photo) => {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', (evt) => {
-      this._handleCardClick(this._photoPopupSelector, this._name, this._link);
+    photo.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
     });
   }
 }

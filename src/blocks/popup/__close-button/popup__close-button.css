@@ -1,5 +1,4 @@
 .popup__close-button {
-  margin: 0;
   padding: 0;
   width: 40px;
   height: 40px;
@@ -7,9 +6,6 @@
   background-size: cover;
   border: none;
   outline: none;
-  position: absolute;
-  top: calc(50% - 350px/2 - 40px);
-  left: calc(50% + 435px/2);
   cursor: pointer;
 }
 
@@ -22,7 +18,5 @@
   .popup__close-button {
     width: 26px;
     height: 26px;
-    top: calc(50% - 322px/2 - 39px);
-    left: calc(50% + 282px/2 - 25px);
   }
 }

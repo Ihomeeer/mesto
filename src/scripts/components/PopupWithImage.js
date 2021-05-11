@@ -2,19 +2,17 @@
 import Popup from './Popup.js';
 
 export default class PopupWithImage extends Popup {
-  constructor(popupSelector, name, link) {
+  constructor(popupSelector) {
     super(popupSelector);
-    this._name = name;
-    this._link = link;
     this._currentPhoto = this._popup.querySelector('.popup__photo');
     this._currentName = this._popup.querySelector('.popup__photo-name');
   }
 
   //открытие модального окна с увеличенным фото
-  openPopup = () => {
-    super.openPopup();
-    this._currentPhoto.src = this._link;
-    this._currentPhoto.alt = this._name;
-    this._currentName.textContent = this._name;
+  openPopup = (name, link) => {
+    super.openPopup(name, link);
+    this._currentPhoto.src = link;
+    this._currentPhoto.alt = name;
+    this._currentName.textContent = name;
   }
 }

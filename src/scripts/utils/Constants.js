@@ -6,9 +6,11 @@ const jobInput = profileFormElement.querySelector('#profilePopupJob');
 
 //---------Переменные для модального окна добавления карточек---------
 const placeForm = document.querySelector('#placeForm');
-const cardGrid = document.querySelector('.elements__grid');
 const name = placePopup.querySelector('#placePopupName');
 const link = placePopup.querySelector('#placePopupLink');
+
+//---------Переменные для модального окна с зумом---------
+const photoPopupSelector = '#photoPopup';
 
 //---------Переменные для валидации---------
 const params = {
@@ -25,8 +27,8 @@ export {
   nameInput,
   jobInput,
   placeForm,
-  cardGrid,
   name,
   link,
+  photoPopupSelector,
   params
 }

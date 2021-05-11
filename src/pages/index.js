@@ -12,11 +12,11 @@ import {
   nameInput,
   jobInput,
   placeForm,
-  cardGrid,
   name,
   link,
+  photoPopupSelector,
   params
-} from '../scripts/utils/Constants.js';
+} from '../scripts/utils/constants.js';
 import {
   moscow,
   vladivostok,
@@ -26,7 +26,7 @@ import {
   peterburg,
   initialCards} from '../scripts/utils/initialCards.js';
 import Card from '../scripts/components/Card.js';
-import FormValidator from '../scripts/utils/FormValidator.js';
+import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js'
 import Section from '../scripts/components/Section.js';
@@ -42,9 +42,12 @@ addCardValidator.enableValidation();
 
 
 // ---------модальное окно зума карточек---------
+//создание нового класса PopupWithImage
+const photoPopupHandler = new PopupWithImage(photoPopupSelector);
 //функция для открытия модалки с увеличеснным изображением
-export const handleCardClick = (popupSelector, name, link) => {
-  const photoPopupOpened = new PopupWithImage('#photoPopup', name, link).openPopup();
+export const handleCardClick = (name, link) => {
+  photoPopupHandler.openPopup(name, link);
+  photoPopupHandler.setEventListeners();
 }
 
 
@@ -53,6 +56,7 @@ export const handleCardClick = (popupSelector, name, link) => {
 const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
 //создание класса (селектор попапа, колбэк отпраки формы)
 const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandlerProfile);
+profilePopupHandler.setEventListeners();
 //первоначальные значения инпутов в профиле
 function profileDefaultInfo () {
   const getUserData = userInfoHandler.getUserInfo();
@@ -75,6 +79,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 // ---------модальное окно для добавления карточек---------
 //создание классса (селектор попапа, колбэк отправки формы)
 const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlace);
+placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
   addNewCard(item);
@@ -90,7 +95,7 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем, селектор карты и колбэк открытия окна с зумом)
-const newCard = (item, cardSelector) => {
+const createNewCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
 
@@ -98,14 +103,14 @@ const newCard = (item, cardSelector) => {
 };
 //функция добавления новой карточки в контейнер
 const prependNewCard = (item, container) => {
-  container.prepend(newCard(item, '.place-card'));
+  container.prepend(createNewCard(item, '.place-card'));
 }
 //новая карточка, добавленная через модалку
 const addNewCard = (item) => {
   const addNewPlaceCard = new Section ({
     item: item,
     renderer: prependNewCard
-  }, cardGrid);
+  }, '.elements__grid');
   addNewPlaceCard.addItem({name: name.value, link: link.value});
 }
 //карточки при старте страницы
@@ -113,5 +118,5 @@ initialCards.reverse();
 const initialCardsList = new Section ({
   item: initialCards,
   renderer: prependNewCard
-}, cardGrid);
+}, '.elements__grid');
   initialCardsList.renderItems();
