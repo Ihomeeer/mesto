@@ -82,7 +82,7 @@ const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlac
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  addNewCard(item);
+  cardsSection.addItem(item);
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -105,18 +105,11 @@ const createNewCard = (item, cardSelector) => {
 const prependNewCard = (item, container) => {
   container.prepend(createNewCard(item, '.place-card'));
 }
-//новая карточка, добавленная через модалку
-const addNewCard = (item) => {
-  const addNewPlaceCard = new Section ({
-    item: item,
-    renderer: prependNewCard
-  }, '.elements__grid');
-  addNewPlaceCard.addItem({name: name.value, link: link.value});
-}
-//карточки при старте страницы
+//создание экземпляра класса Section
 initialCards.reverse();
-const initialCardsList = new Section ({
+const cardsSection = new Section ({
   item: initialCards,
   renderer: prependNewCard
 }, '.elements__grid');
-  initialCardsList.renderItems();
+//карточки при старте страницы
+  cardsSection.renderItems();

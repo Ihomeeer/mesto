@@ -27,7 +27,7 @@ export default class PopupWithForm extends Popup {
   //дополнительная функция-колбэк для упразднения путаницы с "evt" во время передачи колбэка сабмита форм
   _callBackHandler = (evt) => {
     evt.preventDefault();
-    this._submitHandler(evt, this._getInputValues())
+    this._submitHandler(this._getInputValues())
   }
 
   //установка слушателей отправки и закрытия форм
