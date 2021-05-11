@@ -5,7 +5,7 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._photoPopupSelector = document.querySelector('#photoPopup');
+
   }
 
   //создание карточки
@@ -48,8 +48,8 @@ export default class Card {
   _setListeners = (likeBtn, deleteBtn, photo) => {
     likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
     deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', (evt) => {
-      this._handleCardClick(this._photoPopupSelector, this._name, this._link);
+    photo.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
     });
   }
 }

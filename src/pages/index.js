@@ -12,9 +12,9 @@ import {
   nameInput,
   jobInput,
   placeForm,
-  cardGrid,
   name,
   link,
+  photoPopupSelector,
   params
 } from '../scripts/utils/constants.js';
 import {
@@ -44,11 +44,13 @@ addCardValidator.enableValidation();
 // ---------модальное окно зума карточек---------
 //функция для открытия модалки с увеличеснным изображением
 
-export const handleCardClick = (popupSelector, name, link) => {
-  const photoPopupHandler = new PopupWithImage('#photoPopup', name, link);
-  photoPopupHandler.openPopup();
+export const handleCardClick = (name, link) => {
+  const photoPopupHandler = new PopupWithImage(photoPopupSelector);
+  photoPopupHandler.openPopup(name, link);
   photoPopupHandler.setEventListeners();
 }
+
+
 
 
 // ---------профильное модальное окно---------
