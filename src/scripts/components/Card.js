@@ -5,20 +5,19 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-
+    this.element = this._getTemplate();
+    this._newCardName = this.element.querySelector('.elements__name');
+    this._newCardPhoto = this.element.querySelector('.elements__photo');
+    this._newCardLikeBtn = this.element.querySelector('.elements__like');
+    this._newCardDeleteBtn = this.element.querySelector('.elements__delete');
   }
 
   //создание карточки
   createCard() {
-    this.element = this._getTemplate();
-    const _newCardName = this.element.querySelector('.elements__name');
-    const _newCardPhoto = this.element.querySelector('.elements__photo');
-    const _newCardLikeBtn = this.element.querySelector('.elements__like');
-    const _newCardDeleteBtn = this.element.querySelector('.elements__delete');
-    _newCardName.textContent = this._name;
-    _newCardPhoto.src = this._link;
-    _newCardPhoto.alt = this._name;
-    this._setListeners(_newCardLikeBtn, _newCardDeleteBtn, _newCardPhoto);
+    this._newCardName.textContent = this._name;
+    this._newCardPhoto.src = this._link;
+    this._newCardPhoto.alt = this._name;
+    this._setListeners();
     return this.element;
   }
 
@@ -45,10 +44,10 @@ export default class Card {
   }
 
   //слушатели
-  _setListeners = (likeBtn, deleteBtn, photo) => {
-    likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
-    deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', () => {
+  _setListeners = () => {
+    this._newCardLikeBtn.addEventListener('click', (evt) => this._likeCard(evt));
+    this._newCardDeleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
+    this._newCardPhoto.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   }

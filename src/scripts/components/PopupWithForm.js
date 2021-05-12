@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector('.popup__main-form');
+    this._inputsList = Array.from(this._form.querySelectorAll('.popup__input'));
   }
 
   //закрытие модалки
@@ -17,8 +18,7 @@ export default class PopupWithForm extends Popup {
   //получение значений инпутов
   _getInputValues = () => {
     const values = {};
-    const inputs = Array.from(this._form.querySelectorAll('.popup__input'));
-    inputs.forEach(input => {
+    this._inputsList.forEach(input => {
       values[input.name] = input.value;
     })
     return values;
@@ -27,7 +27,7 @@ export default class PopupWithForm extends Popup {
   //дополнительная функция-колбэк для упразднения путаницы с "evt" во время передачи колбэка сабмита форм
   _callBackHandler = (evt) => {
     evt.preventDefault();
-    this._submitHandler(evt, this._getInputValues())
+    this._submitHandler(this._getInputValues())
   }
 
   //установка слушателей отправки и закрытия форм

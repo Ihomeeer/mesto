@@ -12,8 +12,6 @@ import {
   nameInput,
   jobInput,
   placeForm,
-  name,
-  link,
   photoPopupSelector,
   params
 } from '../scripts/utils/constants.js';
@@ -44,10 +42,10 @@ addCardValidator.enableValidation();
 // ---------модальное окно зума карточек---------
 //создание нового класса PopupWithImage
 const photoPopupHandler = new PopupWithImage(photoPopupSelector);
+photoPopupHandler.setEventListeners();
 //функция для открытия модалки с увеличеснным изображением
 export const handleCardClick = (name, link) => {
   photoPopupHandler.openPopup(name, link);
-  photoPopupHandler.setEventListeners();
 }
 
 
@@ -64,8 +62,8 @@ function profileDefaultInfo () {
   jobInput.value = getUserData.userJob;
 }
 //функция отправки формы
-function submitFormHandlerProfile () {
-  const newProfileInfo = userInfoHandler.setUserInfo(nameInput.value, jobInput.value);
+function submitFormHandlerProfile (newUser) {
+  userInfoHandler.setUserInfo(newUser);
   profilePopupHandler.closePopup();
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
@@ -82,7 +80,7 @@ const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlac
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  addNewCard(item);
+  cardsSection.addItem(item);
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -105,18 +103,11 @@ const createNewCard = (item, cardSelector) => {
 const prependNewCard = (item, container) => {
   container.prepend(createNewCard(item, '.place-card'));
 }
-//новая карточка, добавленная через модалку
-const addNewCard = (item) => {
-  const addNewPlaceCard = new Section ({
-    item: item,
-    renderer: prependNewCard
-  }, '.elements__grid');
-  addNewPlaceCard.addItem({name: name.value, link: link.value});
-}
-//карточки при старте страницы
+//создание экземпляра класса Section
 initialCards.reverse();
-const initialCardsList = new Section ({
+const cardsSection = new Section ({
   item: initialCards,
   renderer: prependNewCard
 }, '.elements__grid');
-  initialCardsList.renderItems();
+//карточки при старте страницы
+  cardsSection.renderItems();

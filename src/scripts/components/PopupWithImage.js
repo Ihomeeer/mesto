@@ -10,7 +10,7 @@ export default class PopupWithImage extends Popup {
 
   //открытие модального окна с увеличенным фото
   openPopup = (name, link) => {
-    super.openPopup(name, link);
+    super.openPopup();
     this._currentPhoto.src = link;
     this._currentPhoto.alt = name;
     this._currentName.textContent = name;

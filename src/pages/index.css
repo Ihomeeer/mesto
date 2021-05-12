@@ -7,7 +7,11 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__main-form/popup__main-form.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
+<<<<<<< HEAD
 @import url(../blocks/popup/__form_close-button/popup__form_close-button.css);
+=======
+@import url(../blocks/popup/__form-close-button/popup__form-close-button.css);
+>>>>>>> develop
 @import url(../blocks/popup/__header/popup__header.css);
 @import url(../blocks/popup/__input-container/popup__input-container.css);
 @import url(../blocks/popup/__input/popup__input.css);
