@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Восьмая">
+    <meta name="author" content="Михаил Киричков">
+    <title>Место</title>
+    <link rel="icon" href="#">
+  </head>
+  <body class="body">
+    <main class="page">
+      <header class="header">
+        <div class="header__logo"></div>
+      </header>
+      <section class="profile">
+        <div class="profile__info">
+          <img class="profile__avatar" src="<%=require('./images/default-avatar.jpg')%>" alt="Жак-Ив Кусто">
+          <div class="profile__text-section">
+            <div class="profile__name-section">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-button"></button>
+            </div>
+            <p class="profile__function">Исследователь океана</p>
+          </div>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__grid"></ul>
+      </section>
+      <footer class="footer">
+        <p class="footer__copyright">&#169; 2021 Mesto Russia</p>
+      </footer>
+      <template class="place-card" id="placeCard">
+        <li class="elements__card">
+          <button type="button" class="elements__delete"></button>
+          <img src="#" alt="#" class="elements__photo">
+          <div class="elements__info-panel">
+            <h2 class="elements__name" id="cardName"></h2>
+            <button type="button" class="elements__like"></button>
+          </div>
+        </li>
+      </template>
+      <div class="popup"  id="profilePopup">
+        <button type="button" class="popup__close-button popup__form-close-button" id="profilePopupCloseBtn"></button>
+        <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
+          <h2 class="popup__header">Редактировать профиль</h2>
+          <div class="popup__input-container">
+            <input type="text" name="name" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <span class="popup__error-span" id="profilePopupName-error"></span>
+          </div>
+          <div class="popup__input-container">
+            <input type="text" name="link" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
+            <span class="popup__error-span" id="profilePopupJob-error"></span>
+          </div>
+          <button type="submit" class="popup__save-button" id="profilePopupSaveBtn" disabled>Сохранить</button>
+        </form>
+    </div>
+    <div class="popup"  id="placePopup">
+      <button type="button" class="popup__close-button popup__form-close-button" id="placePopupCloseBtn"></button>
+      <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
+        <h2 class="popup__header">Новое место</h2>
+        <div class="popup__input-container">
+          <input type="text" name="name" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
+          <span class="popup__error-span" id="placePopupName-error"></span>
+        </div>
+        <div class="popup__input-container">
+          <input type="url" name="link" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
+          <span class="popup__error-span" id="placePopupLink-error"></span>
+        </div>
+        <button type="submit" class="popup__save-button" id="placePopupSaveBtn" disabled>Создать</button>
+      </form>
+    </div>
+    <div class="popup" name="photo-modal" id="photoPopup">
+      <div class="popup__form-container">
+        <button type="button" class="popup__close-button popup__photo-close-button" id="photoPopupCloseBtn"></button>
+        <figure class="popup__image-container">
+          <img src="#" alt="#" class="popup__photo">
+          <figcaption class="popup__photo-name"></figcaption>
+        </figure>
+      </div>
+    </div>
+    </main>
+  </body>
+</html>
