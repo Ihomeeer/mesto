@@ -10,9 +10,6 @@ const placeForm = document.querySelector('#placeForm');
 //---------Переменные для модального окна с зумом---------
 const photoPopupSelector = '#photoPopup';
 
-//---------Переменные для модального окна с зумом---------
-const photoPopupSelector = '#photoPopup';
-
 //---------Переменные для валидации---------
 const params = {
   formSelector: '.popup__main-form',
