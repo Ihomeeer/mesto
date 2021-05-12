@@ -42,10 +42,10 @@ addCardValidator.enableValidation();
 // ---------модальное окно зума карточек---------
 //создание нового класса PopupWithImage
 const photoPopupHandler = new PopupWithImage(photoPopupSelector);
+photoPopupHandler.setEventListeners();
 //функция для открытия модалки с увеличеснным изображением
 export const handleCardClick = (name, link) => {
   photoPopupHandler.openPopup(name, link);
-  photoPopupHandler.setEventListeners();
 }
 
 
