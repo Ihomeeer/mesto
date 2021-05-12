@@ -17,7 +17,7 @@ export default class Card {
     this._newCardName.textContent = this._name;
     this._newCardPhoto.src = this._link;
     this._newCardPhoto.alt = this._name;
-    this._setListeners(this._newCardLikeBtn, this._newCardDeleteBtn, this._newCardPhoto);
+    this._setListeners();
     return this.element;
   }
 
@@ -44,10 +44,10 @@ export default class Card {
   }
 
   //слушатели
-  _setListeners = (likeBtn, deleteBtn, photo) => {
-    likeBtn.addEventListener('click', (evt) => this._likeCard(evt));
-    deleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
-    photo.addEventListener('click', () => {
+  _setListeners = () => {
+    this._newCardLikeBtn.addEventListener('click', (evt) => this._likeCard(evt));
+    this._newCardDeleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
+    this._newCardPhoto.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   }
