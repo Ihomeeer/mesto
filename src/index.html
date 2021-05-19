@@ -51,7 +51,7 @@
         </li>
       </template>
       <div class="popup"  id="profilePopup">
-        <button type="button" class="popup__close-button popup__form-close-button" id="profilePopupCloseBtn"></button>
+        <button type="button" class="popup__close-button popup__close-button_type_form" id="profilePopupCloseBtn"></button>
         <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
           <h2 class="popup__header">Редактировать профиль</h2>
           <div class="popup__input-container">
@@ -66,7 +66,7 @@
         </form>
     </div>
     <div class="popup"  id="placePopup">
-      <button type="button" class="popup__close-button popup__form-close-button" id="placePopupCloseBtn"></button>
+      <button type="button" class="popup__close-button popup__close-button_type_form" id="placePopupCloseBtn"></button>
       <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
         <h2 class="popup__header">Новое место</h2>
         <div class="popup__input-container">
@@ -82,7 +82,7 @@
     </div>
     <div class="popup" name="photo-modal" id="photoPopup">
       <div class="popup__form-container">
-        <button type="button" class="popup__close-button popup__photo-close-button" id="photoPopupCloseBtn"></button>
+        <button type="button" class="popup__close-button popup__close-button_type_photo" id="photoPopupCloseBtn"></button>
         <figure class="popup__image-container">
           <img src="#" alt="#" class="popup__photo">
           <figcaption class="popup__photo-name"></figcaption>
@@ -90,10 +90,21 @@
       </div>
     </div>
     <div class="popup"  id="confirmPopup">
-      <button type="button" class="popup__close-button popup__confirm-close-button" id="confirmPopupCloseBtn"></button>
+      <button type="button" class="popup__close-button popup__close-button_type_confirm" id="confirmPopupCloseBtn"></button>
       <form name="confirm-modal" class="popup__main-form" id="confirmForm" novalidate>
         <h2 class="popup__confirm-header popup__header">Вы уверены?</h2>
         <button type="submit" class="popup__save-button" id="confirmPopupSaveBtn" disabled>Да</button>
+      </form>
+    </div>
+    <div class="popup"  id="avatarPopup">
+      <button type="button" class="popup__close-button popup__close-button_type_avatar" id="placePopupCloseBtn"></button>
+      <form name="avatar-modal" class="popup__main-form" id="avatarForm" novalidate>
+        <h2 class="popup__header">Обновить аватар</h2>
+        <div class="popup__input-container">
+          <input type="url" name="link" id="avatarPopupLink" class="popup__input popup__avatar-url" placeholder="Ссылка на новый аватар" minlength="2" required>
+          <span class="popup__error-span" id="avatarPopupLink-error"></span>
+        </div>
+        <button type="submit" class="popup__save-button" id="avatarPopupSaveBtn" disabled>Сохранить</button>
       </form>
     </div>
     </main>

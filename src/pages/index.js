@@ -115,11 +115,29 @@ const cardsSection = new Section ({
 
   //Временные скрипты дял верстки модалок и прочего
 
-  
+
 // Вызов попапа удаления на кнопку корзины
   // const confirmPopup = document.querySelector('#confirmPopup');
   // const deleteButton = document.querySelector('.elements__delete');
   // deleteButton.addEventListener('click', () => {
   //   confirmPopup.classList.add('popup_opened')
   // })
+
+  // Вызов попапа обновления аватара
+  const avatarPopup = document.querySelector('#avatarPopup');
+  const avatar = document.querySelector('.profile__avatar');
+  const avatarOverlay = document.querySelector('.profile__avatar-overlay');
+  const avatarContainer = document.querySelector('.profile__avatar-container')
+  avatarContainer.addEventListener('mouseover', () => {
+    avatarOverlay.classList.add('profile__avatar-overlay_visible');
+  })
+  avatarContainer.addEventListener('mouseout', () => {
+    avatarOverlay.classList.remove('profile__avatar-overlay_visible');
+  })
+
+
+  avatarOverlay.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('profile__avatar-overlay') || evt.target.classList.contains('profile__avatar-edit-button'))
+  avatarPopup.classList.add('popup_opened')
+  })
 
