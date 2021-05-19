@@ -1,7 +1,7 @@
 .popup__save-button {
   width: calc(100% - 36px*2);
   min-height: 50px;
-  margin: 32px auto 37px;
+  margin: 32px auto 36px;
   padding: 0;
   background-color: black;
   font-style: normal;

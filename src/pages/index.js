@@ -111,3 +111,15 @@ const cardsSection = new Section ({
 }, '.elements__grid');
 //карточки при старте страницы
   cardsSection.renderItems();
+
+
+  //Временные скрипты дял верстки модалок и прочего
+
+  
+// Вызов попапа удаления на кнопку корзины
+  // const confirmPopup = document.querySelector('#confirmPopup');
+  // const deleteButton = document.querySelector('.elements__delete');
+  // deleteButton.addEventListener('click', () => {
+  //   confirmPopup.classList.add('popup_opened')
+  // })
+
