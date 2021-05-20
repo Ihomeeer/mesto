@@ -1,0 +1,13 @@
+.popup__close-button_type_confirm {
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 282px/2);
+  left: calc(50% + 435px/2);
+}
+
+@media screen and (max-width: 560px) {
+  .popup__close-button_type_confirm {
+    top: calc(50% - 230px/2);
+    left: calc(50% + 282px/2 - 25px);
+  }
+}

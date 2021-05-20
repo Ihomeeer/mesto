@@ -29,6 +29,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js'
 import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js'
 
 //---------валидация---------
 //включение валидации в форме с профилем (переменная с параметрами и форма)
@@ -111,3 +112,87 @@ const cardsSection = new Section ({
 }, '.elements__grid');
 //карточки при старте страницы
   cardsSection.renderItems();
+
+
+
+// работа с API
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co',
+  headers: {
+    authorization: '5183e2a2-8586-4c29-b979-09c0ece03d78'
+  }
+});
+const testFunc = function () {
+  const testConst = api.getUserInfo();
+  testConst.then((data) => {
+    const testName = document.querySelector('.profile__name');
+    testName.textContent = data.name;
+    console.log(data)
+  });
+}
+testFunc()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //Временные скрипты для верстки модалок и прочего
+
+
+// Вызов попапа удаления на кнопку корзины
+  // const confirmPopup = document.querySelector('#confirmPopup');
+  // const deleteButton = document.querySelector('.elements__delete');
+  // deleteButton.addEventListener('click', () => {
+  //   confirmPopup.classList.add('popup_opened')
+  // })
+
+  // Вызов попапа обновления аватара
+  // const avatarPopup = document.querySelector('#avatarPopup');
+  // const avatar = document.querySelector('.profile__avatar');
+  // const avatarOverlay = document.querySelector('.profile__avatar-overlay');
+  // const avatarContainer = document.querySelector('.profile__avatar-container')
+  // avatarContainer.addEventListener('mouseover', () => {
+  //   avatarOverlay.classList.add('profile__avatar-overlay_visible');
+  // })
+  // avatarContainer.addEventListener('mouseout', () => {
+  //   avatarOverlay.classList.remove('profile__avatar-overlay_visible');
+  // })
+
+
+  // avatarOverlay.addEventListener('click', (evt) => {
+  //   if (evt.target.classList.contains('profile__avatar-overlay') || evt.target.classList.contains('profile__avatar-edit-button'))
+  // avatarPopup.classList.add('popup_opened')
+  // })
+

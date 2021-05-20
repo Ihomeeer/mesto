@@ -1,0 +1,13 @@
+.popup__close-button_type_photo {
+  margin-right: -10px;
+  margin-bottom: -7px;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+@media screen and (max-width: 560px) {
+  .popup__close-button_type_photo {
+    margin-right: 40px;
+    margin-bottom: -3px;
+  }
+}

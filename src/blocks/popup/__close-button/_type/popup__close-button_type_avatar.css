@@ -1,0 +1,13 @@
+.popup__close-button_type_avatar {
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 360px/2);
+  left: calc(50% + 438px/2);
+}
+
+@media screen and (max-width: 560px) {
+  .popup__close-button_type_avatar {
+    top: calc(50% - 314px/2);
+    left: calc(50% + 278px/2 - 25px);
+  }
+}
