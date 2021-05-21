@@ -10,5 +10,12 @@ export default class Api {
     .then(res => res.json())
     return getUserInfoPromise;
   }
+  getDefaultCards() {
+    const getDefaultCardsPromise = fetch(`${this._baseUrl}/v1/cohort-24/cards`, {
+      headers: this._headers
+    })
+    .then(res => res.json())
+    return getDefaultCardsPromise;
+  }
 
 }

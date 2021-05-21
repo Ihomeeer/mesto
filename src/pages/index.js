@@ -51,12 +51,12 @@ export const handleCardClick = (name, link) => {
 
 
 // ---------профильное модальное окно---------
-//включение передачи информации с формы на страницу (селекторы инпутов)
-const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
 //создание класса (селектор попапа, колбэк отпраки формы)
+const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
+//включение передачи информации с формы на страницу (селекторы инпутов)
 const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandlerProfile);
 profilePopupHandler.setEventListeners();
-//первоначальные значения инпутов в профиле
+//первоначальные значения инпутов в модалке с профилем
 function profileDefaultInfo () {
   const getUserData = userInfoHandler.getUserInfo();
   nameInput.value = getUserData.userName;
@@ -122,18 +122,37 @@ const api = new Api({
     authorization: '5183e2a2-8586-4c29-b979-09c0ece03d78'
   }
 });
-const testFunc = function () {
-  const testConst = api.getUserInfo();
-  testConst.then((data) => {
-    const testName = document.querySelector('.profile__name');
-    testName.textContent = data.name;
+
+
+//Дефолтные данные пользователя
+const currentName = document.querySelector('.profile__name');
+const currentVocation = document.querySelector('.profile__function');
+const currentAvatar = document.querySelector('.profile__avatar');
+function getDefaultUserInfo() {
+  const getUserInfo = api.getUserInfo();
+  getUserInfo.then((data) => {
+    getUserData(data);
+  })
+}
+getDefaultUserInfo()
+//Функция для подставления данных с сервера в информацию о пользователе на странице
+function getUserData(data) {
+  userInfoHandler.setUserInfo(data)
+
+}
+  // currentName.textContent = name;
+  // currentVocation.textContent = about;
+  // currentAvatar.src = avatar;
+
+//Стартовые карточки
+const getDefaultCards = function () {
+  const getCards = api.getDefaultCards();
+  getCards.then((data) => {
     console.log(data)
   });
 }
-testFunc()
 
-
-
+getDefaultCards()
 
 
 
