@@ -52,7 +52,7 @@ export const handleCardClick = (name, link) => {
 
 // ---------профильное модальное окно---------
 //создание класса (селектор попапа, колбэк отпраки формы)
-const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
+const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function', avatarSelector: '.profile__avatar'});
 //включение передачи информации с формы на страницу (селекторы инпутов)
 const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandlerProfile);
 profilePopupHandler.setEventListeners();
@@ -65,6 +65,7 @@ function profileDefaultInfo () {
 //функция отправки формы
 function submitFormHandlerProfile (newUser) {
   userInfoHandler.setUserInfo(newUser);
+  api.sendUserInfo(newUser);   //----------------------------------------------------------------------отсылка инфы о пользователе на сервер
   profilePopupHandler.closePopup();
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
@@ -81,7 +82,9 @@ const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlac
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  cardsSection.addItem(item);
+  console.log(item)
+  api.sendNewCard(item);
+  // cardsSection.addItem(item);
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -105,13 +108,26 @@ const prependNewCard = (item, container) => {
   container.prepend(createNewCard(item, '.place-card'));
 }
 //создание экземпляра класса Section
-initialCards.reverse();
-const cardsSection = new Section ({
-  item: initialCards,
-  renderer: prependNewCard
-}, '.elements__grid');
-//карточки при старте страницы
-  cardsSection.renderItems();
+// initialCards.reverse();
+// const cardsSection = new Section ({
+//   item: initialCards,
+//   renderer: prependNewCard
+// }, '.elements__grid');
+// //карточки при старте страницы
+//   cardsSection.renderItems();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -119,15 +135,13 @@ const cardsSection = new Section ({
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co',
   headers: {
-    authorization: '5183e2a2-8586-4c29-b979-09c0ece03d78'
+    authorization: '5183e2a2-8586-4c29-b979-09c0ece03d78',
+    'Content-Type': 'application/json'
   }
 });
 
 
 //Дефолтные данные пользователя
-const currentName = document.querySelector('.profile__name');
-const currentVocation = document.querySelector('.profile__function');
-const currentAvatar = document.querySelector('.profile__avatar');
 function getDefaultUserInfo() {
   const getUserInfo = api.getUserInfo();
   getUserInfo.then((data) => {
@@ -137,22 +151,26 @@ function getDefaultUserInfo() {
 getDefaultUserInfo()
 //Функция для подставления данных с сервера в информацию о пользователе на странице
 function getUserData(data) {
-  userInfoHandler.setUserInfo(data)
-
+  userInfoHandler.setUserInfo(data);
+  userInfoHandler.setUserAvatar(data);
 }
-  // currentName.textContent = name;
-  // currentVocation.textContent = about;
-  // currentAvatar.src = avatar;
+
+
+
 
 //Стартовые карточки
 const getDefaultCards = function () {
-  const getCards = api.getDefaultCards();
-  getCards.then((data) => {
-    console.log(data)
-  });
+  const getCards = api.getDefaultCards()
+  .then(data => {
+    const cardsSection = new Section ({
+      item: data,
+      renderer: prependNewCard
+    }, '.elements__grid');
+    cardsSection.renderItems();
+  })
 }
-
 getDefaultCards()
+
 
 
 
