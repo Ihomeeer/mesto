@@ -48,6 +48,7 @@
 @import url(../blocks/elements/__grid/elements__grid.css);
 @import url(../blocks/elements/__card/elements__card.css);
 @import url(../blocks/elements/__delete/elements__delete.css);
+@import url(../blocks/elements/__delete/_visible/elements__delete_visible.css);
 @import url(../blocks/elements/__name/elements__name.css);
 @import url(../blocks/elements/__like-container/elements__like-container.css);
 @import url(../blocks/elements/__like/elements__like.css);

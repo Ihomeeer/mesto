@@ -82,8 +82,8 @@ const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlac
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  api.sendNewCard(item);
-  cardsSection.addItem(item);
+  api.sendNewCard(item) //----------------------------------------------------------------------отсылка инфы о новой карточки на сервер, а затем постройка новой карточки, основываясь на данных, полученных в ответе.
+  .then(response => cardsSection.addItem(response));
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -149,12 +149,6 @@ function getUserData(data) {
   userInfoHandler.setUserAvatar(data);
 }
 
-
-
-
-
-
-
 //Стартовые карточки
 const getDefaultCards = function () {
   const getCards = api.getDefaultCards()
@@ -168,7 +162,14 @@ getDefaultCards()
 
 
 
+// //Модалка удаления карточки
 
+// const confirmPopupHandler = new PopupWithForm('#confirmPopup', submitFormHandlerConfirm);
+// submitFormHandlerConfirm = () => {
+
+// }
+
+// //слушатель открытия по кнопке
 
 
 
