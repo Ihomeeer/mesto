@@ -15,7 +15,6 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch(error => console.log(error));
 
     return getUserInfoPromise;
   }
@@ -35,7 +34,6 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch(error => console.log(error));
     return sendUserInfoPromise;
   }
 
@@ -47,7 +45,7 @@ export default class Api {
 
 
   //получение списка карточек с сервера при старте страницы
-  getDefaultCards() {
+  getDefaultCards = () => {
     const getDefaultCardsPromise = fetch(`${this._baseUrl}/v1/cohort-24/cards`, {
       headers: this._headers
     })
@@ -57,7 +55,6 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .catch(error => console.log('Ошибка', error))
     return getDefaultCardsPromise;
   }
 
@@ -77,7 +74,6 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
     .then(res => console.log(res))
-    .catch(error => console.log(error));
     return sendNewCardPromise;
   }
 

@@ -77,6 +77,8 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 
 
 // ---------модальное окно для добавления карточек---------
+
+
 //создание классса (селектор попапа, колбэк отправки формы)
 const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlace);
 placePopupHandler.setEventListeners();
@@ -84,7 +86,7 @@ placePopupHandler.setEventListeners();
 function submitFormHandlerPlace (item) {
   console.log(item)
   api.sendNewCard(item);
-  // cardsSection.addItem(item);
+  cardsSection.addItem(item);
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -97,6 +99,8 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем, селектор карты и колбэк открытия окна с зумом)
+
+
 const createNewCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
@@ -159,17 +163,30 @@ function getUserData(data) {
 
 
 //Стартовые карточки
-const getDefaultCards = function () {
+// const getDefaultCards = function () {
+//   const getCards = api.getDefaultCards()
+//   .then(data => {
+//     const cardsSection = new Section ({
+//       item: data,
+//       renderer: prependNewCard
+//     }, '.elements__grid');
+//     cardsSection.renderItems();
+//   })
+// }
+// getDefaultCards()
+
+
+
+
   const getCards = api.getDefaultCards()
-  .then(data => {
-    const cardsSection = new Section ({
-      item: data,
-      renderer: prependNewCard
-    }, '.elements__grid');
-    cardsSection.renderItems();
-  })
-}
-getDefaultCards()
+
+
+
+const cardsSection = new Section ({
+  item: getCards,
+  renderer: prependNewCard
+}, '.elements__grid');
+cardsSection.renderItems();
 
 
 
@@ -180,6 +197,7 @@ getDefaultCards()
 
 
 
+    getDefaultCards()
 
 
 
@@ -190,13 +208,18 @@ getDefaultCards()
 
 
 
-
-
-
-
-
-
-
+//Стартовые карточки
+// const getDefaultCards = function () {
+//   const getCards = api.getDefaultCards()
+//   .then(data => {
+//     const cardsSection = new Section ({
+//       item: data,
+//       renderer: prependNewCard
+//     }, '.elements__grid');
+//     cardsSection.renderItems();
+//   })
+// }
+// getDefaultCards()
 
 
 
