@@ -1,14 +1,13 @@
 //класс, ответственный за отрисовку элементов на странице
 export default class Section {
-  constructor ({item, renderer}, containerSelector) {
-    this._items = item;
+  constructor ({renderer}, containerSelector) {
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
 
 //отрисовка начальных карточек
-  renderItems () {
-    this._items.forEach((item) => {
+  renderItems (items) {
+    items.forEach((item) => {
       this._renderer(item, this._container);
     });
   }

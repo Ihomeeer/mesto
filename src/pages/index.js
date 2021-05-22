@@ -99,8 +99,6 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем, селектор карты и колбэк открытия окна с зумом)
-
-
 const createNewCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick);
   const cardElem = card.createCard();
@@ -111,14 +109,9 @@ const createNewCard = (item, cardSelector) => {
 const prependNewCard = (item, container) => {
   container.prepend(createNewCard(item, '.place-card'));
 }
+
 //создание экземпляра класса Section
-// initialCards.reverse();
-// const cardsSection = new Section ({
-//   item: initialCards,
-//   renderer: prependNewCard
-// }, '.elements__grid');
-// //карточки при старте страницы
-//   cardsSection.renderItems();
+const cardsSection = new Section ({renderer: prependNewCard}, '.elements__grid');
 
 
 
@@ -162,42 +155,18 @@ function getUserData(data) {
 
 
 
+
+
+
 //Стартовые карточки
-// const getDefaultCards = function () {
-//   const getCards = api.getDefaultCards()
-//   .then(data => {
-//     const cardsSection = new Section ({
-//       item: data,
-//       renderer: prependNewCard
-//     }, '.elements__grid');
-//     cardsSection.renderItems();
-//   })
-// }
-// getDefaultCards()
-
-
-
-
+const getDefaultCards = function () {
   const getCards = api.getDefaultCards()
-
-
-
-const cardsSection = new Section ({
-  item: getCards,
-  renderer: prependNewCard
-}, '.elements__grid');
-cardsSection.renderItems();
-
-
-
-
-
-
-
-
-
-
-    getDefaultCards()
+  .then(data => data.reverse())
+  .then(data => {
+    cardsSection.renderItems(data);
+  })
+}
+getDefaultCards()
 
 
 
@@ -208,18 +177,20 @@ cardsSection.renderItems();
 
 
 
-//Стартовые карточки
-// const getDefaultCards = function () {
-//   const getCards = api.getDefaultCards()
-//   .then(data => {
-//     const cardsSection = new Section ({
-//       item: data,
-//       renderer: prependNewCard
-//     }, '.elements__grid');
-//     cardsSection.renderItems();
-//   })
-// }
-// getDefaultCards()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
