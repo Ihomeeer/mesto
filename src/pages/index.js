@@ -77,14 +77,11 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 
 
 // ---------модальное окно для добавления карточек---------
-
-
 //создание классса (селектор попапа, колбэк отправки формы)
 const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlace);
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  console.log(item)
   api.sendNewCard(item);
   cardsSection.addItem(item);
   placePopupHandler.closePopup();
