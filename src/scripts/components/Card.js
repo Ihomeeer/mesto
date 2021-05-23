@@ -6,6 +6,7 @@ export default class Card {
     this._likes = data.likes;
     this._id = data._id;
     this._owner = data.owner._id;
+    this._currentUserId = '453525cde60476829f73e874';
     console.log(data)
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -23,8 +24,10 @@ export default class Card {
     this._newCardName.textContent = this._name;
     this._newCardPhoto.src = this._link;
     this._newCardPhoto.alt = this._name;
+    this._checkValidity();
     this._setListeners();
     this._getLikes();
+
     return this.element;
   }
 
@@ -52,9 +55,11 @@ export default class Card {
   getId() {
     return this._id;
   }
-  // checkValidity() {
-  //   if (this._owner)
-  // }
+  _checkValidity() {
+    if (this._currentUserId === this._owner) {
+      this._newCardDeleteBtn.classList.remove('elements__delete_invisible');
+    }
+  }
   //удаление
   _deleteCard (evt) {
     const _targetDeleteBtn = evt.target;
