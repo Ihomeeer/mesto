@@ -62,16 +62,14 @@ export default class Card {
   //удаление
   _deleteCard (evt) {
     const _targetDeleteBtn = evt.target;
+    this._deleteCardCallback(this._id)
     _targetDeleteBtn.closest('.elements__card').remove();
   }
 
   //слушатели
   _setListeners = () => {
     this._newCardLikeBtn.addEventListener('click', (evt) => this._likeCard(evt));
-    this._newCardDeleteBtn.addEventListener('click', (evt) => {
-      this._deleteCard(evt);
-      this._deleteCardCallback(this._id);
-    });
+    this._newCardDeleteBtn.addEventListener('click', (evt) => this._deleteCard(evt));
     this._newCardPhoto.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });

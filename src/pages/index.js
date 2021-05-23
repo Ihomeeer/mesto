@@ -45,7 +45,7 @@ addCardValidator.enableValidation();
 const photoPopupHandler = new PopupWithImage(photoPopupSelector);
 photoPopupHandler.setEventListeners();
 //функция для открытия модалки с увеличеснным изображением
-export const handleCardClick = (name, link) => {
+const handleCardClick = (name, link) => {
   photoPopupHandler.openPopup(name, link);
 }
 
@@ -115,10 +115,25 @@ const cardsSection = new Section ({renderer: prependNewCard}, '.elements__grid')
 
 
 
+//Новые модалки
+
+//подтверждение удаления
+const confirmPopupHandler = new PopupWithForm('#confirmPopup', submitFormHandlerConfirm);
+
+//отправка формы
+function submitFormHandlerConfirm (item) {
+
+}
+
+function detectDeleteButtons() {
+  const deleteButtons = Array.from(document.querySelectorAll('.elements__delete'));
+
+  return deleteButtons
+}
 
 
-
-
+//слушатели
+// document.querySelectorAll('.')
 
 
 
@@ -153,7 +168,9 @@ const getDefaultCards = function () {
   const getCards = apiHandler.getDefaultCards()
   .then(data => data.reverse())
   .then(data => {
+    console.log(data)
     cardsSection.renderItems(data);
+    detectDeleteButtons()
   })
 }
 getDefaultCards()
@@ -162,20 +179,6 @@ getDefaultCards()
 const deleteCardHander = function(id) {
   apiHandler.deleteCard(id);
 }
-
-
-// //Модалка удаления карточки
-
-// const confirmPopupHandler = new PopupWithForm('#confirmPopup', submitFormHandlerConfirm);
-// submitFormHandlerConfirm = () => {
-
-// }
-
-// //слушатель открытия по кнопке
-
-
-
-
 
 
 
