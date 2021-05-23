@@ -35,6 +35,7 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+
     return sendUserInfoPromise;
   }
 
@@ -49,6 +50,7 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+
     return getDefaultCardsPromise;
   }
 
@@ -68,22 +70,25 @@ export default class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+
     return sendNewCardPromise;
   }
 
-//получение количества лайков карточки
-  // getCardLikes = () => {
-  //   const getCardLikesPromise = fetch(`${this._baseUrl}/v1/cohort-24/cards`, {
-  //     headers: this._headers
-  //   })
-  //   .then(res => {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
-  //     return Promise.reject(`Ошибка: ${res.status}`);
-  //   })
-  //   return getCardLikesPromise;
-  // }
+//удаление карточки с сервера
+  deleteCard(id) {
+    const deleteCardPromise = fetch(`${this._baseUrl}/v1/cohort-24/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+
+      return deleteCardPromise;
+  }
 
 
 

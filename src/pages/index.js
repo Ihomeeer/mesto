@@ -65,7 +65,7 @@ function profileDefaultInfo () {
 //функция отправки формы
 function submitFormHandlerProfile (newUser) {
   userInfoHandler.setUserInfo(newUser);
-  api.sendUserInfo(newUser);   //----------------------------------------------------------------------отсылка инфы о пользователе на сервер
+  apiHandler.sendUserInfo(newUser);   //----------------------------------------------------------------------отсылка инфы о пользователе на сервер
   profilePopupHandler.closePopup();
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
@@ -82,7 +82,7 @@ const placePopupHandler = new PopupWithForm('#placePopup', submitFormHandlerPlac
 placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
-  api.sendNewCard(item) //----------------------------------------------------------------------отсылка инфы о новой карточки на сервер, а затем постройка новой карточки, основываясь на данных, полученных в ответе.
+  apiHandler.sendNewCard(item) //----------------------------------------------------------------------отсылка инфы о новой карточки на сервер, а затем постройка новой карточки, основываясь на данных, полученных в ответе.
   .then(response => cardsSection.addItem(response));
   placePopupHandler.closePopup();
 }
@@ -97,9 +97,8 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
 //---------создание карточки и добавление ее в разметку---------
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем, селектор карты и колбэк открытия окна с зумом)
 const createNewCard = (item, cardSelector) => {
-  const card = new Card(item, cardSelector, handleCardClick);
+  const card = new Card(item, cardSelector, handleCardClick, deleteCardHander);
   const cardElem = card.createCard();
-
   return cardElem;
 };
 //функция добавления новой карточки в контейнер
@@ -126,7 +125,7 @@ const cardsSection = new Section ({renderer: prependNewCard}, '.elements__grid')
 
 
 // работа с API
-const api = new Api({
+const apiHandler = new Api({
   baseUrl: 'https://mesto.nomoreparties.co',
   headers: {
     authorization: '5183e2a2-8586-4c29-b979-09c0ece03d78',
@@ -137,7 +136,7 @@ const api = new Api({
 
 //Дефолтные данные пользователя
 function getDefaultUserInfo() {
-  const getUserInfo = api.getUserInfo();
+  const getUserInfo = apiHandler.getUserInfo();
   getUserInfo.then((data) => {
     getUserData(data);
   })
@@ -151,7 +150,7 @@ function getUserData(data) {
 
 //Стартовые карточки
 const getDefaultCards = function () {
-  const getCards = api.getDefaultCards()
+  const getCards = apiHandler.getDefaultCards()
   .then(data => data.reverse())
   .then(data => {
     cardsSection.renderItems(data);
@@ -159,7 +158,10 @@ const getDefaultCards = function () {
 }
 getDefaultCards()
 
-
+//удаление своих карточек с сервера
+const deleteCardHander = function(id) {
+  apiHandler.deleteCard(id);
+}
 
 
 // //Модалка удаления карточки
