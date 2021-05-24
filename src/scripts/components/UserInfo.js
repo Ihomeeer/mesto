@@ -3,7 +3,7 @@ export default class UserInfo {
   constructor ({nameSelector, aboutSelector, avatarSelector}) {
     this._name = document.querySelector(nameSelector);
     this._job = document.querySelector(aboutSelector);
-    this._avatar = document.querySelector(avatarSelector)
+    this._avatar = document.querySelector(avatarSelector);
   }
 
 //подставляет в поля модалки существующее инфо
@@ -17,7 +17,6 @@ export default class UserInfo {
     this._job.textContent = newUser.about;
   }
 
-  //Обновляет аватар
   setUserAvatar = (newUser) => {
     this._avatar.src = newUser.avatar;
   }
