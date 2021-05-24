@@ -52,7 +52,7 @@ export const handleCardClick = (name, link) => {
 
 // ---------профильное модальное окно---------
 //создание класса (селектор попапа, колбэк отпраки формы)
-const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function'});
+const userInfoHandler = new UserInfo ({nameSelector: '.profile__name', aboutSelector: '.profile__function', avatarSelector: '.profile__avatar'});
 //включение передачи информации с формы на страницу (селекторы инпутов)
 const profilePopupHandler = new PopupWithForm('#profilePopup', submitFormHandlerProfile);
 profilePopupHandler.setEventListeners();
@@ -115,6 +115,18 @@ const cardsSection = new Section ({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // работа с API
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co',
@@ -132,30 +144,38 @@ function getDefaultUserInfo() {
   const getUserInfo = api.getUserInfo();
   getUserInfo.then((data) => {
     getUserData(data);
+    getUserAvatar(data);
   })
 }
 getDefaultUserInfo()
-//Функция для подставления данных с сервера в информацию о пользователе на странице
+//Функция для получения данных о пользователе с сервера
 function getUserData(data) {
-  userInfoHandler.setUserInfo(data)
-
+  userInfoHandler.setUserInfo(data);
 }
-  // currentName.textContent = name;
-  // currentVocation.textContent = about;
-  // currentAvatar.src = avatar;
-
-//Стартовые карточки
-const getDefaultCards = function () {
-  const getCards = api.getDefaultCards();
-  getCards.then((data) => {
-    console.log(data)
-  });
+//Функция для получения аватара пользователя с сервера
+function getUserAvatar(data) {
+  userInfoHandler.setUserAvatar(data);
 }
 
-getDefaultCards()
 
 
 
+
+
+
+//Стартовые карточки - работает, но засирает консоль
+// const getCards = function() {
+//   const getDefaultCards = api.getDefaultCards();
+//   getDefaultCards.then((data) => {
+//     const cardsSection = new Section ({
+//       item: data,
+//       renderer: prependNewCard
+//     }, '.elements__grid');
+//     cardsSection.renderItems()
+//   });
+
+// }
+// getCards()
 
 
 
