@@ -179,13 +179,13 @@ const getDefaultCards = function () {
 getDefaultCards()
 
 const handleSendLike = (data, card) => {
-  apiHandler.sendLike(data._id)
+  apiHandler.toggleLike('PUT', data._id)
   .then((res) => {card.countLikes(res.likes.length)})
   .catch(error => console.log(error))
 }
 
 const handleDeleteLike = (data, card) => {
-  apiHandler.deleteLike(data._id)
+  apiHandler.toggleLike('DELETE', data._id)
   .then((res) => {card.countLikes(res.likes.length)})
   .catch(error => console.log(error))
 }

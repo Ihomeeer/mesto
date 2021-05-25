@@ -91,9 +91,9 @@ export default class Api {
   }
 
 //запрос на добавление лайка на сервер
-  sendLike(id) {
-    const sendLikePromise = fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
-    method: 'PUT',
+  toggleLike(method, id) {
+    const toggleLikePromise = fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
+    method: method,
     headers: this._headers
     })
     .then(res => {
@@ -103,23 +103,9 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
 
-    return sendLikePromise;
+    return toggleLikePromise;
   }
 
-  deleteLike(id) {
-    const deleteLikePromise = fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: this._headers
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-
-    return deleteLikePromise;
-  }
 
 
 }
