@@ -13,16 +13,11 @@ import {
   jobInput,
   placeForm,
   photoPopupSelector,
+  avatarForm,
+  avatar,
   params
 } from '../scripts/utils/constants.js';
-import {
-  moscow,
-  vladivostok,
-  rostov,
-  ekb,
-  sochi,
-  peterburg,
-  initialCards} from '../scripts/utils/initialCards.js';
+
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
@@ -44,6 +39,8 @@ editProfileValidator.enableValidation();
 //включение валидации в форме с добавлением карточек (переменная с параметрами и форма)
 const addCardValidator = new FormValidator(params, placeForm);
 addCardValidator.enableValidation();
+const avatarValidator = new FormValidator(params, avatarForm);
+avatarValidator.enableValidation();
 
 
 // ---------модальное окно зума карточек---------
@@ -107,6 +104,31 @@ function submitFormHandlerConfirm (id) {
   cardElement.deleteCard();
 }
 
+// ---------модальное окно для смены аватара---------
+//создание класса (селектор попапа, колбэк отправки формы)
+const avatarPopupHandler = new PopupWithForm('#avatarPopup', submitFormHandlerAvatar);
+avatarPopupHandler.setEventListeners();
+//отправка формы
+function submitFormHandlerAvatar() {
+  apiHandler.setAvatar(document.querySelector('.popup__avatar-url').value)
+  .then((result => {
+    avatar.src = result.avatar;
+    console.log(result)
+  }))
+  avatarPopupHandler.closePopup();
+}
+//выбор элементов для открытия модалки с аватаром
+const avatarPopupElements = (evt) => {
+  if (evt.target.classList.contains('profile__avatar-edit-button') || evt.target.classList.contains('profile__avatar-overlay')) {
+    avatarValidator.removeErrors();
+    avatarValidator.disableSubmitButton();
+    avatarPopupHandler.openPopup();
+  }
+}
+//слушатели открытия модалки по кнопке
+document.querySelector('.profile__avatar-container').addEventListener('mousedown', avatarPopupElements)
+
+
 //---------создание карточки и добавление ее в разметку---------
 
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем,
@@ -114,7 +136,8 @@ function submitFormHandlerConfirm (id) {
 //cardElement = card необходим, чтобы "вытащить" карточку в глобальную область, чтобы можно было запустить
 //метод удаления из класса Card
 const createNewCard = (item, cardSelector) => {
-  const card = new Card(item, cardSelector, handleCardClick, () => {
+  const card = new Card(item, cardSelector, handleCardClick,
+    () => {
     cardElement = card;
     confirmPopupHandler.openPopup(card.getId());
   },
@@ -150,8 +173,6 @@ const apiHandler = new Api({
     'Content-Type': 'application/json'
   }
 });
-
-
 //Дефолтные данные пользователя
 function getDefaultUserInfo() {
   const getUserInfo = apiHandler.getUserInfo();
@@ -166,7 +187,6 @@ function getUserData(data) {
   userInfoHandler.setUserInfo(data);
   userInfoHandler.setUserAvatar(data);
 }
-
 //Стартовые карточки
 const getDefaultCards = function () {
   const getCards = apiHandler.getDefaultCards()
@@ -177,13 +197,13 @@ const getDefaultCards = function () {
   })
 }
 getDefaultCards()
-
+//колбэк для установки лайка
 const handleSendLike = (data, card) => {
   apiHandler.toggleLike('PUT', data._id)
   .then((res) => {card.countLikes(res.likes.length)})
   .catch(error => console.log(error))
 }
-
+//колбэк для удаления лайка
 const handleDeleteLike = (data, card) => {
   apiHandler.toggleLike('DELETE', data._id)
   .then((res) => {card.countLikes(res.likes.length)})

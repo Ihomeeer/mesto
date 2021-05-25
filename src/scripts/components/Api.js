@@ -90,7 +90,7 @@ export default class Api {
       return deleteCardPromise;
   }
 
-//запрос на добавление лайка на сервер
+//запрос на добавление лайка на сервер или его удаление
   toggleLike(method, id) {
     const toggleLikePromise = fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/likes/${id}`, {
     method: method,
@@ -106,6 +106,22 @@ export default class Api {
     return toggleLikePromise;
   }
 
+  //запрос на обновление аватары
+  setAvatar(userData) {
+    const setAvatarPromise = fetch('https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify ({
+        avatar: userData
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
 
-
+    return setAvatarPromise;
+    }
 }
