@@ -107,7 +107,6 @@ function submitFormHandlerConfirm (id) {
   cardElement.deleteCard();
 }
 
-
 //---------создание карточки и добавление ее в разметку---------
 
 //функция создания элемента карточки (создается класс Card, на вход в него подается объект с ссылкой на фото и именем,
@@ -118,6 +117,14 @@ const createNewCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector, handleCardClick, () => {
     cardElement = card;
     confirmPopupHandler.openPopup(card.getId());
+  },
+  () => {
+    cardElement = card;
+    handleSendLike(item, cardElement)
+  },
+  () => {
+    cardElement = card;
+    handleDeleteLike(item, cardElement)
   });
 
   const cardElem = card.createCard();
@@ -171,20 +178,17 @@ const getDefaultCards = function () {
 }
 getDefaultCards()
 
+const handleSendLike = (data, card) => {
+  apiHandler.sendLike(data._id)
+  .then((res) => {card.countLikes(res.likes.length)})
+  .catch(error => console.log(error))
+}
 
-
-
-
-
-
-
-
-//Новые модалки
-
-
-
-
-
+const handleDeleteLike = (data, card) => {
+  apiHandler.deleteLike(data._id)
+  .then((res) => {card.countLikes(res.likes.length)})
+  .catch(error => console.log(error))
+}
 
 
 
@@ -195,31 +199,4 @@ getDefaultCards()
 
 
 
-  //Временные скрипты для верстки модалок и прочего
-
-
-// Вызов попапа удаления на кнопку корзины
-  // const confirmPopup = document.querySelector('#confirmPopup');
-  // const deleteButton = document.querySelector('.elements__delete');
-  // deleteButton.addEventListener('click', () => {
-  //   confirmPopup.classList.add('popup_opened')
-  // })
-
-  // Вызов попапа обновления аватара
-  // const avatarPopup = document.querySelector('#avatarPopup');
-  // const avatar = document.querySelector('.profile__avatar');
-  // const avatarOverlay = document.querySelector('.profile__avatar-overlay');
-  // const avatarContainer = document.querySelector('.profile__avatar-container')
-  // avatarContainer.addEventListener('mouseover', () => {
-  //   avatarOverlay.classList.add('profile__avatar-overlay_visible');
-  // })
-  // avatarContainer.addEventListener('mouseout', () => {
-  //   avatarOverlay.classList.remove('profile__avatar-overlay_visible');
-  // })
-
-
-  // avatarOverlay.addEventListener('click', (evt) => {
-  //   if (evt.target.classList.contains('profile__avatar-overlay') || evt.target.classList.contains('profile__avatar-edit-button'))
-  // avatarPopup.classList.add('popup_opened')
-  // })
 
