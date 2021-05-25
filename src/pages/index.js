@@ -67,7 +67,8 @@ function profileDefaultInfo () {
 //функция отправки формы
 function submitFormHandlerProfile (newUser) {
   userInfoHandler.setUserInfo(newUser);
-  apiHandler.sendUserInfo(newUser);   //----------------------------------------------------------------------отсылка инфы о пользователе на сервер
+  apiHandler.sendUserInfo(newUser)
+  .catch(error => console.log(error))   //----------------------------------------------------------------------отсылка инфы о пользователе на сервер
   profilePopupHandler.closePopup();
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
@@ -84,7 +85,8 @@ placePopupHandler.setEventListeners();
 //функция отправки формы
 function submitFormHandlerPlace (item) {
   apiHandler.sendNewCard(item) //----------------------------------------------------------------------отсылка инфы о новой карточки на сервер, а затем постройка новой карточки, основываясь на данных, полученных в ответе.
-  .then(response => cardsSection.addItem(response));
+  .then(response => cardsSection.addItem(response))
+  .catch(error => console.log(error))
   placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
@@ -100,7 +102,8 @@ const confirmPopupHandler = new PopupWithConfirm('#confirmPopup', submitFormHand
 confirmPopupHandler.setEventListeners();
 //отправка формы
 function submitFormHandlerConfirm (id) {
-  apiHandler.deleteCard(id);
+  apiHandler.deleteCard(id)
+  .catch(error => console.log(error))
   cardElement.deleteCard();
 }
 
@@ -113,8 +116,8 @@ function submitFormHandlerAvatar() {
   apiHandler.setAvatar(document.querySelector('.popup__avatar-url').value)
   .then((result => {
     avatar.src = result.avatar;
-    console.log(result)
   }))
+  .catch(error => console.log(error))
   avatarPopupHandler.closePopup();
 }
 //выбор элементов для открытия модалки с аватаром
@@ -178,8 +181,8 @@ function getDefaultUserInfo() {
   const getUserInfo = apiHandler.getUserInfo();
   getUserInfo.then((data) => {
     getUserData(data);
-    // getUserAvatar(data);
   })
+  .catch(error => console.log(error))
 }
 getDefaultUserInfo()
 //Функция для получения данных о пользователе с сервера
@@ -192,9 +195,9 @@ const getDefaultCards = function () {
   const getCards = apiHandler.getDefaultCards()
   .then(data => data.reverse())
   .then(data => {
-    // console.log(data)
     cardsSection.renderItems(data);
   })
+  .catch(error => console.log(error))
 }
 getDefaultCards()
 //колбэк для установки лайка
