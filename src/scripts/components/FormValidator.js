@@ -9,15 +9,15 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
   }
 
-  //---------показ и скрытие ошибок---------
-  // показ ошибок
+//---------показ и скрытие ошибок---------
+// показ ошибок
   _showInputError(inputElement, errorMessage) {
     const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._params.inputErrorClass);
     _errorElement.textContent = errorMessage;
     _errorElement.classList.add(this._params.errorClass);
   };
-  // скрытие ошибок
+// скрытие ошибок
   _hideInputError(inputElement) {
     const _errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._params.inputErrorClass);
@@ -25,7 +25,7 @@ export default class FormValidator {
     _errorElement.textContent = '';
   };
 
-  //---------проверка валидности форм---------
+//---------проверка валидности форм---------
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -34,14 +34,14 @@ export default class FormValidator {
     }
   };
 
-  //---------детектирование невалидных полей---------
+//---------детектирование невалидных полей---------
   _hasInvalidInput() {
     return this._inputsList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   };
 
-  //---------изменение состояния кнопки отправки---------
+//---------изменение состояния кнопки отправки---------
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputsList)) {
       this.disableSubmitButton();
@@ -51,7 +51,7 @@ export default class FormValidator {
     }
   };
 
-  //---------установка обработчиков---------
+//---------установка обработчиков---------
   _setEventListeners() {
     this._toggleButtonState();
     this._inputsList.forEach((inputElement) => {
@@ -62,20 +62,20 @@ export default class FormValidator {
     });
   };
 
-  //---------публичный метод для отключения кнопки валидации. Используется в index.js для отключения кнопки в модалке с карточками---------
+//---------публичный метод для отключения кнопки валидации. Используется в index.js для отключения кнопки в модалке с карточками---------
   disableSubmitButton() {
     this._buttonElement.classList.add(this._params.inactiveButtonClass);
     this._buttonElement.setAttribute('disabled', true);
   }
 
-  //---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
+//---------публичный метод для удаления ошибок при повторном открытии модалок. Используется в index.js для отключенИя кнопки в модалке с карточками---------
   removeErrors = () => {
     this._inputsList.forEach((input) => {
       this._hideInputError(input);
     });
   }
 
-  //---------инициация валидации---------
+//---------инициация валидации---------
   enableValidation() {
     this._setEventListeners();
 

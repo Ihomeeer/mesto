@@ -1,3 +1,5 @@
+//Отдельный класс для модалки с подтверждением удаления карточки
+
 import Popup from './Popup.js'
 
 export default class PopupWithConfirm extends Popup {
@@ -7,12 +9,13 @@ export default class PopupWithConfirm extends Popup {
     this._form = this._popup.querySelector('.popup__main-form');
   }
 
+//открытие модалки
   openPopup(cardId) {
     this._cardId = cardId;
     super.openPopup();
   }
 
-
+//установка слушателей
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {

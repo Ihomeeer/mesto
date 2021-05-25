@@ -11,12 +11,13 @@ export default class UserInfo {
     return {userName: this._name.textContent, userJob: this._job.textContent}
   }
 
-  //обновляет существующее инфо данными из модалки
+//обновляет существующее инфо данными из модалки
   setUserInfo = (newUser) => {
     this._name.textContent = newUser.name;
     this._job.textContent = newUser.about;
   }
 
+//обновляет автар пользователя, берет ссылку из соответствующей модалки
   setUserAvatar = (newUser) => {
     this._avatar.src = newUser.avatar;
   }

@@ -1,10 +1,11 @@
+//Класс содержит всю логику для работы с API
 export default class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
 
-  //проверка состояния промиса, чтобы не писать одно и то же сто тыщ раз
+//проверка состояния промиса, чтобы не писать одно и то же сто тыщ раз
   _checkStatus(res) {
     if (res.ok) {
       return res.json();
@@ -33,10 +34,11 @@ export default class Api {
       })
     })
     .then(res => this._checkStatus(res));
+
     return sendUserInfoPromise;
   }
 
-  //получение списка карточек с сервера при старте страницы
+//получение списка карточек с сервера при старте страницы
   getDefaultCards = () => {
     const getDefaultCardsPromise = fetch(`${this._baseUrl}/v1/cohort-24/cards`, {
       headers: this._headers
@@ -83,7 +85,7 @@ export default class Api {
     return toggleLikePromise;
   }
 
-  //запрос на обновление аватары
+//запрос на обновление аватары
   setAvatar(userData) {
     const setAvatarPromise = fetch('https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar', {
       method: 'PATCH',
@@ -95,5 +97,5 @@ export default class Api {
     .then(res => this._checkStatus(res));
 
     return setAvatarPromise;
-    }
+  }
 }
