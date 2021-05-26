@@ -10,6 +10,10 @@ const placeForm = document.querySelector('#placeForm');
 //---------Переменные для модального окна с зумом---------
 const photoPopupSelector = '#photoPopup';
 
+//---------Переменные для модального окна с изменением аватара---------
+const avatarForm = document.querySelector('#avatarForm');
+const avatar = document.querySelector('.profile__avatar');
+
 //---------Переменные для валидации---------
 const params = {
   formSelector: '.popup__main-form',
@@ -26,5 +30,7 @@ export {
   jobInput,
   placeForm,
   photoPopupSelector,
+  avatarForm,
+  avatar,
   params
 }

@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
     this._currentName = this._popup.querySelector('.popup__photo-name');
   }
 
-  //открытие модального окна с увеличенным фото
+//открытие модального окна с увеличенным фото
   openPopup = (name, link) => {
     super.openPopup();
     this._currentPhoto.src = link;

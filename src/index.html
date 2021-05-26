@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Восьмая">
+    <meta name="description" content="Девятая проектная работа">
     <meta name="author" content="Михаил Киричков">
     <title>Место</title>
     <link rel="icon" href="#">
@@ -15,13 +15,18 @@
       </header>
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__avatar" src="<%=require('./images/default-avatar.jpg')%>" alt="Жак-Ив Кусто">
+          <div class="profile__avatar-container">
+            <div class="profile__avatar-overlay">
+              <button class="profile__avatar-edit-button"></button>
+            </div>
+            <img class="profile__avatar" src="#" alt="Аватар профиля">
+          </div>
           <div class="profile__text-section">
             <div class="profile__name-section">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name"></h1>
               <button type="button" class="profile__edit-button"></button>
             </div>
-            <p class="profile__function">Исследователь океана</p>
+            <p class="profile__function"></p>
           </div>
         </div>
         <button type="button" class="profile__add-button"></button>
@@ -34,16 +39,19 @@
       </footer>
       <template class="place-card" id="placeCard">
         <li class="elements__card">
-          <button type="button" class="elements__delete"></button>
+          <button type="button" class="elements__delete_invisible elements__delete"></button>
           <img src="#" alt="#" class="elements__photo">
           <div class="elements__info-panel">
             <h2 class="elements__name" id="cardName"></h2>
-            <button type="button" class="elements__like"></button>
+            <div class="elements__like-container">
+              <button type="button" class="elements__like"></button>
+              <p class="elements__like-counter"></p>
+            </div>
           </div>
         </li>
       </template>
       <div class="popup"  id="profilePopup">
-        <button type="button" class="popup__close-button popup__form-close-button" id="profilePopupCloseBtn"></button>
+        <button type="button" class="popup__close-button popup__close-button_type_form" id="profilePopupCloseBtn"></button>
         <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
           <h2 class="popup__header">Редактировать профиль</h2>
           <div class="popup__input-container">
@@ -51,14 +59,14 @@
             <span class="popup__error-span" id="profilePopupName-error"></span>
           </div>
           <div class="popup__input-container">
-            <input type="text" name="link" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
+            <input type="text" name="about" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
             <span class="popup__error-span" id="profilePopupJob-error"></span>
           </div>
           <button type="submit" class="popup__save-button" id="profilePopupSaveBtn" disabled>Сохранить</button>
         </form>
     </div>
     <div class="popup"  id="placePopup">
-      <button type="button" class="popup__close-button popup__form-close-button" id="placePopupCloseBtn"></button>
+      <button type="button" class="popup__close-button popup__close-button_type_form" id="placePopupCloseBtn"></button>
       <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
         <h2 class="popup__header">Новое место</h2>
         <div class="popup__input-container">
@@ -74,12 +82,30 @@
     </div>
     <div class="popup" name="photo-modal" id="photoPopup">
       <div class="popup__form-container">
-        <button type="button" class="popup__close-button popup__photo-close-button" id="photoPopupCloseBtn"></button>
+        <button type="button" class="popup__close-button popup__close-button_type_photo" id="photoPopupCloseBtn"></button>
         <figure class="popup__image-container">
           <img src="#" alt="#" class="popup__photo">
           <figcaption class="popup__photo-name"></figcaption>
         </figure>
       </div>
+    </div>
+    <div class="popup"  id="confirmPopup">
+      <button type="button" class="popup__close-button popup__close-button_type_confirm" id="confirmPopupCloseBtn"></button>
+      <form name="confirm-modal" class="popup__main-form" id="confirmForm" novalidate>
+        <h2 class="popup__confirm-header popup__header">Вы уверены?</h2>
+        <button type="submit" class="popup__save-button" id="confirmPopupSaveBtn">Да</button>
+      </form>
+    </div>
+    <div class="popup"  id="avatarPopup">
+      <button type="button" class="popup__close-button popup__close-button_type_avatar" id="avatarPopupCloseBtn"></button>
+      <form name="avatar-modal" class="popup__main-form" id="avatarForm" novalidate>
+        <h2 class="popup__header">Обновить аватар</h2>
+        <div class="popup__input-container">
+          <input type="url" name="link" id="avatarPopupLink" class="popup__input popup__avatar-url" placeholder="Ссылка на новый аватар" minlength="2" required>
+          <span class="popup__error-span" id="avatarPopupLink-error"></span>
+        </div>
+        <button type="submit" class="popup__save-button" id="avatarPopupSaveBtn" disabled>Сохранить</button>
+      </form>
     </div>
     </main>
   </body>
