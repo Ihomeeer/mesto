@@ -85,13 +85,16 @@ function profileDefaultInfo () {
 //функция отправки формы
 function submitFormHandlerProfile (newUser) {
   toggleButtonCapture(profilePopupHandler, false);
-  userInfoHandler.setUserInfo(newUser);
   apiHandler.sendUserInfo(newUser)
+  .then(() => {
+    userInfoHandler.setUserInfo(newUser);
+    profilePopupHandler.closePopup();
+  })
   .catch(error => console.log(error))
   .finally(() => {
     toggleButtonCapture(profilePopupHandler, true);
   });
-  profilePopupHandler.closePopup();
+
 }
 //слушатель открытия по кнопке и добавления существующей инфо в поля
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -109,12 +112,14 @@ placePopupHandler.setEventListeners();
 function submitFormHandlerPlace (item) {
   toggleButtonCapture(placePopupHandler, false);
   apiHandler.sendNewCard(item)
-  .then(response => cardsSection.addItem(response))
+  .then((response) => {
+    cardsSection.addItem(response);
+    placePopupHandler.closePopup();
+  })
   .catch(error => console.log(error))
   .finally(() => {
     toggleButtonCapture(placePopupHandler, true);
   });
-  placePopupHandler.closePopup();
 }
 //слушатели открытия по кнопке
 document.querySelector('.profile__add-button').addEventListener('click', function () {
@@ -131,8 +136,11 @@ confirmPopupHandler.setEventListeners();
 //отправка формы
 function submitFormHandlerConfirm (id) {
   apiHandler.deleteCard(id)
+  .then(() => {
+    cardElement.deleteCard();
+    confirmPopupHandler.closePopup();
+  })
   .catch(error => console.log(error));
-  cardElement.deleteCard();
 }
 
 
@@ -146,12 +154,12 @@ function submitFormHandlerAvatar() {
   apiHandler.setAvatar(document.querySelector('.popup__avatar-url').value)
   .then((result => {
     avatar.src = result.avatar;
+    avatarPopupHandler.closePopup();
   }))
   .catch(error => console.log(error))
   .finally(() => {
     toggleButtonCapture(avatarPopupHandler, true);
   });
-  avatarPopupHandler.closePopup();
 }
 //выбор элементов для открытия модалки с аватаром
 const avatarPopupElements = (evt) => {
