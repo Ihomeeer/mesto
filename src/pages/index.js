@@ -242,6 +242,6 @@ const handleDeleteLike = (data, card) => {
 }
 
 //---------слушатель анимации зашрузки---------
-window.onload = function() {
+avatar.onload = function() {
   loadingPage.classList.add('loading-page_loaded');
 }
