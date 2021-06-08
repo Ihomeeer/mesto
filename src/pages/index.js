@@ -241,7 +241,7 @@ const handleDeleteLike = (data, card) => {
   .catch(error => console.log(error))
 }
 
-//---------слушатель анимации зашрузки---------
+//---------слушатель анимации загрузки---------
 avatar.onload = function() {
   loadingPage.classList.add('loading-page_loaded');
 }
