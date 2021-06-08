@@ -13,9 +13,9 @@ import {
   photoPopupSelector,
   avatarForm,
   avatar,
-  loadingPage,
   params
 } from '../scripts/utils/constants.js';
+
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
@@ -28,6 +28,7 @@ import Api from '../scripts/components/Api.js'
 
 //---------переменная для корректного удаления карточек---------
 let cardElement = null;
+
 
 //---------валидация---------
 //включение валидации в форме с профилем (переменная с параметрами и форма)
@@ -220,9 +221,9 @@ Promise.all([apiHandler.getUserInfo(), apiHandler.getDefaultCards()])
 .then(([userInfo, defaultCards]) => {
   getUserData(userInfo);
   const reversedCards = defaultCards.reverse();
-  cardsSection.renderItems(reversedCards);
+  cardsSection.renderItems(reversedCards)
 })
-.catch(error => console.log(error))
+.catch(error => console.log(error));
 //Функция для получения данных о пользователе с сервера
 function getUserData(data) {
   userInfoHandler.setUserInfo(data);
@@ -239,9 +240,4 @@ const handleDeleteLike = (data, card) => {
   apiHandler.toggleLike('DELETE', data._id)
   .then((res) => {card.countLikes(res.likes.length)})
   .catch(error => console.log(error))
-}
-
-//---------слушатель анимации загрузки---------
-avatar.onload = function() {
-  loadingPage.classList.add('loading-page_loaded');
 }

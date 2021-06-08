@@ -14,9 +14,6 @@ const photoPopupSelector = '#photoPopup';
 const avatarForm = document.querySelector('#avatarForm');
 const avatar = document.querySelector('.profile__avatar');
 
-//---------Переменная для загрузочой анимации---------
-const loadingPage = document.querySelector('.loading-page');
-
 //---------Переменные для валидации---------
 const params = {
   formSelector: '.popup__main-form',
@@ -35,6 +32,5 @@ export {
   photoPopupSelector,
   avatarForm,
   avatar,
-  loadingPage,
   params
 }
