@@ -13,6 +13,7 @@ import {
   photoPopupSelector,
   avatarForm,
   avatar,
+  loadingPage,
   params
 } from '../scripts/utils/constants.js';
 
@@ -240,4 +241,9 @@ const handleDeleteLike = (data, card) => {
   apiHandler.toggleLike('DELETE', data._id)
   .then((res) => {card.countLikes(res.likes.length)})
   .catch(error => console.log(error))
+}
+
+//---------слушатель анимации загрузки---------
+avatar.onload = function() {
+  loadingPage.classList.add('loading-page_loaded');
 }

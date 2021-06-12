@@ -9,9 +9,11 @@
     <link rel="icon" href="#">
   </head>
   <body class="body">
-    <header class="header">
-      <div class="header__logo"></div>
-    </header>
+    <div class="loading-page__container">
+      <div class="loading-page">
+        <img src="<%=require('./images/header__logo.svg')%>" alt="загрузка страницы" class="loading-page__icon">
+      </div>
+    </div>
     <main class="page">
       <section class="profile">
         <div class="profile__info">
@@ -34,54 +36,50 @@
       <section class="elements">
         <ul class="elements__grid"></ul>
       </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">&#169; 2021 Mesto Russia</p>
-    </footer>
-    
-    <template class="place-card" id="placeCard">
-      <li class="elements__card">
-        <button type="button" class="elements__delete_invisible elements__delete"></button>
-        <img src="#" alt="#" class="elements__photo">
-        <div class="elements__info-panel">
-          <h2 class="elements__name" id="cardName"></h2>
-          <div class="elements__like-container">
-            <button type="button" class="elements__like"></button>
-            <p class="elements__like-counter"></p>
+      <footer class="footer">
+        <p class="footer__copyright">&#169; 2021 Mesto Russia</p>
+      </footer>
+      <template class="place-card" id="placeCard">
+        <li class="elements__card">
+          <button type="button" class="elements__delete_invisible elements__delete"></button>
+          <img src="#" alt="#" class="elements__photo">
+          <div class="elements__info-panel">
+            <h2 class="elements__name" id="cardName"></h2>
+            <div class="elements__like-container">
+              <button type="button" class="elements__like"></button>
+              <p class="elements__like-counter"></p>
+            </div>
           </div>
+        </li>
+      </template>
+
+      <div class="popup" id="profilePopup">
+        <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
+          <button type="button" class="popup__close-button " id="profilePopupCloseBtn"></button>
+          <h2 class="popup__header">Редактировать профиль</h2>
+          <div class="popup__input-container">
+            <input type="text" name="name" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <span class="popup__error-span" id="profilePopupName-error"></span>
+          </div>
+          <div class="popup__input-container">
+            <input type="text" name="about" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
+            <span class="popup__error-span" id="profilePopupJob-error"></span>
+          </div>
+          <button type="submit" class="popup__save-button" id="profilePopupSaveBtn" disabled>Сохранить</button>
+        </form>
+    </div>
+
+    <div class="popup" id="placePopup">
+      <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
+        <button type="button" class="popup__close-button
+        " id="placePopupCloseBtn"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <div class="popup__input-container">
+          <input type="text" name="name" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
+          <span class="popup__error-span" id="placePopupName-error"></span>
         </div>
       </li>
     </template>
-    <div class="popup"  id="profilePopup">
-      <button type="button" class="popup__close-button popup__close-button_type_form" id="profilePopupCloseBtn"></button>
-      <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
-        <h2 class="popup__header">Редактировать профиль</h2>
-        <div class="popup__input-container">
-          <input type="text" name="name" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="popup__error-span" id="profilePopupName-error"></span>
-        </div>
-        <div class="popup__input-container">
-          <input type="text" name="about" id="profilePopupJob" class="popup__input popup__function" placeholder="Призвание" minlength="2" maxlength="200" required>
-          <span class="popup__error-span" id="profilePopupJob-error"></span>
-        </div>
-        <button type="submit" class="popup__save-button" id="profilePopupSaveBtn" disabled>Сохранить</button>
-      </form>
-  </div>
-  <div class="popup"  id="placePopup">
-    <button type="button" class="popup__close-button popup__close-button_type_form" id="placePopupCloseBtn"></button>
-    <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
-      <h2 class="popup__header">Новое место</h2>
-      <div class="popup__input-container">
-        <input type="text" name="name" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
-        <span class="popup__error-span" id="placePopupName-error"></span>
-      </div>
-      <div class="popup__input-container">
-        <input type="url" name="link" id="placePopupLink" class="popup__input popup__function" placeholder="Ссылка на картинку" minlength="2" required>
-        <span class="popup__error-span" id="placePopupLink-error"></span>
-      </div>
-      <button type="submit" class="popup__save-button" id="placePopupSaveBtn" disabled>Создать</button>
-    </form>
-  </div>
   <div class="popup" name="photo-modal" id="photoPopup">
     <div class="popup__form-container">
       <button type="button" class="popup__close-button popup__close-button_type_photo" id="photoPopupCloseBtn"></button>

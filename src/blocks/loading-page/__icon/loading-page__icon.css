@@ -1,0 +1,14 @@
+  @keyframes logo-scaling {
+    from {
+      width: 20%;
+      height: 10%;
+    }
+    to {
+      width: 40%;
+      height: 20%;
+    }
+  }
+
+.loading-page__icon {
+  animation: logo-scaling 2s infinite alternate;
+}
