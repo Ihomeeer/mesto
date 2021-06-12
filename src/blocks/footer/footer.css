@@ -18,3 +18,11 @@
     padding-bottom: 36px;
   }
 }
+
+@media screen and (min-width: 1921px) {
+  .footer {
+    margin-left: 19px;
+    margin-right: 19px;
+    padding-bottom: 36px;
+  }
+}
