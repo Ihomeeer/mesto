@@ -50,9 +50,10 @@
           </div>
         </li>
       </template>
-      <div class="popup"  id="profilePopup">
-        <button type="button" class="popup__close-button popup__close-button_type_form" id="profilePopupCloseBtn"></button>
+
+      <div class="popup" id="profilePopup">
         <form name="profile-modal" class="popup__main-form" id="profileForm" novalidate>
+          <button type="button" class="popup__close-button " id="profilePopupCloseBtn"></button>
           <h2 class="popup__header">Редактировать профиль</h2>
           <div class="popup__input-container">
             <input type="text" name="name" id="profilePopupName" class="popup__input popup__name" placeholder="Имя" minlength="2" maxlength="40" required>
@@ -65,9 +66,11 @@
           <button type="submit" class="popup__save-button" id="profilePopupSaveBtn" disabled>Сохранить</button>
         </form>
     </div>
-    <div class="popup"  id="placePopup">
-      <button type="button" class="popup__close-button popup__close-button_type_form" id="placePopupCloseBtn"></button>
+
+    <div class="popup" id="placePopup">
       <form name="place-modal" class="popup__main-form" id="placeForm" novalidate>
+        <button type="button" class="popup__close-button
+        " id="placePopupCloseBtn"></button>
         <h2 class="popup__header">Новое место</h2>
         <div class="popup__input-container">
           <input type="text" name="name" id="placePopupName" class="popup__input popup__name" placeholder="Название" minlength="2" maxlength="40" required>
@@ -80,6 +83,7 @@
         <button type="submit" class="popup__save-button" id="placePopupSaveBtn" disabled>Создать</button>
       </form>
     </div>
+
     <div class="popup" name="photo-modal" id="photoPopup">
       <div class="popup__form-container">
         <button type="button" class="popup__close-button popup__close-button_type_photo" id="photoPopupCloseBtn"></button>
@@ -89,16 +93,18 @@
         </figure>
       </div>
     </div>
-    <div class="popup"  id="confirmPopup">
-      <button type="button" class="popup__close-button popup__close-button_type_confirm" id="confirmPopupCloseBtn"></button>
+
+    <div class="popup" id="confirmPopup">
       <form name="confirm-modal" class="popup__main-form" id="confirmForm" novalidate>
+        <button type="button" class="popup__close-button" id="confirmPopupCloseBtn"></button>
         <h2 class="popup__confirm-header popup__header">Вы уверены?</h2>
         <button type="submit" class="popup__save-button" id="confirmPopupSaveBtn">Да</button>
       </form>
     </div>
-    <div class="popup"  id="avatarPopup">
-      <button type="button" class="popup__close-button popup__close-button_type_avatar" id="avatarPopupCloseBtn"></button>
+
+    <div class="popup" id="avatarPopup">
       <form name="avatar-modal" class="popup__main-form" id="avatarForm" novalidate>
+        <button type="button" class="popup__close-button" id="avatarPopupCloseBtn"></button>
         <h2 class="popup__header">Обновить аватар</h2>
         <div class="popup__input-container">
           <input type="url" name="link" id="avatarPopupLink" class="popup__input popup__avatar-url" placeholder="Ссылка на новый аватар" minlength="2" required>

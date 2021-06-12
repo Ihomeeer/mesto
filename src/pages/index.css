@@ -7,10 +7,7 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__main-form/popup__main-form.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
-@import url(../blocks/popup/__close-button/_type/popup__close-button_type_form.css);
 @import url(../blocks/popup/__close-button/_type/popup__close-button_type_photo.css);
-@import url(../blocks/popup/__close-button/_type/popup__close-button_type_confirm.css);
-@import url(../blocks/popup/__close-button/_type/popup__close-button_type_avatar.css);
 @import url(../blocks/popup/__header/popup__header.css);
 @import url(../blocks/popup/__confirm-header/popup__confirm-header.css);
 @import url(../blocks/popup/__input-container/popup__input-container.css);

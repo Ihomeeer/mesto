@@ -1,4 +1,5 @@
 .popup__main-form {
+  position: relative;
   width: 430px;
   height: min-content;
   margin: auto;

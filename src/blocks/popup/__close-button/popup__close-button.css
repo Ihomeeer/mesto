@@ -1,5 +1,8 @@
 .popup__close-button {
   padding: 0;
+  margin-top: -46px;
+  margin-left: 436px;
+  position: absolute;
   width: 40px;
   height: 40px;
   background: url(../../../images/popup__close-icon.svg);
@@ -7,6 +10,7 @@
   border: none;
   outline: none;
   cursor: pointer;
+
 }
 
 .popup__close-button:hover {
@@ -18,5 +22,7 @@
   .popup__close-button {
     width: 26px;
     height: 26px;
+    margin-top: -36px;
+    margin-left: 255px;
   }
 }
