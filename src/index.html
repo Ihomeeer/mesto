@@ -9,11 +9,13 @@
     <link rel="icon" href="#">
   </head>
   <body class="body">
+
     <div class="loading-page__container">
       <div class="loading-page">
         <img src="<%=require('./images/header__logo.svg')%>" alt="загрузка страницы" class="loading-page__icon">
       </div>
     </div>
+
     <main class="page">
       <header class="header">
         <div class="header__logo"></div>
@@ -39,9 +41,12 @@
       <section class="elements">
         <ul class="elements__grid"></ul>
       </section>
+    </main>
+
       <footer class="footer">
         <p class="footer__copyright">&#169; 2021 Mesto Russia</p>
       </footer>
+      
       <template class="place-card" id="placeCard">
         <li class="elements__card">
           <button type="button" class="elements__delete_invisible elements__delete"></button>
@@ -118,6 +123,6 @@
         <button type="submit" class="popup__save-button" id="avatarPopupSaveBtn" disabled>Сохранить</button>
       </form>
     </div>
-    </main>
+
   </body>
 </html>
