@@ -1,5 +1,5 @@
 .header {
-  width: calc(100% - 200px*2);
+  width: 90%;
   margin: 0 auto 0;
   padding-top: 45px;
   padding-bottom: 40px;
@@ -8,13 +8,13 @@
 
 @media screen and (max-width: 1279px) {
   .header{
-    width: 90%;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .header {
-    width: 100%;
     padding-top: 28px;
     padding-bottom: 31px;
   }
