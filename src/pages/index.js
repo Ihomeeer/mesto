@@ -221,6 +221,7 @@ const apiHandler = new Api({
 Promise.all([apiHandler.getUserInfo(), apiHandler.getDefaultCards()])
 .then(([userInfo, defaultCards]) => {
   getUserData(userInfo);
+  console.log(defaultCards);
   const reversedCards = defaultCards.reverse();
   cardsSection.renderItems(reversedCards)
 })
