@@ -6,6 +6,20 @@ _______________
 В проекте использованы основные техники, использующиеся при работе с HTML и CSS, JavaScript, сторонний код *normalize.css, шрифт Inter*.
 Основная цель проекта - тренировка использования JavaScript и работа с неизвестным ранее кодом.
 Код и структура файлов в проекте организованы согласно положениям БЭМ. Скрипты написаны с использованием ООП. Проект собран при помощи WebPack.
+Можно редактировать данные пользователя и автар, добавлять и удалять новые карточки.
+
+
+<p align="center">
+  <img src="/srceenshots/mesto/App.JPG" height="400" width="350" vspace="20" hspace="20"/>
+  <img src="/srceenshots/mesto/Card.JPG" height="300" width="350"/>
+</p>
+<p align="center">
+  <img src="/srceenshots/mesto/NewCard.JPG" height="200" width="350" hspace="20"/>
+  <img src="/srceenshots/mesto/Profile.JPG" height="200" width="350"/>
+</p>
+
+
+
 
 ## HTML/CSS
 1. Работа с макетами в Figma
